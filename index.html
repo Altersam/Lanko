@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Питомник «Ланко» — Полный гид по цифровой трансформации</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #0ea5e9;
+    --accent2: #06b6d4;
+    --green: #10b981;
+    --green-light: #d1fae5;
+    --purple: #8b5cf6;
+    --orange: #f97316;
+    --pink: #ec4899;
+    --yellow: #f59e0b;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --max-width: 900px;
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 18px;
+    padding-top: 64px;
+  }
+  /* Навигация */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    z-index: 1000;
+    padding: 0 1rem;
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo { font-weight: 800; color: var(--accent); font-size: 1.1rem; }
+  .menu-btn {
+    background: none; border: none; font-size: 1.6rem; cursor: pointer; color: var(--text);
+  }
+  .menu {
+    display: none;
+    position: absolute;
+    top: 64px; left: 0; right: 0;
+    background: #fff;
+    border-bottom: 2px solid var(--accent);
+    padding: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+  .menu.open { display: block; }
+  .menu a {
+    display: block;
+    padding: 0.6rem 0.4rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+  }
+  .menu a:hover { color: var(--accent); }
+  @media (min-width: 900px) {
+    .menu-btn { display: none; }
+    .menu {
+      display: flex !important; position: static;
+      background: none; border: none; box-shadow: none;
+      padding: 0; gap: 0.8rem;
+    }
+    .menu a { border: none; padding: 0.35rem; font-size: 0.82rem; white-space: nowrap; }
+  }
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 1.2rem; }
+  section { margin-bottom: 3rem; }
+  h1 { font-size: 2.4rem; line-height: 1.15; margin-bottom: 0.8rem; }
+  h2 {
+    font-size: 1.7rem;
+    margin: 2.2rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 5px solid var(--accent);
+  }
+  h3 { font-size: 1.25rem; margin: 1.4rem 0 0.6rem; color: #1e293b; }
+  p { margin-bottom: 1rem; }
+  a { color: #0369a1; }
+  a:hover { color: #0c4a6e; }
+  /* Карточки */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    border: 1px solid #e2e8f0;
+  }
+  .card-accent { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-color: #bae6fd; }
+  .card-green { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-color: #bbf7d0; }
+  .card-warm { background: linear-gradient(135deg, #fff7ed, #ffedd5); border-color: #fed7aa; }
+  .card-purple { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border-color: #e9d5ff; }
+  .card-pink { background: linear-gradient(135deg, #fdf2f8, #fce7f3); border-color: #fbcfe8; }
+  /* Бейджи */
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.8rem;
+    border-radius: 60px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-right: 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+  .bg-blue { background: #dbeafe; color: #1e40af; }
+  .bg-green { background: #d1fae5; color: #065f46; }
+  .bg-orange { background: #ffedd5; color: #7c2d12; }
+  .bg-purple { background: #e9d5ff; color: #6b21a8; }
+  .bg-pink { background: #fce7f3; color: #9d174d; }
+  /* Списки */
+  ul, ol { margin-left: 1.4rem; margin-bottom: 1rem; }
+  li { margin-bottom: 0.5rem; }
+  /* Таблицы */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    border: 1px solid #e2e8f0;
+  }
+  th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+  th { background: #f8fafc; font-weight: 700; color: #475569; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  tr:hover { background: #f8fafc; }
+  /* Шаги */
+  .steps {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    background: #f1f5f9; border-radius: 60px; padding: 1rem; margin: 1rem 0;
+  }
+  .step-pill {
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; padding: 0.5rem 1.2rem; border-radius: 40px; font-weight: 600; font-size: 0.9rem;
+  }
+  .arrow { color: var(--accent); font-size: 1.3rem; }
+  @media (max-width: 600px) {
+    .steps { border-radius: 24px; flex-direction: column; align-items: flex-start; }
+    .arrow { transform: rotate(90deg); }
+  }
+  /* Цена */
+  .cost-row {
+    background: #f8fafc; border-radius: 16px; padding: 0.7rem 1rem;
+    margin: 0.5rem 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem;
+  }
+  /* Советы */
+  .tip {
+    border-left: 5px solid var(--accent);
+    background: #f0f9ff;
+    padding: 1rem 1.2rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+  }
+  .warning {
+    border-left: 5px solid var(--orange);
+    background: #fff7ed;
+    padding: 1rem 1.2rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+  }
+  /* Простое объяснение */
+  .simple-explain {
+    background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+    border-radius: var(--radius);
+    padding: 1.3rem;
+    margin: 1rem 0;
+    border: 1px solid #bbf7d0;
+  }
+  .simple-explain strong { color: #065f46; }
+  /* Чеклисты */
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li {
+    padding: 0.6rem 0 0.6rem 2.2rem;
+    position: relative;
+  }
+  .checklist li::before {
+    content: "☐"; position: absolute; left: 0; color: var(--accent); font-size: 1.3rem;
+  }
+  /* SVG */
+  .svg-container { text-align: center; margin: 1.5rem 0; }
+  .svg-container svg { max-width: 100%; height: auto; }
+  /* Уровни */
+  .level-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .level-card {
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius);
+    padding: 1.2rem;
+  }
+  .level-card h4 { color: var(--accent); margin-bottom: 0.6rem; }
+  /* Кнопки */
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    padding: 0.75rem 1.6rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 0.3rem 0;
+  }
+  .btn:hover { background: #0284c7; }
+  /* Примеры */
+  .example-box {
+    background: #fffbeb;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin: 0.8rem 0;
+    border: 1px solid #fde68a;
+  }
+  .example-box strong { color: #92400e; }
+  /* FAQ */
+  details {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  summary { font-weight: 700; cursor: pointer; color: #1e293b; }
+  details[open] summary { margin-bottom: 0.5rem; }
+  /* Фото */
+  .img-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 1rem 0;
+    position: relative;
+  }
+  .img-card img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
+  .img-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.6); color: #fff; padding: 0.6rem 1rem; font-size: 0.85rem;
+  }
+  /* Сравнение */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .compare .old { background: #fef2f2; border: 2px solid #fecaca; border-radius: var(--radius); padding: 1rem; }
+  .compare .new { background: #f0fdf4; border: 2px solid #bbf7d0; border-radius: var(--radius); padding: 1rem; }
+  @media (max-width: 600px) {
+    .compare { grid-template-columns: 1fr; }
+    body { font-size: 17px; padding-top: 56px; }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.35rem; }
+    .card { padding: 1.1rem; border-radius: 18px; }
+    table { font-size: 0.85rem; }
+  }
+  hr {
+    border: none; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    margin: 2.5rem 0;
+  }
+  blockquote {
+    border-left: 5px solid var(--accent);
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  @media print {
+    nav { display: none; }
+    body { padding-top: 0; font-size: 14px; }
+    .card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">🐕 Ланко — Гид</div>
+    <button class="menu-btn" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+    <div class="menu">
+      <a href="#dictionary">Словарь</a>
+      <a href="#audit">Аудит</a>
+      <a href="#analysis">Анализ</a>
+      <a href="#strategy">Стратегия</a>
+      <a href="#roadmap">Роадмэп</a>
+      <a href="#site">Сайт</a>
+      <a href="#booking">Запись</a>
+      <a href="#crm">CRM</a>
+      <a href="#cameras">Камеры</a>
+      <a href="#pedigree">Племкнига</a>
+      <a href="#finance">Финансы</a>
+      <a href="#blog">Блог</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#plan">План</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ОБЛОЖКА -->
+<section id="cover" style="text-align:center; padding: 2.5rem 0 1.5rem;">
+  <div style="font-size: 4rem; margin-bottom: 0.6rem;">🐕</div>
+  <h1>Питомник «Ланко»</h1>
+  <p style="font-size: 1.25rem; color: var(--muted); max-width: 640px; margin: 0 auto 1.5rem;">
+    Полный гид: от бумажных записей к современному питомнику. С примерами, схемами и простыми объяснениями.
+  </p>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:0.4rem; margin-bottom:1rem;">
+    <span class="badge bg-blue">Аудит сайта</span>
+    <span class="badge bg-green">Бизнес-стратегия</span>
+    <span class="badge bg-purple">Сайт + запись</span>
+    <span class="badge bg-orange">Камеры</span>
+    <span class="badge bg-pink">CRM</span>
+    <span class="badge bg-blue">Финансы</span>
+  </div>
+  <p style="font-size:0.9rem; color:#94a3b8;">Читается на телефоне. Распечатывается. Всё просто.</p>
+</section>
+
+<hr>
+
+<!-- ОГЛАВЛЕНИЕ -->
+<section id="toc">
+  <h2>📋 Оглавление</h2>
+  <div class="level-cards">
+    <div class="level-card card-accent">
+      <h4>🔍 Понять</h4>
+      <ul>
+        <li><a href="#dictionary">Словарь простыми словами</a></li>
+        <li><a href="#audit">Аудит lanko.ru</a></li>
+        <li><a href="#analysis">Бизнес-анализ</a></li>
+      </ul>
+    </div>
+    <div class="level-card card-green">
+      <h4>🎯 Спланировать</h4>
+      <ul>
+        <li><a href="#strategy">Стратегия</a></li>
+        <li><a href="#roadmap">Роадмэп</a></li>
+        <li><a href="#finance-model">Финансовая модель</a></li>
+      </ul>
+    </div>
+    <div class="level-card card-purple">
+      <h4>🛠️ Сделать</h4>
+      <ul>
+        <li><a href="#site">Варианты сайта</a></li>
+        <li><a href="#booking">Онлайн-запись</a></li>
+        <li><a href="#crm">CRM и учёт</a></li>
+        <li><a href="#cameras">Камеры</a></li>
+        <li><a href="#pedigree">Племенная книга</a></li>
+        <li><a href="#finance">Финансы</a></li>
+      </ul>
+    </div>
+    <div class="level-card card-pink">
+      <h4>✍️ Развивать</h4>
+      <ul>
+        <li><a href="#blog">Темы для блога</a></li>
+        <li><a href="#faq">Частые вопросы</a></li>
+        <li><a href="#plan">План на 2 недели</a></li>
+        <li><a href="#links">Все ссылки</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- СЛОВАРЬ -->
+<section id="dictionary">
+  <h2>📖 Словарь простыми словами</h2>
+  <p>Каждое слово — как на кухне за чаем.</p>
+
+  <div class="card card-accent">
+    <h3>🏠 Лендинг</h3>
+    <p><strong>Это как визитка, только в интернете.</strong> Одна длинная страница: кто вы, что продаёте, сколько стоит, как позвонить. Не нужно лазить по разным страницам — всё на одном экране.</p>
+    <div class="example-box">
+      <strong>Пример:</strong> вы даёте объявление в газету. Лендинг — это красивое объявление с фото, ценами и кнопкой «Позвонить».
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <h3>🗂️ CRM</h3>
+    <p><strong>Это умная записная книжка.</strong> На каждого клиента и каждую собаку заводится карточка. Система сама напоминает: «Завтра прививка у Мухтара», «Клиент Иванов не появлялся 2 месяца — позвонить».</p>
+    <div class="example-box">
+      <strong>Аналогия:</strong> представьте, что блокнот ведётся сам, считает деньги и стучит вам в Telegram, когда что-то надо сделать.
+    </div>
+  </div>
+
+  <div class="card card-warm">
+    <h3>🌐 Хостинг и домен</h3>
+    <p><strong>Домен</strong> — это адрес вашего участка в интернете (lanko.ru). <strong>Хостинг</strong> — это сам участок, где стоит дом (сайт). Вы платите аренду за участок.</p>
+    <div class="steps">
+      <span class="step-pill">Домен (адрес)</span>
+      <span class="arrow">→</span>
+      <span class="step-pill">Хостинг (земля)</span>
+      <span class="arrow">→</span>
+      <span class="step-pill">Сайт (дом)</span>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <h3>📅 Виджет</h3>
+    <p><strong>Маленькая программка</strong>, которую вставляют на сайт. Например, кнопка «Записаться» — это виджет. Он берёт информацию с другого сайта (Planerka) и показывает у вас.</p>
+  </div>
+
+  <div class="card card-pink">
+    <h3>💳 Эквайринг / ЮKassa</h3>
+    <p><strong>Это терминал для интернета.</strong> Клиент вводит данные карты — деньги приходят вам. ЮKassa — один из таких терминалов, работает с самозанятыми.</p>
+  </div>
+
+  <div class="card card-accent">
+    <h3>🧩 Конструктор сайтов (Tilda)</h3>
+    <p><strong>Это LEGO для сайтов.</strong> Берёте готовые блоки (текст, фото, форма), перетаскиваете мышкой — сайт готов. Не нужно учить программирование.</p>
+  </div>
+
+  <div class="card card-green">
+    <h3>📹 Ivideon / iDogCam</h3>
+    <p><strong>Ivideon</strong> — бесплатный сервис, через который камера показывает видео на вашем сайте. <strong>iDogCam</strong> — платный сервис: клиент платит за доступ к камере в вольере своей собаки.</p>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" style="max-width:760px;">
+      <rect x="40" y="30" width="200" height="80" rx="16" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="140" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Лендинг</text>
+      <text x="140" y="85" text-anchor="middle" font-size="11" fill="#475569">Одна страница</text>
+      <text x="140" y="100" text-anchor="middle" font-size="11" fill="#475569">Всё на одном месте</text>
+
+      <rect x="300" y="30" width="200" height="80" rx="16" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+      <text x="400" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#065f46">CRM</text>
+      <text x="400" y="85" text-anchor="middle" font-size="11" fill="#475569">Умная записная</text>
+      <text x="400" y="100" text-anchor="middle" font-size="11" fill="#475569">книжка</text>
+
+      <rect x="560" y="30" width="200" height="80" rx="16" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+      <text x="660" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#9d174d">Эквайринг</text>
+      <text x="660" y="85" text-anchor="middle" font-size="11" fill="#475569">Терминал</text>
+      <text x="660" y="100" text-anchor="middle" font-size="11" fill="#475569">в интернете</text>
+
+      <rect x="40" y="150" width="200" height="80" rx="16" fill="#e9d5ff" stroke="#8b5cf6" stroke-width="2"/>
+      <text x="140" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#6b21a8">Виджет</text>
+      <text x="140" y="205" text-anchor="middle" font-size="11" fill="#475569">Кнопка на сайте</text>
+      <text x="140" y="220" text-anchor="middle" font-size="11" fill="#475569">из другого сервиса</text>
+
+      <rect x="300" y="150" width="200" height="80" rx="16" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+      <text x="400" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#7c2d12">Конструктор</text>
+      <text x="400" y="205" text-anchor="middle" font-size="11" fill="#475569">LEGO для сайтов</text>
+      <text x="400" y="220" text-anchor="middle" font-size="11" fill="#475569">Tilda, Nethouse</text>
+
+      <rect x="560" y="150" width="200" height="80" rx="16" fill="#e0f2fe" stroke="#06b6d4" stroke-width="2"/>
+      <text x="660" y="185" text-anchor="middle" font-size="14" font-weight="bold" fill="#155e75">Ivideon</text>
+      <text x="660" y="205" text-anchor="middle" font-size="11" fill="#475569">Бесплатная камера</text>
+      <text x="660" y="220" text-anchor="middle" font-size="11" fill="#475569">на сайте</text>
+    </svg>
+  </div>
+</section>
+
+<hr>
+
+<!-- АУДИТ САЙТА -->
+<section id="audit">
+  <h2>🔍 Аудит lanko.ru — что мы увидели</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=900&auto=format&fit=crop" alt="Собака смотрит в экран">
+    <div class="img-caption">Ваш сайт — лицо питомника. Он должен вызывать доверие с первой секунды.</div>
+  </div>
+
+  <div class="compare">
+    <div class="old">
+      <h3 style="color:#991b1b; margin-bottom:0.6rem;">❌ Сейчас: lanko.ru</h3>
+      <ul style="margin-left:1.2rem; font-size:0.95rem;">
+        <li>Дизайн из 2000-х годов</li>
+        <li>Не адаптирован для телефона</li>
+        <li>Нет кнопки «Записаться»</li>
+        <li>Нет фотогалереи</li>
+        <li>Нет цен на услуги</li>
+        <li>Нет блога и книг хозяйки</li>
+        <li>Нет онлайн-камер</li>
+        <li>Плохо виден в Google</li>
+        <li>Клиенты уходят к конкурентам</li>
+      </ul>
+    </div>
+    <div class="new">
+      <h3 style="color:#065f46; margin-bottom:0.6rem;">✅ Цель: новый сайт</h3>
+      <ul style="margin-left:1.2rem; font-size:0.95rem;">
+        <li>Современный красивый дизайн</li>
+        <li>Отлично выглядит на телефоне</li>
+        <li>Кнопка «Записаться» 24/7</li>
+        <li>Красивые фото собак</li>
+        <li>Прозрачные цены</li>
+        <li>Блог и книги хозяйки</li>
+        <li>Камеры онлайн</li>
+        <li>Находят в интернете</li>
+        <li>Клиенты приходят сами</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="max-width:760px;">
+      <rect x="30" y="30" width="320" height="240" rx="20" fill="#fef2f2" stroke="#ef4444" stroke-width="3" stroke-dasharray="8,4"/>
+      <text x="190" y="70" text-anchor="middle" font-size="18" font-weight="bold" fill="#991b1b">lanko.ru сейчас</text>
+      <text x="190" y="110" text-anchor="middle" font-size="13" fill="#7f1d1d">❌ Старый дизайн</text>
+      <text x="190" y="135" text-anchor="middle" font-size="13" fill="#7f1d1d">❌ Не работает на телефоне</text>
+      <text x="190" y="160" text-anchor="middle" font-size="13" fill="#7f1d1d">❌ Нет записи онлайн</text>
+      <text x="190" y="185" text-anchor="middle" font-size="13" fill="#7f1d1d">❌ Нет цен и блога</text>
+      <text x="190" y="210" text-anchor="middle" font-size="13" fill="#7f1d1d">❌ Не найти в Google</text>
+      <text x="190" y="245" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">Результат: уходят к конкурентам</text>
+
+      <text x="400" y="160" text-anchor="middle" font-size="32" fill="#f97316">→</text>
+      <text x="400" y="190" text-anchor="middle" font-size="12" fill="#94a3b8">1–3 дня работы</text>
+
+      <rect x="450" y="30" width="320" height="240" rx="20" fill="#f0fdf4" stroke="#10b981" stroke-width="3"/>
+      <text x="610" y="70" text-anchor="middle" font-size="18" font-weight="bold" fill="#065f46">Новый сайт</text>
+      <text x="610" y="110" text-anchor="middle" font-size="13" fill="#065f46">✅ Красивый и современный</text>
+      <text x="610" y="135" text-anchor="middle" font-size="13" fill="#065f46">✅ Читается на телефоне</text>
+      <text x="610" y="160" text-anchor="middle" font-size="13" fill="#065f46">✅ Запись без звонков</text>
+      <text x="610" y="185" text-anchor="middle" font-size="13" fill="#065f46">✅ Цены, блог, фото</text>
+      <text x="610" y="210" text-anchor="middle" font-size="13" fill="#065f46">✅ Камеры онлайн</text>
+      <text x="610" y="245" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">Результат: +5–15 клиентов/мес</text>
+    </svg>
+  </div>
+
+  <h3>Примеры питомников — как делать правильно</h3>
+  <div class="level-cards">
+    <div class="level-card card-accent">
+      <h4>🐕 savaleks.ru</h4>
+      <p>Питомник «Савалекс» — бордер-колли и чихуахуа. Сделан на Tilda. Простой, понятный, есть форма бронирования щенков.</p>
+      <a class="btn" href="https://savaleks.ru" target="_blank">Открыть пример</a>
+    </div>
+    <div class="level-card card-green">
+      <h4>🎥 ECAD камера</h4>
+      <p>Питомник служебных собак. Прямая трансляция во дворе — любой может посмотреть, как живут собаки. Повышает доверие в 10 раз.</p>
+      <a class="btn" href="http://www.webcam-oko.ru/pitomnik-sluzhebnykh-sobak-ecad/" target="_blank">Смотреть камеру</a>
+    </div>
+    <div class="level-card card-warm">
+      <h4>📈 Кейс: 778 заявок</h4>
+      <p>Питомник мальтипу переделал сайт, добавил формы заявок и SEO. Результат: 778 заявок в месяц с фактически нуля.</p>
+      <a class="btn" href="https://oborot.ru/blogs/778-zayavok-s-sajta-za-mesyac-dlya-pitomnika-sobak-i237589.html" target="_blank">Читать кейс</a>
+    </div>
+  </div>
+
+  <h3>Три варианта — что выбрать</h3>
+  <div class="level-cards">
+    <div class="level-card" style="border-color: var(--green);">
+      <h4 style="color: var(--green);">🟢 Вариант А: Tilda (рекомендуем)</h4>
+      <p>Конструктор сайтов. Как LEGO. Перетаскиваете блоки — сайт готов. Не нужен программист.</p>
+      <div class="cost-row"><span>Стоимость:</span><span>0–750 ₽/мес</span></div>
+      <div class="cost-row"><span>Срок:</span><span>1–2 дня</span></div>
+      <a class="btn" href="https://tilda.ru" target="_blank">Tilda</a>
+      <a class="btn" href="https://nethouse.ru" target="_blank" style="background: var(--purple);">Nethouse</a>
+    </div>
+    <div class="level-card">
+      <h4>🟡 Вариант Б: Фрилансер</h4>
+      <p>Нанимаете человека. Сохраняете стиль, добавляете уникальные функции. Дороже, но индивидуальнее.</p>
+      <div class="cost-row"><span>Стоимость:</span><span>15 000–50 000 ₽</span></div>
+      <div class="cost-row"><span>Срок:</span><span>2–4 недели</span></div>
+      <p style="font-size:0.9rem; color: var(--muted); margin-top:0.5rem;">Где искать: <a href="https://kwork.ru" target="_blank">Kwork</a>, <a href="https://fl.ru" target="_blank">FL.ru</a></p>
+    </div>
+    <div class="level-card">
+      <h4>🔵 Вариант В: WordPress</h4>
+      <p>Гибкая система. Можно всё что угодно, но сложнее. Лучше с IT-помощником.</p>
+      <div class="cost-row"><span>Стоимость:</span><span>5000–20 000 ₽</span></div>
+      <div class="cost-row"><span>Срок:</span><span>1–2 недели</span></div>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Совет:</strong> Для «Ланко» рекомендуем <strong>Tilda + Planerka</strong>. За выходные можно перенести информацию с lanko.ru и получить современный сайт с кнопкой записи.
+  </div>
+</section>
+
+<hr>
+
+<!-- БИЗНЕС-АНАЛИЗ -->
+<section id="analysis">
+  <h2>📊 Бизнес-анализ</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=900&auto=format&fit=crop" alt="Собака и блокнот">
+    <div class="img-caption">Сейчас вся информация в голове хозяйки или на бумаге. Это работает, но рискованно.</div>
+  </div>
+
+  <div class="card">
+    <h3>✍️ Как работает питомник сейчас</h3>
+    <ul>
+      <li>Все записи на бумаге или в голове</li>
+      <li>Заявки через Telegram — переписка теряется</li>
+      <li>Прививки, сроки, собаки — помнит хозяйка</li>
+      <li>Сайт старый, молодые клиенты не доверяют</li>
+      <li>Только «сарафан» — нет притока из интернета</li>
+      <li>Блог хочется, но непонятно, о чём писать</li>
+    </ul>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" style="max-width:760px;">
+      <circle cx="400" cy="200" r="75" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="3"/>
+      <text x="400" y="195" text-anchor="middle" font-size="16" font-weight="bold" fill="#0c4a6e">Питомник</text>
+      <text x="400" y="215" text-anchor="middle" font-size="14" fill="#0369a1">«Ланко»</text>
+
+      <line x1="340" y1="160" x2="170" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="50" y="50" width="180" height="70" rx="12" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+      <text x="140" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">Записи</text>
+      <text x="140" y="92" text-anchor="middle" font-size="10" fill="#7f1d1d">Бумага, ТГ, в голове</text>
+      <text x="140" y="108" text-anchor="middle" font-size="10" fill="#7f1d1d">Легко потерять!</text>
+
+      <line x1="400" y1="125" x2="400" y2="55" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="290" y="10" width="220" height="50" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="400" y="30" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Клиенты (~10/мес)</text>
+      <text x="400" y="47" text-anchor="middle" font-size="10" fill="#047857">100% сарафан</text>
+
+      <line x1="460" y1="160" x2="630" y2="90" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="570" y="50" width="180" height="70" rx="12" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+      <text x="660" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">Сайт</text>
+      <text x="660" y="92" text-anchor="middle" font-size="10" fill="#7f1d1d">Устарел, не на телефоне</text>
+      <text x="660" y="108" text-anchor="middle" font-size="10" fill="#7f1d1d">Не находят в Google</text>
+
+      <line x1="340" y1="240" x2="170" y2="320" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="50" y="290" width="180" height="70" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="140" y="315" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Собаки</text>
+      <text x="140" y="332" text-anchor="middle" font-size="10" fill="#047857">Хозяйка помнит всё</text>
+      <text x="140" y="348" text-anchor="middle" font-size="10" fill="#047857">Если заболеет — хаос</text>
+
+      <line x1="400" y1="275" x2="400" y2="345" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="290" y="345" width="220" height="55" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+      <text x="400" y="365" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">Финансы</text>
+      <text x="400" y="382" text-anchor="middle" font-size="10" fill="#9a3412">Наличные / переводы</text>
+
+      <line x1="460" y1="240" x2="630" y2="320" stroke="#cbd5e1" stroke-width="2"/>
+      <rect x="570" y="290" width="180" height="70" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+      <text x="660" y="315" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">Блог / Книги</text>
+      <text x="660" y="332" text-anchor="middle" font-size="10" fill="#9a3412">Есть опыт, но нет системы</text>
+      <text x="660" y="348" text-anchor="middle" font-size="10" fill="#9a3412">Клиенты не знают о книгах</text>
+    </svg>
+  </div>
+
+  <div class="card card-green">
+    <h3>✅ Сильные стороны «Ланко»</h3>
+    <ul>
+      <li>Огромный опыт — питомник с 1984 года, FCI</li>
+      <li>Хозяйка помнит всех клиентов — это доверие</li>
+      <li>Есть книги, блог, экспертность — уникальное преимущество</li>
+      <li>Работающая клиентская база через сарафан</li>
+      <li>Свой домен lanko.ru — можно сохранить</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border: 2px solid #fecaca;">
+    <h3 style="color:#991b1b;">⚠️ Зоны роста</h3>
+    <ul>
+      <li>Если хозяйка заболеет — вся информация остановится</li>
+      <li>Двойные брони возможны на бумаге</li>
+      <li>Клиенты забывают о визитах — нет напоминаний</li>
+      <li>Молодые клиенты ищут в интернете — сайт не убеждает</li>
+      <li>Экспертность хозяйки не работает на привлечение</li>
+      <li>Нет дополнительного дохода (камеры, курсы)</li>
+    </ul>
+  </div>
+
+  <h3>📈 Цифры — что возможно</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Показатель</th><th>Сейчас</th><th>После цифровизации</th></tr></thead>
+      <tbody>
+        <tr><td>Клиентов в месяц</td><td>~10</td><td>15–25 (+50–150%)</td></tr>
+        <tr><td>Неявки / забытые записи</td><td>20–30%</td><td>5–10%</td></tr>
+        <tr><td>Находят через интернет</td><td>Почти 0</td><td>30–50% заявок</td></tr>
+        <tr><td>Доп. доход (камеры)</td><td>0 ₽</td><td>2000–6000 ₽/мес</td></tr>
+        <tr><td>Время на записи</td><td>5–7 ч/нед</td><td>0,5–1 ч/нед</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr>
+
+<!-- БИЗНЕС-СТРАТЕГИЯ -->
+<section id="strategy">
+  <h2>🎯 Бизнес-стратегия «Ланко»</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1534361960057-19889db4611e?w=900&auto=format&fit=crop" alt="Собаки на природе">
+    <div class="img-caption">Стратегия — это ответ на вопрос: что делать каждую неделю, чтобы через полгода было лучше?</div>
+  </div>
+
+  <div class="card card-accent">
+    <h3>🎯 Миссия</h3>
+    <p>Помогать собакам и хозяевам находить друг друга. Делиться знаниями. Сохранять лучшие качества породы. Показывать заботу — настолько, что готовы показать это онлайн.</p>
+  </div>
+
+  <div class="card card-green">
+    <h3>🏆 Видение (через год)</h3>
+    <ul>
+      <li>Современный сайт, который клиенты находят сами</li>
+      <li>Запись работает без звонков хозяйки</li>
+      <li>Все собаки в компьютере — прививки, родословные, вязки</li>
+      <li>Хозяйка пишет блог и продаёт книги через сайт</li>
+      <li>Дополнительный доход от камер покрывает расходы на корм</li>
+    </ul>
+  </div>
+
+  <h3>📍 Четыре направления развития</h3>
+  <div class="level-cards">
+    <div class="level-card" style="border-top: 4px solid var(--accent);">
+      <h4>1️⃣ Автоматизация рутины</h4>
+      <p>Записи, напоминания, учёт собак. Цель: освободить хозяйку на 5–7 часов в неделю.</p>
+      <div class="example-box" style="margin-top:0.8rem;">
+        <strong>Результат:</strong> клиенты сами записываются, система напоминает. Хозяйка отвечает только на важные звонки.
+      </div>
+    </div>
+    <div class="level-card" style="border-top: 4px solid var(--green);">
+      <h4>2️⃣ Доверие через прозрачность</h4>
+      <p>Камеры, блог, открытая информация. Цель: клиент выбирает нас не потому что дешево, а потому что видит заботу.</p>
+      <div class="example-box" style="margin-top:0.8rem;">
+        <strong>Результат:</strong> люди смотрят на камеру, видят чистые вольеры — и бронируют без вопросов.
+      </div>
+    </div>
+    <div class="level-card" style="border-top: 4px solid var(--purple);">
+      <h4>3️⃣ Экспертность = привлечение</h4>
+      <p>Статьи, книги, видео. Цель: 30% клиентов приходят через интернет, а не сарафан.</p>
+      <div class="example-box" style="margin-top:0.8rem;">
+        <strong>Результат:</strong> человек ищет «как приучить щенка к лотку» — находит вашу статью — доверяет — покупает щенка.
+      </div>
+    </div>
+    <div class="level-card" style="border-top: 4px solid var(--orange);">
+      <h4>4️⃣ Новые источники дохода</h4>
+      <p>Платные камеры, онлайн-консультации, партнёрские программы. Цель: +10 000–20 000 ₽/мес дополнительно.</p>
+      <div class="example-box" style="margin-top:0.8rem;">
+        <strong>Результат:</strong> 3 собаки на передержке × 200 ₽/сутки × 20 дней = 12 000 ₽ сверху.
+      </div>
+    </div>
+  </div>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> мы не делаем всё сразу. Мы берём три маленьких шага каждый месяц. Через год они сложатся в большой результат.
+  </div>
+</section>
+
+<hr>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <h2>🗺️ Роадмэп: поэтапный план</h2>
+  <p>Что делать сейчас, через месяц, через полгода.</p>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" style="max-width:860px;">
+      <!-- Линия -->
+      <line x1="100" y1="110" x2="800" y2="110" stroke="#e2e8f0" stroke-width="4"/>
+      <line x1="100" y1="280" x2="800" y2="280" stroke="#e2e8f0" stroke-width="4"/>
+
+      <!-- Этап 1 -->
+      <circle cx="150" cy="110" r="18" fill="#10b981" stroke="#fff" stroke-width="3"/>
+      <text x="150" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Недели 1–2</text>
+      <rect x="50" y="140" width="200" height="120" rx="14" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="150" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Уровень 1</text>
+      <text x="150" y="185" text-anchor="middle" font-size="10" fill="#065f46">Новый сайт</text>
+      <text x="150" y="200" text-anchor="middle" font-size="10" fill="#065f46">+ онлайн-запись</text>
+      <text x="150" y="215" text-anchor="middle" font-size="10" fill="#065f46">+ страница блога</text>
+      <text x="150" y="235" text-anchor="middle" font-size="10" fill="#065f46">💰 0–500 ₽/мес</text>
+
+      <!-- Этап 2 -->
+      <circle cx="350" cy="110" r="18" fill="#0ea5e9" stroke="#fff" stroke-width="3"/>
+      <text x="350" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Месяц 1–2</text>
+      <rect x="250" y="140" width="200" height="120" rx="14" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+      <text x="350" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">Уровень 2</text>
+      <text x="350" y="185" text-anchor="middle" font-size="10" fill="#0c4a6e">+ CRM (собаки)</text>
+      <text x="350" y="200" text-anchor="middle" font-size="10" fill="#0c4a6e">+ общая камера</text>
+      <text x="350" y="215" text-anchor="middle" font-size="10" fill="#0c4a6e">+ 3 статьи в блог</text>
+      <text x="350" y="235" text-anchor="middle" font-size="10" fill="#0c4a6e">💰 0–1500 ₽/мес</text>
+
+      <!-- Этап 3 -->
+      <circle cx="550" cy="110" r="18" fill="#8b5cf6" stroke="#fff" stroke-width="3"/>
+      <text x="550" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#6b21a8">Месяц 3–4</text>
+      <rect x="450" y="140" width="200" height="120" rx="14" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2"/>
+      <text x="550" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="#6b21a8">Уровень 3</text>
+      <text x="550" y="185" text-anchor="middle" font-size="10" fill="#6b21a8">+ платные камеры</text>
+      <text x="550" y="200" text-anchor="middle" font-size="10" fill="#6b21a8">+ онлайн-оплата</text>
+      <text x="550" y="215" text-anchor="middle" font-size="10" fill="#6b21a8">+ племенная книга</text>
+      <text x="550" y="235" text-anchor="middle" font-size="10" fill="#6b21a8">💰 1000–2500 ₽/мес</text>
+
+      <!-- Этап 4 -->
+      <circle cx="750" cy="110" r="18" fill="#f97316" stroke="#fff" stroke-width="3"/>
+      <text x="750" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">Месяц 6+</text>
+      <rect x="650" y="140" width="200" height="120" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+      <text x="750" y="165" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">Масштаб</text>
+      <text x="750" y="185" text-anchor="middle" font-size="10" fill="#7c2d12">+ онлайн-курсы</text>
+      <text x="750" y="200" text-anchor="middle" font-size="10" fill="#7c2d12">+ партнёры</text>
+      <text x="750" y="215" text-anchor="middle" font-size="10" fill="#7c2d12">+ реклама</text>
+      <text x="750" y="235" text-anchor="middle" font-size="10" fill="#7c2d12">💰 +20 000 ₽/мес</text>
+
+      <!-- Результаты -->
+      <text x="450" y="320" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f172a">Что получаем</text>
+
+      <rect x="60" y="345" width="190" height="80" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="155" y="375" text-anchor="middle" font-size="12" fill="#065f46" font-weight="bold">Экономия времени</text>
+      <text x="155" y="395" text-anchor="middle" font-size="10" fill="#065f46">5–7 ч/нед свободнее</text>
+
+      <rect x="270" y="345" width="190" height="80" rx="12" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+      <text x="365" y="375" text-anchor="middle" font-size="12" fill="#0c4a6e" font-weight="bold">Рост заявок</text>
+      <text x="365" y="395" text-anchor="middle" font-size="10" fill="#0c4a6e">+5–15 клиентов/мес</text>
+
+      <rect x="480" y="345" width="190" height="80" rx="12" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2"/>
+      <text x="575" y="375" text-anchor="middle" font-size="12" fill="#6b21a8" font-weight="bold">Новый доход</text>
+      <text x="575" y="395" text-anchor="middle" font-size="10" fill="#6b21a8">+10 000–20 000 ₽/мес</text>
+
+      <rect x="690" y="345" width="190" height="80" rx="12" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+      <text x="785" y="375" text-anchor="middle" font-size="12" fill="#7c2d12" font-weight="bold">Спокойствие</text>
+      <text x="785" y="395" text-anchor="middle" font-size="10" fill="#7c2d12">Всё в компьютере</text>
+    </svg>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Важно:</strong> Не прыгайте сразу на 4-й уровень. Каждый питомник, который так делал, забрасывал проект. Начните с сайта и записи — остальное добавится.
+  </div>
+</section>
+
+<hr>
+
+<!-- ФИНАНСОВАЯ МОДЕЛЬ -->
+<section id="finance-model">
+  <h2>💰 Финансовая модель</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&auto=format&fit=crop" alt="Финансы">
+    <div class="img-caption">Сколько вложить, сколько получить, когда окупится. Считаем вместе.</div>
+  </div>
+
+  <div class="card">
+    <h3>📊 Сейчас (оценка)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Показатель</th><th>Сейчас</th></tr></thead>
+        <tbody>
+          <tr><td>Клиентов в месяц</td><td>~10</td></tr>
+          <tr><td>Средний чек</td><td>3000–5000 ₽</td></tr>
+          <tr><td>Выручка</td><td>30 000–50 000 ₽/мес</td></tr>
+          <tr><td>Источники клиентов</td><td>100% сарафан / ТГ</td></tr>
+          <tr><td>Доп. доход</td><td>0 ₽</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <h3>📈 Прогноз после цифровизации</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Что меняется</th><th>Через 3 мес</th><th>Через 6 мес</th></tr></thead>
+        <tbody>
+          <tr><td>Клиентов в месяц</td><td>12–14</td><td>15–20</td></tr>
+          <tr><td>Заявок из интернета</td><td>2–4</td><td>5–8</td></tr>
+          <tr><td>Доп. доход (камеры)</td><td>1000–2000 ₽</td><td>3000–6000 ₽</td></tr>
+          <tr><td>Продажи книг/консультации</td><td>500 ₽</td><td>2000–5000 ₽</td></tr>
+          <tr><td><strong>Итого прирост</strong></td><td><strong>+5000–10 000 ₽</strong></td><td><strong>+15 000–25 000 ₽</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-warm">
+    <h3>💵 Инвестиции по этапам</h3>
+    <div class="cost-row"><span><strong>Этап 1</strong> (сайт + запись)</span><span>0–5000 ₽ разово</span></div>
+    <div class="cost-row"><span><strong>Этап 2</strong> (+ CRM + камера)</span><span>3000–8000 ₽ разово + 1500 ₽/мес</span></div>
+    <div class="cost-row"><span><strong>Этап 3</strong> (+ платные камеры + оплата)</span><span>5000 ₽ разово + 2500 ₽/мес</span></div>
+    <div class="cost-row" style="background:#d1fae5;"><span><strong>Окупаемость</strong></span><span><strong>1–2 месяца</strong></span></div>
+  </div>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;">
+      <rect x="40" y="40" width="160" height="60" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+      <text x="120" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Вложения</text>
+      <text x="120" y="82" text-anchor="middle" font-size="11" fill="#475569">15 000 ₽ макс.</text>
+
+      <line x1="200" y1="70" x2="260" y2="70" stroke="#cbd5e1" stroke-width="3"/>
+      <polygon points="255,65 265,70 255,75" fill="#cbd5e1"/>
+
+      <rect x="270" y="40" width="160" height="60" rx="12" fill="#ffedd5" stroke="#f97316" stroke-width="2"/>
+      <text x="350" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">1–2 месяца</text>
+      <text x="350" y="82" text-anchor="middle" font-size="11" fill="#475569">Окупаемость</text>
+
+      <line x1="430" y1="70" x2="490" y2="70" stroke="#cbd5e1" stroke-width="3"/>
+      <polygon points="485,65 495,70 485,75" fill="#cbd5e1"/>
+
+      <rect x="500" y="40" width="160" height="60" rx="12" fill="#d1fae5" stroke="#10b981" stroke-width="2"/>
+      <text x="580" y="65" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">Чистая прибыль</text>
+      <text x="580" y="82" text-anchor="middle" font-size="11" fill="#475569">+15 000–25 000 ₽/мес</text>
+
+      <text x="350" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">💡 Даже если потратить 15 000 ₽, они вернутся за месяц</text>
+      <text x="350" y="175" text-anchor="middle" font-size="12" fill="#475569">А потом начнётся чистая прибыль каждый месяц</text>
+    </svg>
+  </div>
+
+  <div class="simple-explain">
+    <strong>Вывод:</strong> даже если вы потратите 15 000 ₽ на всё сразу, эти деньги вернутся за 1–2 месяца за счёт новых клиентов и платных камер.
+  </div>
+</section>
+
+<hr>
+
+<!-- ВАРИАНТЫ САЙТА -->
+<section id="site">
+  <h2>🖥️ Варианты нового сайта</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop" alt="Сайт на ноутбуке">
+    <div class="img-caption">Современный сайт работает 24/7: рассказывает о вас, показывает цены, принимает записи.</div>
+  </div>
+
+  <div class="card card-accent">
+    <h3>🥇 Рекомендация: Tilda</h3>
+    <p><strong>Что это:</strong> конструктор сайтов. Как LEGO: берёте блок «Текст», блок «Фото», блок «Форма» — собираете страницу за вечер.</p>
+    <div class="example-box">
+      <strong>Примеры питомников на Tilda:</strong>
+      <ul>
+        <li><a href="https://savaleks.ru" target="_blank">savaleks.ru</a> — питомник «Савалекс». Простой, понятный, форма бронирования щенков.</li>
+        <li><a href="https://vk.com/@ereshdesign-razrabotka-saita-dlya-pitomnika-sobak-border-kolli-i-chihuah" target="_blank">История создания «Савалекса»</a> — как заводчица сделала сайт сама и попала в топ.</li>
+      </ul>
+    </div>
+    <div class="cost-row"><span>Цена:</span><span>0–750 ₽/мес</span></div>
+    <div class="cost-row"><span>Домен:</span><span>можно подключить lanko.ru</span></div>
+    <a class="btn" href="https://tilda.ru" target="_blank">Открыть Tilda</a>
+  </div>
+
+  <div class="card">
+    <h3>🥈 Альтернатива: Nethouse</h3>
+    <p>Российский конструктор. Хорошо индексируется Яндексом, есть шаблоны для зообизнеса.</p>
+    <div class="cost-row"><span>Цена:</span><span>от 500 ₽/мес</span></div>
+    <a class="btn" href="https://nethouse.ru" target="_blank" style="background: var(--purple);">Nethouse</a>
+  </div>
+
+  <div class="card">
+    <h3>🥉 Для быстрого старта: Craftum</h3>
+    <p>Очень простой визуальный редактор. За час можно собрать первую версию.</p>
+    <div class="cost-row"><span>Цена:</span><span>от 390 ₽/мес</span></div>
+    <a class="btn" href="https://craftum.com" target="_blank" style="background: var(--pink);">Craftum</a>
+  </div>
+
+  <h3>📋 Что должно быть на сайте питомника</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Страница / Блок</th><th>Зачем нужен</th></tr></thead>
+      <tbody>
+        <tr><td>🖼️ Главная с фото</td><td>Первое впечатление. Красивые фото собак и территории.</td></tr>
+        <tr><td>📖 О питомнике / История</td><td>Рассказ о FCI, опыте с 1984 года, хозяйке.</td></tr>
+        <tr><td>🐕 Щенки / Собаки</td><td>Карточки с фото, родословными, ценами.</td></tr>
+        <tr><td>💰 Услуги и цены</td><td>Передержка, дрессировка, вязка — с чёткими ценами.</td></tr>
+        <tr><td>✍️ Блог хозяйки</td><td>Статьи, видео, отрывки книг. Это продаёт доверие.</td></tr>
+        <tr><td>📅 Кнопка «Записаться»</td><td>Виджет Planerka. Клиент выбирает дату сам.</td></tr>
+        <tr><td>📹 Камера онлайн</td><td>Общая трансляция во дворе — для доверия.</td></tr>
+        <tr><td>📞 Контакты + карта</td><td>Телефон, Telegram, WhatsApp, адрес.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Подсказка:</strong> не делайте 20 страниц. Достаточно <strong>одного длинного лендинга</strong>, где всё по порядку: фото → о нас → собаки → цены → записаться → отзывы → контакты.
+  </div>
+</section>
+
+<hr>
+
+<!-- ОНЛАЙН-ЗАПИСЬ -->
+<section id="booking">
+  <h2>📅 Онлайн-запись и календарь</h2>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> представьте календарь на двери. Каждый клиент подходит и записывается в свободную клеточку. Вы получаете SMS: «Иванов на пятницу 10:00». За день клиенту само приходит напоминание.
+  </div>
+
+  <div class="steps">
+    <span class="step-pill">📱 Клиент заходит</span>
+    <span class="arrow">→</span>
+    <span class="step-pill">📅 Выбирает дату</span>
+    <span class="arrow">→</span>
+    <span class="step-pill">✅ Вы получаете уведомление</span>
+    <span class="arrow">→</span>
+    <span class="step-pill">💬 Напоминание за день</span>
+  </div>
+
+  <h3>Сервисы для записи</h3>
+  <div class="card card-accent">
+    <h4>🥇 Planerka.app — наш выбор</h4>
+    <ul>
+      <li>Бесплатно до 50 записей в месяц</li>
+      <li>Виджет вставляется на любой сайт</li>
+      <li>Напоминания в Telegram, SMS, email</li>
+      <li>Синхронизация с Google / Яндекс календарём</li>
+      <li>Клиенты сами отменяют и переносят</li>
+    </ul>
+    <div class="cost-row"><span>Цена:</span><span>0 ₽ (до 50 записей), потом от 500 ₽/мес</span></div>
+    <a class="btn" href="https://planerka.app" target="_blank">Открыть Planerka.app</a>
+  </div>
+
+  <div class="card">
+    <h4>🥈 Альтернативы</h4>
+    <ul>
+      <li><a href="https://yclients.com" target="_blank">YCLIENTS</a> — популярен у грумеров. Есть CRM внутри. Бесплатно до 1 сотрудника.</li>
+      <li><a href="https://zapis.kz" target="_blank">Zapis.kz</a> — простой виджет, есть бесплатный тариф.</li>
+      <li><a href="https://nethouse.ru" target="_blank">Встроенная запись Nethouse</a> — если сайт на Nethouse.</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <strong>📌 Как это работает в питомнике:</strong>
+    <ol>
+      <li>Клиент нажимает «Записаться на передержку»</li>
+      <li>Видит календарь: зелёные даты — свободны, красные — заняты</li>
+      <li>Выбирает дату, вводит имя, телефон, имя собаки</li>
+      <li>Вы мгновенно получаете уведомление в Telegram</li>
+      <li>За день клиенту: «Напоминаем, завтра в 10:00 ждём Мухтара»</li>
+    </ol>
+  </div>
+
+  <div class="card card-green">
+    <h3>✅ Результат для «Ланко»</h3>
+    <ul>
+      <li>Неявки снизятся с 20–30% до 5–10%</li>
+      <li>Не нужно отвечать на 10 сообщений «а вы свободны?»</li>
+      <li>Клиенты записываются ночью, пока хозяйка спит</li>
+    </ul>
+  </div>
+</section>
+
+<hr>
+
+<!-- CRM -->
+<section id="crm">
+  <h2>🗂️ CRM и учёт собак</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=900&auto=format&fit=crop" alt="Карточки">
+    <div class="img-caption">Электронная картотека: каждая собака — своя карточка с фото, прививками и историей.</div>
+  </div>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> CRM — это картотека. Каждая собака = карточка. В карточке: имя, порода, хозяин, телефон, прививки, аллергии, фото. Система сама считает: «Через 3 дня прививка», «Щенку 2 месяца — пора чипировать».
+  </div>
+
+  <h3>Варианты для питомника</h3>
+  <div class="level-cards">
+    <div class="level-card">
+      <h4>🟢 Google Таблицы (0 ₽)</h4>
+      <p>Самый простой старт. Одна таблица = список собак. Другая = клиенты.</p>
+      <div class="example-box">
+        <strong>Плюсы:</strong> бесплатно, доступ с телефона, как Excel.
+        <br><strong>Минусы:</strong> не шлёт напоминания, легко запутаться, когда собак много.
+      </div>
+      <a class="btn" href="https://sheets.google.com" target="_blank">Google Таблицы</a>
+    </div>
+    <div class="level-card card-accent">
+      <h4>🟡 Битрикс24 (0–1500 ₽/мес)</h4>
+      <p>Полноценная CRM. Карточки клиентов, сделки, задачи, напоминания. Бесплатно до 12 пользователей.</p>
+      <div class="example-box">
+        <strong>Как применить:</strong> «сделка» на каждую собаку. Стадии: «Передержка» → «Выписан». Задачи: «Прививка 15.06».
+      </div>
+      <a class="btn" href="https://www.bitrix24.ru" target="_blank">Битрикс24</a>
+    </div>
+    <div class="level-card">
+      <h4>🔵 Notion (0–800 ₽/мес)</h4>
+      <p>Красивая база знаний. Галерея собак с фото, фильтры по породе, дате.</p>
+      <a class="btn" href="https://notion.so" target="_blank" style="background: var(--purple);">Notion</a>
+    </div>
+  </div>
+
+  <h3>📋 Пример карточки собаки</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Поле</th><th>Пример данных</th></tr></thead>
+      <tbody>
+        <tr><td>Кличка</td><td>Мухтар</td></tr>
+        <tr><td>Порода</td><td>Немецкая овчарка</td></tr>
+        <tr><td>Дата рождения</td><td>12.03.2022</td></tr>
+        <tr><td>Хозяин</td><td>Иванов А.В., +7...</td></tr>
+        <tr><td>Прививки</td><td>Бешенство 10.01.2024, Комплекс 15.02.2024</td></tr>
+        <tr><td>Особенности</td><td>Аллергия на курицу</td></tr>
+        <tr><td>Фото</td><td>📎 5 фото</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Совет:</strong> начните с <strong>Google Таблицы</strong>. За 1 вечер перенесите всех текущих собак. Через месяц, когда поймёте, чего не хватает, перейдёте на Битрикс24.
+  </div>
+</section>
+
+<hr>
+
+<!-- КАМЕРЫ -->
+<section id="cameras">
+  <h2>📹 Камеры видеонаблюдения</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=900&auto=format&fit=crop" alt="Камера">
+    <div class="img-caption">Одна камера повышает доверие в 10 раз. Клиенты видят: территория чистая, собаки довольные.</div>
+  </div>
+
+  <div class="card card-warm">
+    <h3>🟡 Бесплатная камера во двор — для доверия</h3>
+    <p>Одна камера, транслирующая во двор. Любой посетитель сайта видит: территория чистая, собаки гуляют, за ними ухаживают. Это снимает 50% сомнений новых клиентов.</p>
+    <div class="example-box">
+      <strong>Пример:</strong> <a href="http://www.webcam-oko.ru/pitomnik-sluzhebnykh-sobak-ecad/" target="_blank">Питомник ECAD</a> — онлайн-камера в реальном времени. Просто, но вызывает огромное доверие.
+    </div>
+    <div class="cost-row"><span>Камера:</span><span>3000–5000 ₽</span></div>
+    <div class="cost-row"><span>Сервис Ivideon:</span><span>0 ₽ (2 камеры бесплатно)</span></div>
+    <a class="btn" href="https://www.ivideon.com/ru/" target="_blank">Ivideon</a>
+  </div>
+
+  <div class="card card-green">
+    <h3>🔵 Платные камеры в вольерах — доход</h3>
+    <p>Клиент, чья собака на передержке, платит 200–300 ₽ в сутки за доступ к камере. Смотрит со смартфона.</p>
+    <ul>
+      <li>1 собака × 200 ₽ × 20 дней = <strong>4000 ₽ дополнительно</strong></li>
+      <li>2 собаки = <strong>8000 ₽/мес</strong></li>
+      <li>Окупаемость камеры и сервиса — 1–2 месяца</li>
+    </ul>
+    <div class="cost-row"><span>Сервис iDogCam:</span><span>от 990 ₽/мес</span></div>
+    <a class="btn" href="https://idogcam.com" target="_blank">iDogCam</a>
+  </div>
+
+  <h3>📋 Какую камеру купить</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Модель</th><th>Цена</th><th>Почему подходит</th></tr></thead>
+      <tbody>
+        <tr><td>TP-Link Tapo C200 / C210</td><td>2500–3500 ₽</td><td>Отличное качество, ночное видение, работает с Ivideon</td></tr>
+        <tr><td>Xiaomi Mi Home Security 360</td><td>2000–3000 ₽</td><td>Дешевле, хорошая картинка, простая настройка</td></tr>
+        <tr><td>Hikvision DS-2CD</td><td>4000–6000 ₽</td><td>Профессиональная, для улицы, не боится дождя</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr>
+
+<!-- ПЛЕМЕННАЯ КНИГА -->
+<section id="pedigree">
+  <h2>📖 Племенная книга и документы</h2>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> племенная книга — это паспорт родословной. Каждый щенок из породистого питомника должен иметь документ: кто мама, кто папа, какая порода, где родился. Раньше — бумажные книги, теперь — компьютерные базы.
+  </div>
+
+  <div class="level-cards">
+    <div class="level-card">
+      <h4>🟢 Google Таблицы (старт)</h4>
+      <p>Для внутреннего учёта: имя, родители, дата вязки, дата рождения, метки щенков.</p>
+      <a class="btn" href="https://sheets.google.com" target="_blank">Создать таблицу</a>
+    </div>
+    <div class="level-card card-accent">
+      <h4>🟡 PAWID / GAR</h4>
+      <p>Международная система. Электронная родословная с QR-кодом. Можно проверить онлайн.</p>
+      <div class="cost-row"><span>Цена:</span><span>от 2000 ₽ за родословную</span></div>
+      <a class="btn" href="https://pawid.ru" target="_blank">PAWID</a>
+    </div>
+    <div class="level-card">
+      <h4>🔵 РКФ</h4>
+      <p>Российская кинологическая федерация. Официальные племенные книги, документы для выставок.</p>
+      <a class="btn" href="https://rkf.org.ru" target="_blank" style="background: var(--purple);">РКФ</a>
+    </div>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Совет:</strong> если продаёте щенков с документами — регистрируйте помёт в РКФ. Для внутреннего учёта достаточно Google Таблицы или PAWID.
+  </div>
+</section>
+
+<hr>
+
+<!-- ФИНАНСОВЫЕ СИСТЕМЫ -->
+<section id="finance">
+  <h2>💳 Финансовые системы: как принимать деньги онлайн</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&auto=format&fit=crop" alt="Оплата картой">
+    <div class="img-caption">Клиент платит картой на сайте — деньги сразу приходят вам. Никаких звонков и проверок переводов.</div>
+  </div>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> раньше клиент платил наличными или переводом. Теперь вы вставляете на сайт кнопку «Оплатить картой». Клиент вводит номер карты — деньги приходят вам. Вы выбиваете чек в приложении «Мой налог».
+  </div>
+
+  <h3>Налоги для самозанятых (НПД)</h3>
+  <div class="card">
+    <ul>
+      <li><strong>4%</strong> — если платит человек (физлицо)</li>
+      <li><strong>6%</strong> — если платит компания (юрлицо)</li>
+      <li>Чек выбивается в приложении <strong>«Мой налог»</strong></li>
+      <li>Декларации не нужны — налоговая считает сама</li>
+    </ul>
+    <div class="example-box">
+      <strong>Пример:</strong> клиент платит 5000 ₽. Вы получаете 5000 ₽. Налог = 5000 × 4% = <strong>200 ₽</strong>. Чек в приложении. Всё.
+    </div>
+  </div>
+
+  <h3>Сравнение сервисов приёма платежей</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Сервис</th><th>Комиссия</th><th>Самозанятый</th><th>Скорость</th><th>Ссылка</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ЮKassa</strong></td><td>2,5% (карты), 0,2% (СБП)</td><td>✅ Да</td><td>1 день</td><td><a href="https://yookassa.ru/priem-platezhej/" target="_blank">yookassa.ru</a></td></tr>
+        <tr><td><strong>СберБанк</strong></td><td>от 2,5%</td><td>✅ Через «Своё дело»</td><td>3–5 дней</td><td><a href="https://www.sberbank.ru" target="_blank">sberbank.ru</a></td></tr>
+        <tr><td><strong>Т-Банк</strong></td><td>от 2,5%</td><td>✅ Да</td><td>1–2 дня</td><td><a href="https://www.tbank.ru" target="_blank">tbank.ru</a></td></tr>
+        <tr><td><strong>Robokassa</strong></td><td>от 3,5%</td><td>✅ Да</td><td>1 день</td><td><a href="https://robokassa.ru" target="_blank">robokassa.ru</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>🥇 Что выбрать питомнику «Ланко»</h3>
+  <div class="card card-green">
+    <p><strong>Рекомендуем ЮKassa.</strong></p>
+    <ul>
+      <li>Самая низкая комиссия при СБП (оплата по QR-коду)</li>
+      <li>Работает с самозанятыми напрямую</li>
+      <li>Виджет легко вставить на Tilda / Nethouse</li>
+      <li>Карты, СБП, Apple Pay, Google Pay</li>
+    </ul>
+    <a class="btn" href="https://yookassa.ru/priem-platezhej/" target="_blank">Подключить ЮKassa</a>
+  </div>
+
+  <h3>Пошаговое подключение ЮKassa</h3>
+  <div class="card">
+    <ol>
+      <li><strong>Регистрация:</strong> заходите на <a href="https://yookassa.ru" target="_blank">yookassa.ru</a> → «Подключиться». Указываете ИНН, паспорт, email.</li>
+      <li><strong>Проверка:</strong> обычно одобряют за 1–2 часа (самозанятые).</li>
+      <li><strong>Настройка:</strong> личный кабинет → «Магазин» → копируете ID и секретный ключ.</li>
+      <li><strong>Вставка на сайт:</strong> в Tilda — блок «Платёжная система» → выбираете ЮKassa, вставляете ключи.</li>
+      <li><strong>Тест:</strong> сами нажимаете «Купить» → оплачиваете 1 ₽ → проверяете.</li>
+      <li><strong>Чек:</strong> при каждой продаже выбиваете чек в «Мой налог».</li>
+    </ol>
+    <div class="warning">
+      <strong>Важно:</strong> не забывайте выбивать чеки! Штраф за пропуск — от 1000 ₽. Приложение «Мой налог» бесплатное.
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- БЛОГ -->
+<section id="blog">
+  <h2>✍️ Блог хозяйки: о чём писать</h2>
+
+  <div class="img-card">
+    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900&auto=format&fit=crop" alt="Блог">
+    <div class="img-caption">Блог — это не дневник. Это способ показать: «Я разбираюсь в собаках лучше других».</div>
+  </div>
+
+  <div class="simple-explain">
+    <strong>Простыми словами:</strong> человек ищет «как приучить щенка к лотку» — находит вашу статью — доверяет вам — покупает щенка.
+  </div>
+
+  <h3>📝 30 готовых тем для статей</h3>
+  <div class="level-cards">
+    <div class="level-card card-accent">
+      <h4>Для щенководов</h4>
+      <ul>
+        <li>Как выбрать щенка: 5 признаков здоровья</li>
+        <li>Первые 3 дня щенка дома</li>
+        <li>Чем кормить щенка в 2, 4, 6 месяцев</li>
+        <li>Как приучить к лотку за неделю</li>
+        <li>Первая прививка: когда и какая</li>
+        <li>Социализация щенка</li>
+        <li>Ошибки новичков при покупке</li>
+      </ul>
+    </div>
+    <div class="level-card card-green">
+      <h4>Для владельцев</h4>
+      <ul>
+        <li>Передержка: как подготовить собаку</li>
+        <li>Как понять, что собака скучает</li>
+        <li>Зачем дрессировка: мифы и правда</li>
+        <li>Линька: как уменьшить шерсть</li>
+        <li>Питание: натуралка или корм</li>
+        <li>Когда пора на вязку</li>
+      </ul>
+    </div>
+    <div class="level-card card-purple">
+      <h4>Экспертные</h4>
+      <ul>
+        <li>Я 40 лет с породой: что изменилось</li>
+        <li>Отрывок из книги + личная история</li>
+        <li>5 мифов о породе</li>
+        <li>Как я выбираю пару для вязки</li>
+        <li>Книги о собаках: что читать</li>
+      </ul>
+    </div>
+    <div class="level-card card-warm">
+      <h4>Из жизни питомника</h4>
+      <ul>
+        <li>Утро в «Ланко»</li>
+        <li>Новый помёт: знакомим щенков</li>
+        <li>История спасения [имя]</li>
+        <li>Наши вольеры: показываем</li>
+        <li>Гости питомника: фотоотчёт</li>
+        <li>Почему не продаём первому встречному</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>📅 Контент-план на первый месяц</h3>
+  <div class="card card-accent">
+    <p><strong>Ритм:</strong> 1 статья в неделю (500–800 слов).</p>
+    <ul>
+      <li><strong>Неделя 1:</strong> «Как выбрать щенка» + 3 фото</li>
+      <li><strong>Неделя 2:</strong> «Утро в питомнике Ланко» — фото + видео 30 сек</li>
+      <li><strong>Неделя 3:</strong> «Отрывок из книги хозяйки + почему написала»</li>
+      <li><strong>Неделя 4:</strong> «Вопросы, которые задать заводчику»</li>
+    </ul>
+    <div class="tip">
+      <strong>Где публиковать:</strong> сначала на сайт в «Блог», потом дублируйте в Telegram и ВК. Из одной статьи — 3 поста.
+    </div>
+  </div>
+
+  <h3>🎥 Видео: проще, чем кажется</h3>
+  <div class="card">
+    <p>Не нужно снимать кино. Достаточно:</p>
+    <ul>
+      <li>Видео 30 сек: щенки играют → Instagram Reels / VK Клипы</li>
+      <li>Видео 1 мин: хозяйка о породе → сайт и YouTube</li>
+      <li>Видеоответы на вопросы → Stories в VK / Telegram</li>
+    </ul>
+    <div class="example-box">
+      <strong>Пример:</strong> заводчица снимает 15-секундное видео «Щенок впервые видит снег» → 10 000 просмотров → 50 подписчиков → 3 заявки на щенка.
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>❓ Частые вопросы</h2>
+
+  <details>
+    <summary>Мне 60+ лет, я не разбираюсь в компьютерах. Смогу ли я?</summary>
+    <p>Да. Tilda и Planerka сделаны так, чтобы бабушка разобралась. Это как набор кубиков: берёте готовый блок, перетаскиваете, меняете текст. Если что-то непонятно — в Tilda есть бесплатные обучающие видео (10 минут). Или попросите внука помочь на выходные — он сделает за 2 часа.</p>
+  </details>
+
+  <details>
+    <summary>Старый сайт lanko.ru пропадёт?</summary>
+    <p>Нет. Вы сохраняете домен lanko.ru и просто «переписываете» его на новый сайт. Старые тексты можно скопировать. Домен остаётся вашим.</p>
+  </details>
+
+  <details>
+    <summary>Сколько реально нужно денег на старт?</summary>
+    <p><strong>Минимум: 0 ₽.</strong> Tilda (бесплатный тестовый период) + Planerka (50 записей бесплатно). Если хотите свой домен и без рекламы — 500–750 ₽/мес.</p>
+  </details>
+
+  <details>
+    <summary>А если клиенты не захотят онлайн-запись?</summary>
+    <p>Они всё равно смогут позвонить. Но опыт других питомников показывает: 70% молодых клиентов предпочитают записаться онлайн, чем звонить. А те, кто звонит, тоже рады — потому что вы не заняты другими звонками.</p>
+  </details>
+
+  <details>
+    <summary>Камеры — это сложно?</summary>
+    <p>Нет. Покупаете TP-Link Tapo за 3000 ₽, вставляете флешку, подключаете к Wi-Fi. В Ivideon регистрируетесь за 5 минут. Код для сайта — копируете одной кнопкой.</p>
+  </details>
+
+  <details>
+    <summary>Как не запутаться в CRM?</summary>
+    <p>Начните с <strong>Google Таблицы</strong>. Это как Excel, только в интернете. Заведите 5 строк: кличка, хозяин, телефон, порода, дата рождения. Через месяц, когда поймёте, чего не хватает, перейдёте на Битрикс24.</p>
+  </details>
+
+  <details>
+    <summary>О чём писать в блоге, если я не писатель?</summary>
+    <p>Диктуйте голосом. Телефон превращает голос в текст. Напишите, как прошёл день в питомнике — это уже интереснее, чем 90% статей в интернете, потому что вы живёте этим 40 лет.</p>
+  </details>
+</section>
+
+<hr>
+
+<!-- ПЛАН ДЕЙСТВИЙ -->
+<section id="plan">
+  <h2>✅ План действий на 2 недели</h2>
+  <p>Что делать прямо сейчас. Каждый пункт — маленький шаг.</p>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" style="max-width:760px;">
+      <rect x="40" y="40" width="140" height="120" rx="14" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+      <text x="110" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#065f46">День 1–2</text>
+      <text x="110" y="90" text-anchor="middle" font-size="10" fill="#065f46">Сайт на Tilda</text>
+      <text x="110" y="105" text-anchor="middle" font-size="10" fill="#065f46">5 фото</text>
+      <text x="110" y="120" text-anchor="middle" font-size="10" fill="#065f46">Текст с lanko.ru</text>
+      <text x="110" y="140" text-anchor="middle" font-size="10" fill="#065f46">✅ Просто</text>
+
+      <text x="195" y="110" font-size="20" fill="#cbd5e1">→</text>
+
+      <rect x="220" y="40" width="140" height="120" rx="14" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="2"/>
+      <text x="290" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#0c4a6e">День 3–4</text>
+      <text x="290" y="90" text-anchor="middle" font-size="10" fill="#0c4a6e">Planerka.app</text>
+      <text x="290" y="105" text-anchor="middle" font-size="10" fill="#0c4a6e">Услуги, часы</text>
+      <text x="290" y="120" text-anchor="middle" font-size="10" fill="#0c4a6e">Виджет на сайт</text>
+      <text x="290" y="140" text-anchor="middle" font-size="10" fill="#0c4a6e">✅ Бесплатно</text>
+
+      <text x="375" y="110" font-size="20" fill="#cbd5e1">→</text>
+
+      <rect x="400" y="40" width="140" height="120" rx="14" fill="#faf5ff" stroke="#8b5cf6" stroke-width="2"/>
+      <text x="470" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#6b21a8">День 5–7</text>
+      <text x="470" y="90" text-anchor="middle" font-size="10" fill="#6b21a8">Страница «Блог»</text>
+      <text x="470" y="105" text-anchor="middle" font-size="10" fill="#6b21a8">Первая статья</text>
+      <text x="470" y="120" text-anchor="middle" font-size="10" fill="#6b21a8">Telegram-канал</text>
+      <text x="470" y="140" text-anchor="middle" font-size="10" fill="#6b21a8">✅ Быстро</text>
+
+      <text x="555" y="110" font-size="20" fill="#cbd5e1">→</text>
+
+      <rect x="580" y="40" width="140" height="120" rx="14" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+      <text x="650" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#7c2d12">День 8–14</text>
+      <text x="650" y="90" text-anchor="middle" font-size="10" fill="#7c2d12">Google Таблица</text>
+      <text x="650" y="105" text-anchor="middle" font-size="10" fill="#7c2d12">Камера + Ivideon</text>
+      <text x="650" y="120" text-anchor="middle" font-size="10" fill="#7c2d12">Показать знакомым</text>
+      <text x="650" y="140" text-anchor="middle" font-size="10" fill="#7c2d12">✅ Готово!</text>
+    </svg>
+  </div>
+
+  <div class="card card-green">
+    <h3>🗓️ День 1–2: Сайт</h3>
+    <ul class="checklist">
+      <li>Зарегистрироваться на <a href="https://tilda.ru" target="_blank">Tilda</a></li>
+      <li>Выбрать шаблон (поиск: «питомник», «животные»)</li>
+      <li>Перенести текст с lanko.ru: «О питомнике», контакты</li>
+      <li>Добавить 5–10 фото собак и территории</li>
+      <li>Опубликовать на тестовом адресе</li>
+    </ul>
+  </div>
+
+  <div class="card card-accent">
+    <h3>🗓️ День 3–4: Запись</h3>
+    <ul class="checklist">
+      <li>Зарегистрироваться на <a href="https://planerka.app" target="_blank">Planerka.app</a></li>
+      <li>Создать услуги: «Передержка», «Дрессировка», «Вязка»</li>
+      <li>Указать рабочие часы</li>
+      <li>Скопировать код виджета и вставить на сайт</li>
+      <li>Протестировать: сами запишитесь</li>
+    </ul>
+  </div>
+
+  <div class="card card-purple">
+    <h3>🗓️ День 5–7: Контент</h3>
+    <ul class="checklist">
+      <li>Создать страницу «Блог хозяйки»</li>
+      <li>Написать первую статью: «Как выбрать щенка» (можно диктовать)</li>
+      <li>Добавить обложки книг и ссылки на Wildberries / Ozon</li>
+      <li>Создать Telegram-канал «Питомник Ланко»</li>
+    </ul>
+  </div>
+
+  <div class="card card-warm">
+    <h3>🗓️ День 8–10: Учёт</h3>
+    <ul class="checklist">
+      <li>Создать Google Таблицу «Собаки Ланко»</li>
+      <li>Внести всех текущих подопечных</li>
+      <li>Создать вторую вкладку «Прививки»</li>
+      <li>Проверить, что таблица открывается на телефоне</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border: 2px solid var(--pink);">
+    <h3 style="color: var(--pink);">🗓️ День 11–14: Камера и финал</h3>
+    <ul class="checklist">
+      <li>Купить камеру TP-Link Tapo C200 (в DNS, М.Видео, Ozon)</li>
+      <li>Установить во дворе, подключить к Wi-Fi</li>
+      <li>Зарегистрировать бесплатный <a href="https://www.ivideon.com/ru/" target="_blank">Ivideon</a></li>
+      <li>Вставить код на сайт</li>
+      <li>Показать сайт 3–5 знакомым, собрать обратную связь</li>
+      <li>Подключить домен lanko.ru к новому сайту</li>
+    </ul>
+  </div>
+
+  <div class="warning">
+    <strong>⚠️ Если кажется, что много:</strong> сделайте только первые 3 пункта (сайт + запись + статья). Это уже даст 70% эффекта. Остальное — досыпки.
+  </div>
+</section>
+
+<hr>
+
+<!-- ВСЕ ССЫЛКИ -->
+<section id="links">
+  <h2>🔗 Все ссылки в одном месте</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Что</th><th>Ссылка</th><th>Цена</th></tr></thead>
+      <tbody>
+        <tr><td>Tilda</td><td><a href="https://tilda.ru" target="_blank">tilda.ru</a></td><td>0–750 ₽/мес</td></tr>
+        <tr><td>Nethouse</td><td><a href="https://nethouse.ru" target="_blank">nethouse.ru</a></td><td>от 500 ₽/мес</td></tr>
+        <tr><td>Craftum</td><td><a href="https://craftum.com" target="_blank">craftum.com</a></td><td>от 390 ₽/мес</td></tr>
+        <tr><td>Planerka</td><td><a href="https://planerka.app" target="_blank">planerka.app</a></td><td>0–500 ₽/мес</td></tr>
+        <tr><td>YCLIENTS</td><td><a href="https://yclients.com" target="_blank">yclients.com</a></td><td>0–1500 ₽/мес</td></tr>
+        <tr><td>Битрикс24</td><td><a href="https://www.bitrix24.ru" target="_blank">bitrix24.ru</a></td><td>0–1500 ₽/мес</td></tr>
+        <tr><td>Google Таблицы</td><td><a href="https://sheets.google.com" target="_blank">sheets.google.com</a></td><td>0 ₽</td></tr>
+        <tr><td>Notion</td><td><a href="https://notion.so" target="_blank">notion.so</a></td><td>0–800 ₽/мес</td></tr>
+        <tr><td>Ivideon</td><td><a href="https://www.ivideon.com/ru/" target="_blank">ivideon.com</a></td><td>0 ₽ (2 камеры)</td></tr>
+        <tr><td>iDogCam</td><td><a href="https://idogcam.com" target="_blank">idogcam.com</a></td><td>от 990 ₽/мес</td></tr>
+        <tr><td>PAWID / GAR</td><td><a href="https://pawid.ru" target="_blank">pawid.ru</a></td><td>от 2000 ₽</td></tr>
+        <tr><td>РКФ</td><td><a href="https://rkf.org.ru" target="_blank">rkf.org.ru</a></td><td>По тарифам</td></tr>
+        <tr><td>ЮKassa</td><td><a href="https://yookassa.ru/priem-platezhej/" target="_blank">yookassa.ru</a></td><td>2–3%</td></tr>
+        <tr><td>СберБанк</td><td><a href="https://www.sberbank.ru" target="_blank">sberbank.ru</a></td><td>от 2,5%</td></tr>
+        <tr><td>Т-Банк</td><td><a href="https://www.tbank.ru" target="_blank">tbank.ru</a></td><td>от 2,5%</td></tr>
+        <tr><td>Мой налог</td><td><a href="https://npd.nalog.ru/app/" target="_blank">npd.nalog.ru</a></td><td>0 ₽</td></tr>
+        <tr><td>Пример: savaleks.ru</td><td><a href="https://savaleks.ru" target="_blank">savaleks.ru</a></td><td>—</td></tr>
+        <tr><td>Пример: ECAD камера</td><td><a href="http://www.webcam-oko.ru/pitomnik-sluzhebnykh-sobak-ecad/" target="_blank">webcam-oko.ru</a></td><td>—</td></tr>
+        <tr><td>Кейс: 778 заявок</td><td><a href="https://oborot.ru/blogs/778-zayavok-s-sajta-za-mesyac-dlya-pitomnika-sobak-i237589.html" target="_blank">oborot.ru</a></td><td>—</td></tr>
+        <tr><td>Кейс: 2272 заявки</td><td><a href="https://workspace.ru/cases/1063-zayavki-s-seo-za-aprel-2025-dlya-pitomnika-sobak-maltipu/" target="_blank">workspace.ru</a></td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr>
+
+<!-- ФУТЕР -->
+<section style="text-align:center; padding: 2rem 0 3rem;">
+  <div style="font-size: 3.5rem; margin-bottom: 1rem;">🐕</div>
+  <h2 style="border:none; padding:0;">Питомник «Ланко»</h2>
+  <p style="color:var(--muted); max-width:600px; margin:0 auto 1rem;">
+    Не нужно делать всё сразу. Начните с сайта и онлайн-записи. Это дёшево, быстро и сразу облегчает жизнь.
+    Остальное добавится по мере роста.
+  </p>
+  <p style="font-size:0.85rem; color:#94a3b8;">
+    Гид подготовлен для хозяйки питомника «Ланко». Все сложные слова объяснены просто.<br>
+    Можно читать на телефоне и распечатывать.
+  </p>
+  <div style="margin-top:1.5rem;">
+    <a class="btn" href="#toc">Вернуться к оглавлению</a>
+  </div>
+</section>
+
+</div>
+
+<script>
+  document.querySelectorAll('.menu a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.menu').classList.remove('open'));
+  });
+</script>
+</body>
+</html>
+
+<script>
+  document.querySelectorAll('.menu a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.menu').classList.remove('open'));
+  });
+</script>
+</body>
+</html>

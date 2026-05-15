@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ланко — Онлайн-трансляция</title>
+<style>
+  :root {
+    --bg: #ecfeff;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --accent: #06b6d4;
+    --accent2: #0ea5e9;
+    --green: #10b981;
+    --red: #ef4444;
+    --orange: #f97316;
+    --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); line-height:1.7; }
+  a { color: var(--accent2); text-decoration:none; }
+  nav {
+    position: fixed; top:0; left:0; right:0; background:rgba(255,255,255,0.95); backdrop-filter:blur(8px);
+    border-bottom:1px solid #e2e8f0; z-index:1000;
+  }
+  .nav-wrap { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 1.2rem; height:60px; }
+  .logo { font-weight:800; font-size:1.1rem; color:var(--text); }
+  .logo span { color:var(--accent); }
+  .menu-btn { background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--text); }
+  .menu { display:none; position:absolute; top:60px; left:0; right:0; background:var(--card); border-bottom:2px solid var(--accent); padding:1rem; }
+  .menu.open { display:block; }
+  .menu a { display:block; padding:0.6rem 0; border-bottom:1px solid #f1f5f9; color:var(--text); }
+  @media (min-width:800px) {
+    .menu-btn { display:none; }
+    .menu { display:flex !important; position:static; background:none; border:none; padding:0; gap:1.5rem; }
+    .menu a { border:none; padding:0.3rem; font-size:0.9rem; }
+  }
+  .hero {
+    margin-top:60px; background: linear-gradient(180deg, #cffafe, #ecfeff);
+    padding: 3rem 1.2rem; text-align:center;
+  }
+  .hero h1 { font-size:2.2rem; margin-bottom:0.5rem; }
+  .hero p { color:var(--muted); max-width:600px; margin:0 auto 1rem; }
+  .live-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(239,83,80,0.1); color:var(--red); padding:0.3rem 1rem; border-radius:40px; font-size:0.85rem; font-weight:700; border:1px solid rgba(239,83,80,0.2); }
+  .live-badge .dot { width:8px; height:8px; background:var(--red); border-radius:50%; animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%{opacity:1; transform:scale(1);} 50%{opacity:0.5; transform:scale(1.3);} 100%{opacity:1; transform:scale(1);} }
+  .cam-section { max-width:1100px; margin:0 auto; padding: 0 1.2rem 2rem; }
+  .cam-main {
+    background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 24px; overflow:hidden; position:relative;
+    aspect-ratio: 16/9; max-height: 520px; display:flex; align-items:center; justify-content:center;
+    border: 1px solid #334155;
+  }
+  .cam-main .overlay {
+    position:absolute; bottom:0; left:0; right:0; background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    padding: 2rem 1.5rem 1.2rem; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1rem;
+  }
+  .cam-main .overlay h3 { font-size:1.2rem; margin-bottom:0.3rem; color:#fff; }
+  .cam-main .overlay p { color:#aaa; font-size:0.9rem; }
+  .cam-info { display:flex; gap:1rem; align-items:center; }
+  .info-pill { background:rgba(255,255,255,0.1); padding:0.3rem 0.8rem; border-radius:20px; font-size:0.8rem; color:#ccc; }
+  .cam-grid { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); margin-top:1.5rem; }
+  .mini-cam {
+    background: var(--card); border-radius: 16px; overflow:hidden; border:1px solid #e2e8f0;
+    position:relative; aspect-ratio: 16/10; display:flex; align-items:center; justify-content:center;
+  }
+  .mini-cam .lock { position:absolute; top:10px; right:10px; background:rgba(0,0,0,0.6); padding:0.3rem 0.7rem; border-radius:20px; font-size:0.75rem; color:#fff; }
+  .mini-cam .label { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.7); padding:0.8rem; font-size:0.9rem; color:#fff; }
+  .mini-cam .price { position:absolute; top:10px; left:10px; background:var(--orange); color:#fff; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.75rem; font-weight:700; }
+  .mini-cam .play { font-size:2.5rem; opacity:0.7; }
+  section { max-width:1100px; margin:0 auto; padding: 2.5rem 1.2rem; }
+  h2 { font-size:1.7rem; margin-bottom:0.8rem; }
+  .sub { color:var(--muted); margin-bottom:1.5rem; }
+  .service-cards { display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .svc { background:var(--card); border-radius:20px; padding:1.4rem; border:1px solid #e2e8f0; }
+  .svc h3 { margin-bottom:0.4rem; color:var(--text); }
+  .svc .price-tag { color:var(--accent2); font-weight:800; font-size:1.1rem; margin-top:0.5rem; display:inline-block; }
+  .booking-cam { background: var(--card); border-radius: 24px; padding: 1.5rem; border:1px solid #e2e8f0; }
+  .booking-cam h3 { margin-bottom:1rem; }
+  input, select, textarea {
+    width:100%; padding:0.8rem 1rem; border-radius:12px; border:1px solid #e2e8f0;
+    background:#fff; color:var(--text); font-family:inherit; font-size:1rem; margin-bottom:0.7rem;
+  }
+  .btn {
+    display:inline-block; padding:0.9rem 2rem; border-radius:50px; font-weight:700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent)); color:#fff; margin-top:0.5rem;
+  }
+  .btn:hover { opacity:0.9; }
+  footer { text-align:center; padding:2rem 1rem; color:#94a3b8; font-size:0.85rem; border-top:1px solid #e2e8f0; background:#fff; }
+  @media (max-width:600px) {
+    .hero h1 { font-size:1.7rem; }
+    .cam-main { aspect-ratio: 4/3; }
+    .mini-cam { aspect-ratio: 4/3; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrap">
+    <div class="logo">🐕 LAN<span>KO</span> <span style="font-size:0.75rem; color:var(--muted); font-weight:400;">LIVE</span></div>
+    <button class="menu-btn" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+    <div class="menu">
+      <a href="#live">Трансляция</a>
+      <a href="#rooms">Вольеры</a>
+      <a href="#services">Услуги</a>
+      <a href="#book">Записаться</a>
+      <a href="#contact">Контакты</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="live-badge"><span class="dot"></span> LIVE</div>
+  <h1>Смотрите за собаками онлайн</h1>
+  <p>Круглосуточная трансляция из питомника «Ланко». Убедитесь сами, как живут питомцы.</p>
+</div>
+
+<div class="cam-section" id="live">
+  <div class="cam-main">
+    <div style="text-align:center; opacity:0.6;">
+      <div style="font-size:4rem; margin-bottom:0.5rem;">📹</div>
+      <p style="color:#fff;">Прямая трансляция из питомника</p>
+      <p style="font-size:0.85rem; color:#94a3b8;">Ivideon • 24/7</p>
+    </div>
+    <div class="overlay">
+      <div>
+        <h3>🌳 Общий двор</h3>
+        <p>Территория питомника • Выгул • Игры</p>
+      </div>
+      <div class="cam-info">
+        <div class="info-pill">⬇️ 720p</div>
+        <div class="info-pill">👁️ 12 смотрят</div>
+        <div class="info-pill" style="color:var(--green);">● Онлайн</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cam-grid" id="rooms">
+    <div class="mini-cam">
+      <div class="play">📷</div>
+      <div class="price">200 ₽/сутки</div>
+      <div class="lock">🔒 Требуется доступ</div>
+      <div class="label">Вольер №1 — Мухтар</div>
+    </div>
+    <div class="mini-cam">
+      <div class="play">📷</div>
+      <div class="price">200 ₽/сутки</div>
+      <div class="lock">🔒 Требуется доступ</div>
+      <div class="label">Вольер №2 — Бимка</div>
+    </div>
+    <div class="mini-cam">
+      <div class="play">📷</div>
+      <div class="price">200 ₽/сутки</div>
+      <div class="lock">🔒 Требуется доступ</div>
+      <div class="label">Вольер №3 — Лорд</div>
+    </div>
+    <div class="mini-cam" style="background:#f8fafc; border:2px dashed #cbd5e1;">
+      <div style="text-align:center; color:#94a3b8; font-size:0.9rem; padding:1rem;">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">➕</div>
+        <p>Забронируйте передержку — получите доступ к камере</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <h2>Как получить доступ к камере</h2>
+  <p class="sub">Два варианта: смотреть бесплатно или следить за своим питомцем.</p>
+  <div class="service-cards">
+    <div class="svc">
+      <h3>📹 Общая камера</h3>
+      <p>Вид на двор и игровую зону. Доступен всем. Повышает доверие.</p>
+      <div class="price-tag">Бесплатно</div>
+    </div>
+    <div class="svc">
+      <h3>🔐 Персональная камера</h3>
+      <p>Камера в вольере вашей собаки. Оплата за дни передержки.</p>
+      <div class="price-tag">200 ₽ / сутки</div>
+    </div>
+    <div class="svc">
+      <h3>🎥 Архив записей</h3>
+      <p>Просмотр за последние 7 дней.</p>
+      <div class="price-tag">Включено</div>
+    </div>
+    <div class="svc">
+      <h3>📱 Уведомления</h3>
+      <p>Push-уведомления о выгуле и событиях.</p>
+      <div class="price-tag">Бесплатно</div>
+    </div>
+  </div>
+</section>
+
+<section id="book">
+  <div style="display:grid; gap:1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); align-items:start;">
+    <div class="booking-cam">
+      <h3>🗓️ Записаться на передержку + камера</h3>
+      <p style="color:var(--muted); margin-bottom:1rem; font-size:0.95rem;">Выберите даты — мы подключим камеру.</p>
+      <input type="text" placeholder="Ваше имя">
+      <input type="tel" placeholder="Телефон">
+      <input type="text" placeholder="Кличка собаки, порода">
+      <select>
+        <option>Выберите даты передержки</option>
+        <option>3–7 дней</option>
+        <option>7–14 дней</option>
+        <option>14–30 дней</option>
+      </select>
+      <label style="display:flex; align-items:center; gap:0.6rem; color:var(--muted); font-size:0.9rem; margin:0.5rem 0;">
+        <input type="checkbox" checked> Хочу доступ к персональной камере (+200 ₽/сутки)
+      </label>
+      <a class="btn" href="#" style="display:block; text-align:center;">Отправить заявку</a>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.8rem;">Мы перезвоним в течение часа.</p>
+    </div>
+    <div>
+      <div class="booking-cam" style="margin-bottom:1rem;">
+        <h3>📊 Сколько стоит</h3>
+        <div style="display:flex; justify-content:space-between; padding:0.6rem 0; border-bottom:1px solid #f1f5f9;">
+          <span>Передержка (10 дней × 800 ₽)</span><span>8000 ₽</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:0.6rem 0; border-bottom:1px solid #f1f5f9;">
+          <span>Камера (10 дней × 200 ₽)</span><span>2000 ₽</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; padding:0.8rem 0; font-weight:800; font-size:1.1rem; color:var(--accent2);">
+          <span>Итого</span><span>10 000 ₽</span>
+        </div>
+      </div>
+      <div class="booking-cam" style="background:#f0fdf4; border-color:#bbf7d0;">
+        <h3 style="color:#065f46;">✅ Что включает передержка</h3>
+        <ul style="margin-left:1.2rem; color:#475569; font-size:0.95rem;">
+          <li>Кормление 2–3 раза</li>
+          <li>Выгул 3–4 раза</li>
+          <li>Ежедневный фотоотчёт</li>
+          <li>Доступ к камере</li>
+          <li>Ветеринарный контроль</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="booking-cam" style="text-align:center;">
+    <h3>Контакты питомника «Ланко»</h3>
+    <p style="color:var(--muted); margin-bottom:1rem;">По всем вопросам — звоните или пишите.</p>
+    <p><strong>📞</strong> <a href="tel:+79166748545">8-916-674-8545</a></p>
+    <p><strong>✉️</strong> <a href="mailto:lanko@yandex.ru">lanko@yandex.ru</a></p>
+    <p><strong>💬</strong> Telegram: @lanko_pitomnik</p>
+    <p style="margin-top:1rem; color:#94a3b8; font-size:0.9rem;">Работаем ежедневно, 9:00–19:00</p>
+  </div>
+</section>
+
+<footer>
+  <p>🐕 Питомник «Ланко» — онлайн-трансляция 24/7</p>
+  <p style="margin-top:0.4rem;">FCI • С 1984 года</p>
+  <p style="margin-top:0.6rem; font-size:0.75rem; opacity:0.5;">Демонстрационный макет с акцентом на камеры.</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.menu a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.menu').classList.remove('open')));
+</script>
+</body>
+</html>
