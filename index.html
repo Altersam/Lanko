@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Редизайн сайта питомника «Ланко» — кейс</title>
+<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, ИИ-помощник в админке.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0ea5a8; --teal-dk:#0a7e80; --sky:#2bb3e0; --green:#34c759;
+  --sun:#ffc83d; --coral:#ff6f61; --ink:#143642; --ink2:#3a5a66;
+  --muted:#6f8a93; --line:#d6e7ec; --bg:#f2fbfc; --surface:#fff;
+  --grad:linear-gradient(135deg,#0ea5a8 0%,#2bb3e0 55%,#34c759 100%);
+  --radius:18px; --shadow:0 10px 30px rgba(14,165,168,.14); --shadow-lg:0 20px 50px rgba(14,90,110,.20);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;
+  background-image:
+    radial-gradient(circle at 12% 16%,rgba(43,179,224,.10) 0 22px,transparent 23px),
+    radial-gradient(circle at 82% 10%,rgba(52,199,89,.09) 0 30px,transparent 31px),
+    radial-gradient(circle at 88% 60%,rgba(14,165,168,.08) 0 26px,transparent 27px),
+    radial-gradient(circle at 28% 80%,rgba(255,200,61,.10) 0 18px,transparent 19px);
+  background-attachment:fixed;}
+h1,h2,h3{font-family:'Comfortaa',sans-serif;line-height:1.2;font-weight:700}
+a{color:var(--teal-dk);text-decoration:none}
+.wrap{width:min(100% - 2rem,1080px);margin-inline:auto}
+.section{padding:clamp(2.5rem,6vw,4.5rem) 0}
+
+/* hero */
+.hero{background:var(--grad);color:#fff;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 15% 30%,rgba(255,255,255,.16) 0 26px,transparent 27px),
+    radial-gradient(circle at 80% 22%,rgba(255,255,255,.12) 0 34px,transparent 35px),
+    radial-gradient(circle at 70% 80%,rgba(255,255,255,.10) 0 22px,transparent 23px);}
+.hero .wrap{position:relative;z-index:2;padding:clamp(3rem,7vw,5.5rem) 0}
+.hero .tag{font-family:'Comfortaa';font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+.hero h1{font-size:clamp(2rem,5.2vw,3.4rem);margin:.4rem 0 .8rem}
+.hero p{font-size:1.15rem;max-width:62ch;opacity:.96}
+.meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}
+.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:999px;font-size:.9rem;font-weight:700}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Comfortaa';font-weight:600;padding:.85em 1.6em;border-radius:999px;transition:transform .18s,box-shadow .18s}
+.btn--light{background:#fff;color:var(--teal-dk);box-shadow:var(--shadow)}
+.btn--ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
+.btn:hover{transform:translateY(-2px)}
+.wave{display:block;width:100%;height:auto;margin-bottom:-6px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:-2rem;position:relative;z-index:3}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow)}
+.stat b{font-family:'Comfortaa';font-size:1.9rem;display:block;color:var(--teal-dk)}
+.stat span{font-size:.85rem;color:var(--muted)}
+
+.lead{text-align:center;max-width:760px;margin:0 auto 2.5rem}
+.lead .eyebrow{font-family:'Comfortaa';color:var(--teal);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.85rem}
+.lead h2{font-size:clamp(1.5rem,3.2vw,2.3rem);margin:.3rem 0 .6rem}
+.lead p{color:var(--ink2)}
+
+/* compare links */
+.links{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;box-shadow:var(--shadow);}
+.card--new{border:2px solid var(--green)}
+.card .label{font-family:'Comfortaa';font-weight:700;display:inline-block;padding:.25rem .7rem;border-radius:999px;font-size:.78rem;margin-bottom:.6rem}
+.label--old{background:#ffe2de;color:#c2402f}
+.label--new{background:var(--green);color:#fff}
+.card h3{font-size:1.2rem;margin-bottom:.3rem}
+.card ul{list-style:none;margin:.7rem 0 1rem}
+.card li{padding:.2rem 0;color:var(--ink2);font-size:.95rem}
+.card li::before{content:"•";color:var(--teal);margin-right:.5rem;font-weight:700}
+.card a.go{font-weight:700}
+
+/* table */
+.tbl-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow);background:#fff;border:1px solid var(--line)}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--grad);color:#fff;font-family:'Comfortaa';font-size:.95rem;position:sticky;top:0}
+tbody tr:nth-child(even){background:#f6fcfd}
+td.feature{font-weight:700;color:var(--ink)}
+td.old{color:var(--muted)}
+td.new{color:var(--green-dk,#1f9d44)}
+.yes{color:#1f9d44;font-weight:800}
+.no{color:#c2402f;font-weight:800}
+
+/* feature grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow)}
+.feat .ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:linear-gradient(135deg,#d9f0fb,#def8e6);margin-bottom:.8rem}
+.feat h3{font-size:1.1rem;margin-bottom:.4rem}
+.feat p{font-size:.93rem;color:var(--ink2)}
+
+/* stack */
+.stack{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
+.stack span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;font-size:.9rem;box-shadow:var(--shadow)}
+
+.soft{background:linear-gradient(135deg,#d9f0fb,#def8e6)}
+footer{background:var(--ink);color:#cfe6ec;text-align:center;padding:2.5rem 1rem;font-size:.9rem}
+footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
+
+@media(max-width:780px){
+  .stats{grid-template-columns:1fr 1fr}
+  .links{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){ .grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">🐾 Кейс · Веб-разработка</span>
+    <h1>Редизайн и перевод на WordPress сайта питомника «Ланко»</h1>
+    <p>Объединил три устаревших сайта многопородного питомника собак в один современный адаптивный сайт на WordPress: новый дизайн, корректный перенос контента, родословное древо питомцев и помощник для добавления карточек в админке.</p>
+    <div class="meta">
+      <span class="chip">WordPress + ACF</span>
+      <span class="chip">PHP</span>
+      <span class="chip">Перенос данных</span>
+      <span class="chip">Адаптивный дизайн</span>
+      <span class="chip">UX</span>
+    </div>
+    <div class="cta">
+      <a class="btn btn--light" href="https://ланко.рф" target="_blank" rel="noopener">Новый сайт →</a>
+      <a class="btn btn--ghost" href="#compare">Что сделано ↓</a>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="#f2fbfc" d="M0,35 C240,80 480,0 720,28 C960,55 1200,80 1440,35 L1440,70 L0,70 Z"></path></svg>
+</header>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>3 → 1</b><span>сайта объединены</span></div>
+      <div class="stat"><b>7</b><span>пород</span></div>
+      <div class="stat"><b>1000+</b><span>фото перенесено</span></div>
+      <div class="stat"><b>20</b><span>карточек собак</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- О ПРОЕКТЕ -->
+<section class="section">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">О проекте</span>
+      <h2>Задача</h2>
+      <p>У питомника было три отдельных устаревших сайта (lanko.ru, king.lanko.ru, karavan-iti.ru) с громоздкой навигацией, частью нерабочих страниц и перепутанными фотографиями — например, фото алабая стояло под записью о японском хине. Нужно было собрать единый современный сайт, навести порядок в контенте и дать владельцу возможность самостоятельно его редактировать.</p>
+    </div>
+  </div>
+</section>
+
+<!-- СРАВНЕНИЕ ССЫЛОК -->
+<section class="section soft" id="compare">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">До и после</span>
+      <h2>Старые сайты и новый</h2>
+    </div>
+    <div class="links">
+      <div class="card">
+        <span class="label label--old">Было</span>
+        <h3>Три отдельных сайта</h3>
+        <ul>
+          <li>Громоздкая, дублирующая навигация</li>
+          <li>Часть страниц не открывалась</li>
+          <li>Перепутанные фотографии пород</li>
+          <li>Нет адаптива и единого стиля</li>
+        </ul>
+        <p>
+          <a class="go" href="https://lanko.ru" target="_blank" rel="noopener">lanko.ru ↗</a><br>
+          <a class="go" href="https://king.lanko.ru" target="_blank" rel="noopener">king.lanko.ru ↗</a><br>
+          <a class="go" href="https://karavan-iti.ru" target="_blank" rel="noopener">karavan-iti.ru ↗</a>
+        </p>
+      </div>
+      <div class="card card--new">
+        <span class="label label--new">Стало</span>
+        <h3>Единый сайт на WordPress</h3>
+        <ul>
+          <li>5 понятных разделов вместо десятка</li>
+          <li>Родословное древо питомцев</li>
+          <li>Корректная привязка фото к собакам</li>
+          <li>Адаптив, яркая фирменная гамма</li>
+          <li>Редактирование контента в админке</li>
+        </ul>
+        <p><a class="go" href="https://ланко.рф" target="_blank" rel="noopener"><b>ланко.рф ↗</b></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ТАБЛИЦА -->
+<section class="section">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">Сравнение</span>
+      <h2>Что изменилось</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Параметр</th><th>Старые сайты</th><th>Новый сайт</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="feature">Платформа</td><td class="old">Статичные HTML, 3 разных сайта</td><td class="new">WordPress + ACF, одна тема</td></tr>
+          <tr><td class="feature">Структура</td><td class="old">Десятки разрозненных страниц</td><td class="new">5 разделов: Главная · Питомцы · Блог · Галерея · Контакты</td></tr>
+          <tr><td class="feature">Дизайн</td><td class="old">Устаревший, без единого стиля</td><td class="new">Современный, голубо-зелёная гамма, фон-«пятнышки»</td></tr>
+          <tr><td class="feature">Мобильная версия</td><td class="no">✗ нет</td><td class="yes">✓ полный адаптив</td></tr>
+          <tr><td class="feature">Привязка фото к собакам</td><td class="old">Перепутаны (алабай под хином)</td><td class="new">Восстановлена по исходным данным</td></tr>
+          <tr><td class="feature">Родословные</td><td class="no">✗ нет</td><td class="yes">✓ древо на 3 поколения со ссылками на предков</td></tr>
+          <tr><td class="feature">Породы / щенки / производители</td><td class="old">Разные страницы</td><td class="new">Единый раздел «Питомцы» с фильтром по породам</td></tr>
+          <tr><td class="feature">Блог</td><td class="old">Статьи разбросаны по сайтам</td><td class="new">Лента с фильтром по рубрикам + карта сайта</td></tr>
+          <tr><td class="feature">Галерея</td><td class="old">Простой список фото</td><td class="new">Альбомы-карточки с лайтбоксом</td></tr>
+          <tr><td class="feature">Услуги</td><td class="no">✗ нет</td><td class="yes">✓ передержка, ветуход, груминг, дрессировка</td></tr>
+          <tr><td class="feature">Форма записи</td><td class="no">✗ нет</td><td class="yes">✓ форма + готовность к онлайн-записи (Amelia)</td></tr>
+          <tr><td class="feature">Редактирование владельцем</td><td class="no">✗ только через разработчика</td><td class="yes">✓ полностью в админке WordPress</td></tr>
+          <tr><td class="feature">Битые ссылки и фото</td><td class="old">Присутствовали</td><td class="new">Проверены и исправлены (0 битых)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ФИЧИ -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">Реализовано</span>
+      <h2>Ключевые возможности</h2>
+    </div>
+    <div class="grid">
+      <div class="feat"><div class="ico">🌳</div><h3>Родословное древо</h3><p>Карточка собаки раскрывает отца, мать, дедов и бабок. Если предок есть на сайте — ведёт на его карточку.</p></div>
+      <div class="feat"><div class="ico">🖼️</div><h3>Корректные фото</h3><p>Более 1000 фотографий перенесены и заново привязаны к нужным собакам и статьям по данным исходных сайтов.</p></div>
+      <div class="feat"><div class="ico">🗂️</div><h3>Контент в БД</h3><p>Питомцы, помёты, статьи и альбомы — кастомные типы записей WordPress + ACF. Редактируются в админке.</p></div>
+      <div class="feat"><div class="ico">📸</div><h3>Галерея-альбомы</h3><p>Альбомы-обложки с фильтром по тегам; клик открывает лайтбокс с перелистыванием.</p></div>
+      <div class="feat"><div class="ico">📝</div><h3>Помощник в админке</h3><p>Формы «Добавить питомца / статью»: владелец заполняет поля, выбирает фото — создаётся черновик в нужном разделе.</p></div>
+      <div class="feat"><div class="ico">📥</div><h3>Импортёр данных</h3><p>Пошаговый импорт всего контента и фотографий из подготовленного датасета одной кнопкой в админке.</p></div>
+      <div class="feat"><div class="ico">📱</div><h3>Адаптив</h3><p>Корректная работа на телефонах и планшетах: меню, древо родословных, галерея, формы.</p></div>
+      <div class="feat"><div class="ico">⚙️</div><h3>Редактируемые тексты</h3><p>Заголовки разделов, блок «О питомнике», контакты и услуги меняются через настройки темы без кода.</p></div>
+      <div class="feat"><div class="ico">🤖</div><h3>Задел под ИИ-ассистента</h3><p>REST-эндпоинты и функции, чтобы подключить ИИ-помощника (DeepSeek/Qwen) для создания карточек по команде.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРОЦЕСС -->
+<section class="section">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">Как делалось</span>
+      <h2>Процесс</h2>
+    </div>
+    <div class="grid">
+      <div class="feat"><div class="ico">1️⃣</div><h3>Анализ и аудит</h3><p>Разобрал выгрузку трёх сайтов, нашёл проблемы: битые страницы, перепутанные и «битые» (HTML вместо изображений) фото.</p></div>
+      <div class="feat"><div class="ico">2️⃣</div><h3>Сборка датасета</h3><p>Скриптами на Python распарсил исходные данные, восстановил привязку фото к собакам и статьям, очистил тексты.</p></div>
+      <div class="feat"><div class="ico">3️⃣</div><h3>Дизайн и вёрстка</h3><p>Кастомная дизайн-система, адаптивные шаблоны, родословное древо, галерея, формы.</p></div>
+      <div class="feat"><div class="ico">4️⃣</div><h3>WordPress-тема</h3><p>CPT + ACF, импортёр, формы-помощники, настройки контента — всё под редактирование владельцем.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- СТЕК -->
+<section class="section soft">
+  <div class="wrap">
+    <div class="lead"><span class="eyebrow">Технологии</span><h2>Стек</h2></div>
+    <div class="stack">
+      <span>WordPress</span><span>PHP</span><span>ACF</span>
+      <span>HTML5</span><span>CSS3</span><span>JavaScript (vanilla)</span>
+      <span>Python (ETL)</span><span>REST API</span><span>Amelia</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Кейс по редизайну сайта питомника собак «Ланко».</p>
+  <p style="margin-top:.5rem">
+    Новый сайт: <a href="https://ланко.рф" target="_blank" rel="noopener">ланко.рф</a> ·
+    Старые: <a href="https://lanko.ru" target="_blank" rel="noopener">lanko.ru</a>,
+    <a href="https://king.lanko.ru" target="_blank" rel="noopener">king.lanko.ru</a>,
+    <a href="https://karavan-iti.ru" target="_blank" rel="noopener">karavan-iti.ru</a>
+  </p>
+</footer>
+
+</body>
+</html>
