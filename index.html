@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Редизайн сайта питомника «Ланко» — кейс</title>
-<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, ИИ-помощник в админке.">
+<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, приём заявок, мини-CRM и Telegram-бот.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@ a{color:var(--teal-dk);text-decoration:none}
 .wave{display:block;width:100%;height:auto;margin-bottom:-6px}
 
 /* stats */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:-2rem;position:relative;z-index:3}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:-2rem;position:relative;z-index:3}
 .stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow)}
 .stat b{font-family:'Comfortaa';font-size:1.9rem;display:block;color:var(--teal-dk)}
 .stat span{font-size:.85rem;color:var(--muted)}
@@ -100,6 +100,7 @@ td.new{color:var(--green-dk,#1f9d44)}
 footer{background:var(--ink);color:#cfe6ec;text-align:center;padding:2.5rem 1rem;font-size:.9rem}
 footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
 
+@media(max-width:980px){ .stats{grid-template-columns:repeat(3,1fr)} }
 @media(max-width:780px){
   .stats{grid-template-columns:1fr 1fr}
   .links{grid-template-columns:1fr}
@@ -114,13 +115,14 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
   <div class="wrap">
     <span class="tag">🐾 Кейс · Веб-разработка</span>
     <h1>Редизайн и перевод на WordPress сайта питомника «Ланко»</h1>
-    <p>Объединил три устаревших сайта многопородного питомника собак в один современный адаптивный сайт на WordPress: новый дизайн, корректный перенос контента, родословное древо питомцев и помощник для добавления карточек в админке.</p>
+    <p>Объединил три устаревших сайта многопородного питомника собак в один современный адаптивный сайт на WordPress: новый дизайн, корректный перенос контента, родословное древо питомцев, приём заявок с мини-CRM и Telegram-бот — всё редактируется владельцем в админке.</p>
     <div class="meta">
       <span class="chip">WordPress + ACF</span>
       <span class="chip">PHP</span>
       <span class="chip">Перенос данных</span>
       <span class="chip">Адаптивный дизайн</span>
-      <span class="chip">UX</span>
+      <span class="chip">Мини-CRM</span>
+      <span class="chip">Telegram-бот</span>
     </div>
     <div class="cta">
       <a class="btn btn--light" href="https://ланко.рф" target="_blank" rel="noopener">Новый сайт →</a>
@@ -137,6 +139,8 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
       <div class="stat"><b>7</b><span>пород</span></div>
       <div class="stat"><b>1000+</b><span>фото перенесено</span></div>
       <div class="stat"><b>20</b><span>карточек собак</span></div>
+      <div class="stat"><b>21</b><span>статья блога</span></div>
+      <div class="stat"><b>15</b><span>альбомов галереи</span></div>
     </div>
   </div>
 </section>
@@ -182,6 +186,7 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
           <li>5 понятных разделов вместо десятка</li>
           <li>Родословное древо питомцев</li>
           <li>Корректная привязка фото к собакам</li>
+          <li>Приём заявок, мини-CRM и Telegram-бот</li>
           <li>Адаптив, яркая фирменная гамма</li>
           <li>Редактирование контента в админке</li>
         </ul>
@@ -213,8 +218,11 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
           <tr><td class="feature">Породы / щенки / производители</td><td class="old">Разные страницы</td><td class="new">Единый раздел «Питомцы» с фильтром по породам</td></tr>
           <tr><td class="feature">Блог</td><td class="old">Статьи разбросаны по сайтам</td><td class="new">Лента с фильтром по рубрикам + карта сайта</td></tr>
           <tr><td class="feature">Галерея</td><td class="old">Простой список фото</td><td class="new">Альбомы-карточки с лайтбоксом</td></tr>
-          <tr><td class="feature">Услуги</td><td class="no">✗ нет</td><td class="yes">✓ передержка, ветуход, груминг, дрессировка</td></tr>
-          <tr><td class="feature">Форма записи</td><td class="no">✗ нет</td><td class="yes">✓ форма + готовность к онлайн-записи (Amelia)</td></tr>
+          <tr><td class="feature">Услуги</td><td class="no">✗ нет</td><td class="yes">✓ щенки, передержка, ветуход, груминг, дрессировка</td></tr>
+          <tr><td class="feature">Форма записи</td><td class="no">✗ нет</td><td class="yes">✓ динамическая: поля подстраиваются под услугу</td></tr>
+          <tr><td class="feature">Приём заявок</td><td class="no">✗ нет</td><td class="yes">✓ сохранение в БД + письмо; готовность к Amelia</td></tr>
+          <tr><td class="feature">CRM</td><td class="no">✗ нет</td><td class="yes">✓ канбан-доска + календарь с периодами передержки</td></tr>
+          <tr><td class="feature">Telegram-бот</td><td class="no">✗ нет</td><td class="yes">✓ запись, уведомления, напоминания, новости в блог</td></tr>
           <tr><td class="feature">Редактирование владельцем</td><td class="no">✗ только через разработчика</td><td class="yes">✓ полностью в админке WordPress</td></tr>
           <tr><td class="feature">Битые ссылки и фото</td><td class="old">Присутствовали</td><td class="new">Проверены и исправлены (0 битых)</td></tr>
         </tbody>
@@ -235,8 +243,14 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
       <div class="feat"><div class="ico">🖼️</div><h3>Корректные фото</h3><p>Более 1000 фотографий перенесены и заново привязаны к нужным собакам и статьям по данным исходных сайтов.</p></div>
       <div class="feat"><div class="ico">🗂️</div><h3>Контент в БД</h3><p>Питомцы, помёты, статьи и альбомы — кастомные типы записей WordPress + ACF. Редактируются в админке.</p></div>
       <div class="feat"><div class="ico">📸</div><h3>Галерея-альбомы</h3><p>Альбомы-обложки с фильтром по тегам; клик открывает лайтбокс с перелистыванием.</p></div>
+      <div class="feat"><div class="ico">📨</div><h3>Динамическая форма записи</h3><p>Поля подстраиваются под услугу: для передержки — даты и кличка, для груминга — одна дата, чекбоксы доп. услуг.</p></div>
+      <div class="feat"><div class="ico">📥</div><h3>Приём заявок</h3><p>Заявки сохраняются в базе как отдельный тип записей и приходят на e-mail. Готовность к онлайн-записи через Amelia.</p></div>
+      <div class="feat"><div class="ico">🗂️</div><h3>Мини-CRM</h3><p>Канбан-доска заявок (Новые / В процессе / Завершённые) и календарь FullCalendar с полосами периодов передержки.</p></div>
+      <div class="feat"><div class="ico">💬</div><h3>Telegram-бот</h3><p>Приветствие и запись клиентов, уведомления и напоминания. Для владельца — публикация новостей в блог и сводки заявок.</p></div>
+      <div class="feat"><div class="ico">👥</div><h3>Несколько админов</h3><p>Привязка администраторов по @нику Telegram с авто-подстановкой chat_id; уведомления приходят всем.</p></div>
+      <div class="feat"><div class="ico">☁️</div><h3>Релей через Cloudflare</h3><p>Если хостинг блокирует входящие от Telegram, webhook проксируется через бесплатный Cloudflare Worker.</p></div>
       <div class="feat"><div class="ico">📝</div><h3>Помощник в админке</h3><p>Формы «Добавить питомца / статью»: владелец заполняет поля, выбирает фото — создаётся черновик в нужном разделе.</p></div>
-      <div class="feat"><div class="ico">📥</div><h3>Импортёр данных</h3><p>Пошаговый импорт всего контента и фотографий из подготовленного датасета одной кнопкой в админке.</p></div>
+      <div class="feat"><div class="ico">🚚</div><h3>Импортёр данных</h3><p>Пошаговый импорт всего контента и фотографий из подготовленного датасета одной кнопкой в админке.</p></div>
       <div class="feat"><div class="ico">📱</div><h3>Адаптив</h3><p>Корректная работа на телефонах и планшетах: меню, древо родословных, галерея, формы.</p></div>
       <div class="feat"><div class="ico">⚙️</div><h3>Редактируемые тексты</h3><p>Заголовки разделов, блок «О питомнике», контакты и услуги меняются через настройки темы без кода.</p></div>
       <div class="feat"><div class="ico">🤖</div><h3>Задел под ИИ-ассистента</h3><p>REST-эндпоинты и функции, чтобы подключить ИИ-помощника (DeepSeek/Qwen) для создания карточек по команде.</p></div>
@@ -256,6 +270,7 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
       <div class="feat"><div class="ico">2️⃣</div><h3>Сборка датасета</h3><p>Скриптами на Python распарсил исходные данные, восстановил привязку фото к собакам и статьям, очистил тексты.</p></div>
       <div class="feat"><div class="ico">3️⃣</div><h3>Дизайн и вёрстка</h3><p>Кастомная дизайн-система, адаптивные шаблоны, родословное древо, галерея, формы.</p></div>
       <div class="feat"><div class="ico">4️⃣</div><h3>WordPress-тема</h3><p>CPT + ACF, импортёр, формы-помощники, настройки контента — всё под редактирование владельцем.</p></div>
+      <div class="feat"><div class="ico">5️⃣</div><h3>Сервисы</h3><p>Приём заявок в БД, мини-CRM с календарём и Telegram-бот для записи, уведомлений и публикации новостей.</p></div>
     </div>
   </div>
 </section>
@@ -267,7 +282,8 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
     <div class="stack">
       <span>WordPress</span><span>PHP</span><span>ACF</span>
       <span>HTML5</span><span>CSS3</span><span>JavaScript (vanilla)</span>
-      <span>Python (ETL)</span><span>REST API</span><span>Amelia</span>
+      <span>Python (ETL)</span><span>REST API</span><span>FullCalendar</span>
+      <span>Telegram Bot API</span><span>Cloudflare Workers</span><span>Amelia</span>
     </div>
   </div>
 </section>
