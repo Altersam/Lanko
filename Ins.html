@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как пользоваться сайтом «Ланко» — инструкция</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0ea5a8; --teal-dk:#0a7e80; --sky:#2bb3e0; --green:#34c759;
+  --sun:#ffc83d; --coral:#ff6f61; --ink:#143642; --ink2:#3a5a66;
+  --muted:#6f8a93; --line:#d6e7ec; --bg:#f2fbfc; --surface:#fff;
+  --grad:linear-gradient(135deg,#0ea5a8 0%,#2bb3e0 55%,#34c759 100%);
+  --radius:18px; --shadow:0 10px 30px rgba(14,165,168,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:18px}
+h1,h2,h3{font-family:'Comfortaa',sans-serif;line-height:1.25;font-weight:700}
+a{color:var(--teal-dk)}
+.wrap{width:min(100% - 2rem,820px);margin-inline:auto}
+.section{padding:clamp(2rem,5vw,3.2rem) 0}
+
+/* hero */
+.hero{background:var(--grad);color:#fff;text-align:center;padding:clamp(2.5rem,7vw,4rem) 1rem 3.5rem}
+.hero .paw{font-size:2.6rem}
+.hero h1{font-size:clamp(1.7rem,5vw,2.6rem);margin:.5rem 0 .6rem}
+.hero p{font-size:1.1rem;opacity:.96;max-width:60ch;margin-inline:auto}
+.wave{display:block;width:100%;height:auto;margin-bottom:-6px}
+
+/* card */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:clamp(1.2rem,4vw,2rem);margin-bottom:1.6rem}
+.card h2{font-size:clamp(1.3rem,3.5vw,1.7rem);margin-bottom:.3rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.card h2 .num{flex:0 0 auto;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:1.1rem}
+.card .sub{color:var(--muted);margin-bottom:1rem;font-size:.98rem}
+
+/* steps */
+.steps{counter-reset:s;list-style:none}
+.steps li{position:relative;padding:.55rem 0 .55rem 2.6rem;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:.5rem;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--teal-dk);color:#fff;display:grid;place-items:center;font-family:'Comfortaa';font-size:.95rem;font-weight:700}
+.steps b{color:var(--ink)}
+
+/* pills / chips */
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 0}
+.chip{background:linear-gradient(135deg,#d9f0fb,#def8e6);border:1px solid var(--line);border-radius:999px;padding:.35rem .9rem;font-weight:700;font-size:.9rem}
+
+/* note boxes */
+.note{border-radius:14px;padding:1rem 1.1rem;margin:1rem 0 0;font-size:.96rem;border:1px solid}
+.note--tip{background:#eafaf0;border-color:#bfe9cd}
+.note--warn{background:#fff4e5;border-color:#ffd9a0}
+.note--info{background:#e7f5fb;border-color:#b9e2f3}
+.note b{font-family:'Comfortaa'}
+
+.toc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.2rem 1.4rem;margin:-2.2rem auto 2rem;position:relative;z-index:3}
+.toc h3{font-size:1rem;text-transform:uppercase;letter-spacing:.05em;color:var(--teal);margin-bottom:.6rem}
+.toc ol{margin-left:1.2rem}
+.toc li{padding:.15rem 0}
+
+.btn-demo{display:inline-block;background:var(--coral);color:#fff;font-family:'Comfortaa';font-weight:600;padding:.5rem 1rem;border-radius:999px;font-size:.9rem}
+.btn-demo--green{background:var(--green)}
+.kbd{background:#eef6f8;border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;font-family:'Comfortaa';font-size:.85rem;white-space:nowrap}
+
+footer{background:var(--ink);color:#cfe6ec;text-align:center;padding:2rem 1rem;font-size:.92rem;margin-top:1rem}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="paw">🐾</div>
+  <h1>Как вести сайт питомника</h1>
+  <p>Короткая понятная инструкция. Всё, что нужно для добавления щенков, записей в блог, баннеров и просмотра заявок — прямо с телефона.</p>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#f2fbfc" d="M0,30 C240,70 480,0 720,24 C960,48 1200,70 1440,30 L1440,60 L0,60 Z"></path></svg>
+</header>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h3>Содержание</h3>
+    <ol>
+      <li><a href="#start">С чего начать — приложение на телефоне</a></li>
+      <li><a href="#pets">Добавить щенка на продажу</a></li>
+      <li><a href="#blog">Добавить запись в блог / фотоальбом</a></li>
+      <li><a href="#banners">Поменять фото-баннеры на главной</a></li>
+      <li><a href="#crm">Заявки и календарь (CRM)</a></li>
+      <li><a href="#hide">Скрыть или удалить карточку / запись</a></li>
+      <li><a href="#other">Другие способы (админка и бот)</a></li>
+      <li><a href="#faq">Если что-то не получается</a></li>
+    </ol>
+  </div>
+
+</div>
+
+<main class="wrap">
+
+  <!-- 1 -->
+  <section class="card section" id="start">
+    <h2><span class="num">1</span> С чего начать</h2>
+    <p class="sub">У вас есть личный кабинет — это как приложение, только живёт на самом сайте. Telegram и VPN для него не нужны.</p>
+    <ol class="steps">
+      <li>Откройте на телефоне браузер и зайдите по адресу <span class="kbd">ланко.рф/app/</span></li>
+      <li>Введите <b>логин и пароль</b> — те же, что от админки сайта.</li>
+      <li>Чтобы появилась иконка на экране телефона: меню браузера → <b>«Установить приложение»</b> (или «На главный экран»). После этого открывайте кабинет одним касанием, как обычное приложение.</li>
+    </ol>
+    <div class="note note--tip"><b>Что внутри.</b> Внизу экрана — кнопки разделов: <b>Главная</b>, <b>Щенки</b>, <b>Блог</b>, <b>Заявки</b> и <b>Календарь</b>. Переключайтесь между ними касанием.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="card section" id="pets">
+    <h2><span class="num">2</span> Добавить щенка на продажу</h2>
+    <p class="sub">Карточка сразу появляется на сайте в разделе «Щенки на продажу».</p>
+    <ol class="steps">
+      <li>Внизу нажмите <b>«Щенки»</b>, затем кнопку <span class="btn-demo">+ Добавить щенка</span></li>
+      <li>Впишите <b>кличку</b>.</li>
+      <li>Выберите <b>пол</b> — кнопки «Кобель» / «Сука».</li>
+      <li>Укажите <b>дату рождения</b> (можно пропустить, если неизвестна).</li>
+      <li>Нажмите <b>«Добавить фото»</b> и выберите снимки из телефона. Их можно несколько — на сайте они листаются слайдером.</li>
+      <li>При желании напишите <b>описание</b> (характер, окрас, цена и т.п.).</li>
+      <li>Нажмите <b>«Сохранить»</b> — готово, щенок на сайте.</li>
+    </ol>
+    <div class="note note--info"><b>Первое фото</b> становится главным на карточке. Порядок и состав фото можно поправить, открыв карточку позже.</div>
+  </section>
+
+  <!-- 3 -->
+  <section class="card section" id="blog">
+    <h2><span class="num">3</span> Запись в блог или фотоальбом</h2>
+    <p class="sub">Можно опубликовать статью с текстом или просто альбом из фотографий.</p>
+    <ol class="steps">
+      <li>Внизу нажмите <b>«Блог»</b>, затем <span class="btn-demo">+ Добавить запись</span></li>
+      <li>Укажите <b>тег</b> (рубрику) — например «Новости», «Выставки». Можно выбрать из списка или вписать свой.</li>
+      <li>Впишите <b>заголовок</b>.</li>
+      <li>Добавьте <b>фотографии</b>.</li>
+      <li><b>Описание</b> — по желанию. Если оставить пустым, получится фотоальбом без текста.</li>
+      <li>Нажмите <b>«Опубликовать»</b>.</li>
+    </ol>
+    <div class="note note--tip"><b>Галерея теперь в блоге.</b> Каждая запись листает только свои фото — удобно для альбомов с одной собаки или выставки.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="card section" id="banners">
+    <h2><span class="num">4</span> Фото-баннеры на главной</h2>
+    <p class="sub">Это большие фотографии, которые сменяют друг друга вверху главной страницы.</p>
+    <ol class="steps">
+      <li>Внизу нажмите <b>«Главная»</b>, затем кнопку <span class="btn-demo--green btn-demo">🖼 Баннеры на главной</span></li>
+      <li><b>Добавить</b> фото — кнопка «+ Добавить фото».</li>
+      <li><b>Удалить</b> фото — красный крестик в углу снимка.</li>
+      <li><b>Поменять порядок</b> — стрелки ‹ › под фото.</li>
+      <li>Нажмите <b>«Сохранить»</b>.</li>
+    </ol>
+    <div class="note note--info">Лучше всего смотрятся <b>горизонтальные</b> (широкие) фотографии хорошего качества.</div>
+  </section>
+
+  <!-- 5 -->
+  <section class="card section" id="crm">
+    <h2><span class="num">5</span> Заявки и календарь</h2>
+    <p class="sub">Сюда попадают записи, которые люди оставляют через форму на сайте.</p>
+    <ol class="steps">
+      <li>Внизу нажмите <b>«Заявки»</b> — увидите список с именем, телефоном и услугой.</li>
+      <li>Откройте заявку и поставьте статус: <b>Новая</b>, <b>В работе</b> или <b>Завершена</b>.</li>
+      <li>Можно указать <b>дату визита</b> — она появится в календаре.</li>
+      <li>Раздел <b>«Календарь»</b> внизу показывает все визиты и передержки по дням.</li>
+    </ol>
+    <div class="note note--tip"><b>Красная точка</b> на кнопке «Заявки» означает, что есть новые необработанные заявки.</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="card section" id="hide">
+    <h2><span class="num">6</span> Скрыть или удалить</h2>
+    <p class="sub">Если щенок продан или запись больше не нужна.</p>
+    <ol class="steps">
+      <li>Откройте нужную карточку щенка или запись блога в кабинете.</li>
+      <li><b>«Снять с публикации»</b> — карточка пропадёт с сайта, но сохранится у вас (можно вернуть кнопкой «Опубликовать»).</li>
+      <li><b>«Удалить»</b> (корзина) — убирает совсем.</li>
+    </ol>
+    <div class="note note--warn"><b>Совет.</b> Проданных щенков лучше <b>снимать с публикации</b>, а не удалять — вдруг понадобится фото или история.</div>
+  </section>
+
+  <!-- 7 -->
+  <section class="card section" id="other">
+    <h2><span class="num">7</span> Другие способы</h2>
+    <p class="sub">Кабинет — основной и самый простой способ. Но есть и запасные.</p>
+    <div class="chips">
+      <span class="chip">🖥 Админка WordPress</span>
+      <span class="chip">💬 Telegram-бот</span>
+    </div>
+    <p style="margin-top:1rem"><b>Админка WordPress</b> (адрес <span class="kbd">ланко.рф/wp-admin</span>) — полное управление. Там же в разделе <b>«Настройки питомника»</b> меняются телефон, адрес, карта, ссылки на старые сайты и баннеры.</p>
+    <p style="margin-top:.6rem"><b>Telegram-бот</b> умеет добавлять щенков и записи блога, присылает уведомления о заявках. Но в России он работает только с VPN — поэтому удобнее пользоваться кабинетом на сайте.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="card section" id="faq">
+    <h2><span class="num">8</span> Если что-то не получается</h2>
+    <ol class="steps">
+      <li><b>Не вижу изменений на сайте.</b> Обновите страницу с очисткой кэша: на телефоне закройте и снова откройте вкладку, либо потяните страницу вниз для обновления.</li>
+      <li><b>Кабинет просит войти снова.</b> Введите логин и пароль от сайта ещё раз — это нормально после долгого перерыва.</li>
+      <li><b>Фото не загружается.</b> Проверьте интернет и попробуйте фото поменьше размером. Загружайте по 3–5 штук за раз.</li>
+      <li><b>Совсем не открывается /app/.</b> Напишите разработчику — возможно, нужно один раз нажать «Сохранить» в настройках ссылок сайта.</li>
+    </ol>
+    <div class="note note--info">Эту инструкцию можно сохранить в закладки телефона и возвращаться к ней в любой момент.</div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Питомник «Ланко» · San Lang Hin</p>
+  <p style="margin-top:.4rem">Сайт: <a href="https://ланко.рф" target="_blank" rel="noopener">ланко.рф</a> · Кабинет: <a href="https://ланко.рф/app/" target="_blank" rel="noopener">ланко.рф/app/</a></p>
+</footer>
+
+</body>
+</html>
