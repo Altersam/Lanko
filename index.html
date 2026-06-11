@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Редизайн сайта питомника «Ланко» — кейс</title>
-<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, приём заявок, мини-CRM и Telegram-бот.">
+<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, приём заявок, мини-CRM, Telegram-бот, личный кабинет-приложение (PWA/APK), SEO и оптимизация скорости.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -123,6 +123,8 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
       <span class="chip">Адаптивный дизайн</span>
       <span class="chip">Мини-CRM</span>
       <span class="chip">Telegram-бот</span>
+      <span class="chip">PWA / APK</span>
+      <span class="chip">SEO + Schema.org</span>
     </div>
     <div class="cta">
       <a class="btn btn--light" href="https://ланко.рф" target="_blank" rel="noopener">Новый сайт →</a>
@@ -320,6 +322,50 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
   </div>
 </section>
 
+<!-- ОБНОВЛЕНИЕ V3 -->
+<section class="section" id="v3">
+  <div class="wrap">
+    <div class="lead">
+      <span class="eyebrow">Третья итерация</span>
+      <h2>Обновление v3 — продвижение, скорость и редактирование на ходу</h2>
+      <p>Сайт довели до боевого состояния под реальные задачи: настроили поисковую видимость (в том числе для ИИ-поисковиков), ускорили загрузку по метрикам Google PageSpeed и расширили кабинет владельца — теперь прямо с телефона можно не только создавать, но и редактировать опубликованные карточки и новости.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Раздел</th><th>Было (v2)</th><th>Стало (v3)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="feature">Названия разделов</td><td class="old">«Блог», «Старые сайты»</td><td class="new">«Новости» и «Архив» — понятнее владельцу и посетителям</td></tr>
+          <tr><td class="feature">Контакты</td><td class="old">Телефон и e-mail</td><td class="new">Прямой переход в Telegram по телефону + ссылка на Telegram-канал</td></tr>
+          <tr><td class="feature">SEO</td><td class="no">✗ только базовые мета-теги</td><td class="yes">✓ title/description для каждой страницы, Open Graph, Twitter Card</td></tr>
+          <tr><td class="feature">Карта сайта</td><td class="no">✗ нет</td><td class="yes">✓ собственный /sitemap.xml + robots.txt темы</td></tr>
+          <tr><td class="feature">Индексация ИИ-поиском</td><td class="no">✗ нет</td><td class="yes">✓ разрешены боты GPTBot, PerplexityBot, ClaudeBot, Google-Extended и др.</td></tr>
+          <tr><td class="feature">Структурированные данные</td><td class="no">✗ нет</td><td class="yes">✓ Schema.org JSON-LD (организация, статьи, карточки щенков)</td></tr>
+          <tr><td class="feature">Аналитика</td><td class="no">✗ нет</td><td class="yes">✓ Яндекс.Метрика и Google Analytics — подключаются из админки</td></tr>
+          <tr><td class="feature">Скорость загрузки</td><td class="old">Без оптимизации</td><td class="new">fetchpriority/LCP, lazy-load, defer, асинхронные шрифты, CLS = 0</td></tr>
+          <tr><td class="feature">Кабинет владельца</td><td class="old">Только создание карточек</td><td class="new">Редактирование опубликованных щенков и новостей с телефона</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="lead" style="margin-top:3rem">
+      <span class="eyebrow">Поиск и продвижение</span>
+      <h2>Видимость в поиске — включая ИИ</h2>
+      <p>Всё SEO встроено в тему: отдельный плагин не нужен. Тексты, коды подтверждения поисковиков и счётчики аналитики настраиваются в админке без правки кода.</p>
+    </div>
+    <div class="grid">
+      <div class="feat"><div class="ico">🔎</div><h3>Мета-теги на каждой странице</h3><p>Заголовок, описание, Open Graph и Twitter Card формируются автоматически для главной, щенков, новостей и карточек.</p></div>
+      <div class="feat"><div class="ico">🗺️</div><h3>Карта сайта и robots</h3><p>Собственный /sitemap.xml (встроенный WordPress на хостинге не отдавался) и robots.txt с запретом на админку и кабинет.</p></div>
+      <div class="feat"><div class="ico">🧠</div><h3>Доступ для ИИ-поиска</h3><p>Явно разрешены краулеры ChatGPT, Perplexity, Claude, Gemini, Common Crawl — чтобы сайт попадал в ответы ИИ-поисковиков.</p></div>
+      <div class="feat"><div class="ico">🏷️</div><h3>Schema.org JSON-LD</h3><p>Структурированные данные об организации-питомнике, статьях и щенках — поисковики и ИИ точно понимают содержимое.</p></div>
+      <div class="feat"><div class="ico">📊</div><h3>Аналитика из админки</h3><p>Яндекс.Метрика и Google Analytics подключаются вставкой ID в настройках темы, без кода.</p></div>
+      <div class="feat"><div class="ico">⚡</div><h3>Оптимизация скорости</h3><p>Приоритет первой картинки (LCP), ленивая загрузка, defer-скрипты, асинхронные шрифты, фиксированные размеры (CLS = 0), WebP через LiteSpeed.</p></div>
+    </div>
+  </div>
+</section>
+
 <!-- СТЕК -->
 <section class="section soft">
   <div class="wrap">
@@ -331,6 +377,8 @@ footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
       <span>Telegram Bot API</span><span>Cloudflare Workers</span><span>Amelia</span>
       <span>PWA</span><span>Service Worker</span><span>Web App Manifest</span>
       <span>Android WebView</span><span>GitHub Actions</span>
+      <span>Schema.org JSON-LD</span><span>SEO</span><span>Яндекс.Метрика</span>
+      <span>Google Analytics</span><span>LiteSpeed Cache</span>
     </div>
   </div>
 </section>
