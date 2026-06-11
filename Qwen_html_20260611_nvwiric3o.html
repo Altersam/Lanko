@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как сайту «Ланко» приносить деньги — простое руководство</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --color-bg:#f7f4ec;
+    --color-primary:#4a6b3a;
+    --color-accent:#c08a3e;
+    --color-text:#2b2a26;
+    --color-soft:#eae4d4;
+    --color-dark:#243024;
+    --color-white:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--color-bg);
+    color:var(--color-text);
+    line-height:1.7;
+    padding:0;
+    font-size:17px;
+  }
+  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:700;color:var(--color-dark);line-height:1.3}
+  .container{max-width:1100px;margin:0 auto;padding:24px}
+
+  /* HERO */
+  .hero{
+    background:var(--color-dark);
+    color:var(--color-bg);
+    padding:70px 40px;
+    text-align:center;
+  }
+  .hero h1{color:var(--color-bg);font-size:2.8em;margin-bottom:20px}
+  .hero .subtitle{font-family:'Caveat',cursive;font-size:2em;color:var(--color-accent);margin-bottom:20px}
+  .hero p{font-size:1.2em;max-width:800px;margin:20px auto;color:var(--color-soft)}
+
+  /* INTRO BOX */
+  .intro-box{
+    background:var(--color-white);
+    border-left:6px solid var(--color-accent);
+    padding:30px;
+    border-radius:12px;
+    margin:30px 0;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  }
+  .intro-box h2{font-size:1.5em;margin-bottom:16px;color:var(--color-primary)}
+  .intro-box p{margin-bottom:12px}
+  .intro-box .highlight{
+    background:var(--color-soft);
+    padding:12px 16px;
+    border-radius:8px;
+    margin:16px 0;
+    font-style:italic;
+  }
+
+  /* SECTION */
+  .section{padding:50px 0;border-bottom:1px solid var(--color-soft)}
+  .section-title{font-size:2.2em;margin-bottom:16px;color:var(--color-primary)}
+  .section-lead{font-size:1.15em;color:var(--color-text);margin-bottom:30px;max-width:800px}
+
+  /* HOW IT WORKS - схема */
+  .how-it-works{
+    background:var(--color-white);
+    padding:30px;
+    border-radius:16px;
+    margin:20px 0;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+    border:2px solid var(--color-soft);
+  }
+  .how-title{
+    font-family:'Playfair Display',serif;
+    font-size:1.4em;
+    color:var(--color-primary);
+    margin-bottom:8px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .how-num{
+    background:var(--color-accent);
+    color:white;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    flex-shrink:0;
+  }
+  .how-desc{color:var(--color-text);margin-bottom:20px;font-size:1.05em}
+
+  /* SVG схема */
+  .scheme{
+    background:var(--color-bg);
+    padding:24px;
+    border-radius:12px;
+    margin:16px 0;
+    overflow-x:auto;
+  }
+  .scheme svg{width:100%;height:auto;min-width:500px;display:block;margin:0 auto}
+
+  /* Шаги */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px;
+    margin-top:20px;
+  }
+  .step{
+    background:var(--color-bg);
+    padding:16px;
+    border-radius:10px;
+    border-left:4px solid var(--color-primary);
+  }
+  .step-num{
+    font-family:'Caveat',cursive;
+    font-size:1.8em;
+    color:var(--color-accent);
+    font-weight:700;
+    display:block;
+    margin-bottom:4px;
+  }
+  .step-text{font-size:0.98em}
+
+  /* Доход блок */
+  .income-block{
+    background:var(--color-primary);
+    color:white;
+    padding:16px 20px;
+    border-radius:10px;
+    margin-top:16px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .income-block .label{font-size:0.9em;opacity:0.9}
+  .income-block .amount{font-family:'Playfair Display',serif;font-size:1.4em;font-weight:700;color:var(--color-accent)}
+  .income-block .who-pays{
+    background:rgba(255,255,255,0.15);
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:0.9em;
+  }
+
+  /* Сложность */
+  .difficulty{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:0.88em;
+    font-weight:500;
+    margin-top:8px;
+  }
+  .diff-easy{background:#d4e4c7;color:var(--color-primary)}
+  .diff-medium{background:#f4e4c1;color:#8a6a1e}
+  .diff-hard{background:#f4d4d4;color:#8a3030}
+
+  /* Большой блок с идеей */
+  .idea-big{
+    background:var(--color-white);
+    border-radius:16px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+    border-top:6px solid var(--color-accent);
+  }
+  .idea-big.green{border-top-color:var(--color-primary)}
+
+  /* FAQ стиль */
+  .faq{
+    background:var(--color-soft);
+    padding:24px;
+    border-radius:12px;
+    margin:16px 0;
+  }
+  .faq-q{
+    font-weight:600;
+    color:var(--color-dark);
+    margin-bottom:8px;
+    font-size:1.05em;
+  }
+  .faq-q:before{content:"❓ ";margin-right:4px}
+  .faq-a{color:var(--color-text);padding-left:24px}
+
+  /* Сравнение ДО и ПОСЛЕ */
+  .before-after{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:16px;
+    align-items:center;
+    margin:16px 0;
+  }
+  .ba-box{
+    padding:16px;
+    border-radius:10px;
+    text-align:center;
+  }
+  .ba-before{background:#f4d4d4;color:#8a3030}
+  .ba-after{background:#d4e4c7;color:var(--color-primary)}
+  .ba-arrow{font-size:2em;color:var(--color-accent)}
+
+  /* Числа крупно */
+  .big-numbers{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    margin:24px 0;
+  }
+  .big-num-box{
+    background:var(--color-white);
+    padding:24px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  }
+  .big-num{
+    font-family:'Playfair Display',serif;
+    font-size:2.4em;
+    color:var(--color-accent);
+    font-weight:700;
+  }
+  .big-num-label{
+    font-size:0.95em;
+    color:var(--color-text);
+    margin-top:6px;
+  }
+
+  /* Важное предупреждение */
+  .warning{
+    background:#fff8e1;
+    border-left:5px solid var(--color-accent);
+    padding:20px;
+    border-radius:8px;
+    margin:20px 0;
+  }
+  .warning:before{content:"⚠️ ";font-size:1.4em}
+
+  /* Пример из жизни */
+  .life-example{
+    background:var(--color-soft);
+    padding:20px 24px;
+    border-radius:12px;
+    margin:16px 0;
+    font-style:italic;
+    position:relative;
+  }
+  .life-example:before{
+    content:"💡";
+    font-size:1.8em;
+    position:absolute;
+    top:-14px;
+    left:-8px;
+    background:var(--color-bg);
+    padding:4px;
+    border-radius:50%;
+  }
+  .life-example .le-title{
+    font-weight:600;
+    color:var(--color-primary);
+    font-style:normal;
+    margin-bottom:8px;
+    font-size:1.05em;
+  }
+
+  /* Итоговая таблица */
+  .summary-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--color-white);
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+    margin:20px 0;
+  }
+  .summary-table th{
+    background:var(--color-dark);
+    color:var(--color-bg);
+    padding:14px;
+    text-align:left;
+    font-weight:500;
+  }
+  .summary-table td{
+    padding:14px;
+    border-bottom:1px solid var(--color-soft);
+  }
+  .summary-table tr:last-child td{border-bottom:none}
+  .summary-table tr:hover{background:var(--color-bg)}
+
+  /* Timeline упрощённый */
+  .simple-timeline{
+    background:var(--color-white);
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  }
+  .st-item{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:20px;
+    padding:20px 0;
+    border-bottom:1px dashed var(--color-soft);
+  }
+  .st-item:last-child{border-bottom:none}
+  .st-when{
+    background:var(--color-primary);
+    color:white;
+    padding:12px;
+    border-radius:10px;
+    text-align:center;
+    font-weight:600;
+    height:fit-content;
+  }
+  .st-what h4{color:var(--color-dark);margin-bottom:8px;font-family:'Playfair Display',serif}
+  .st-what ul{list-style:none;padding-left:0}
+  .st-what li{padding:5px 0;font-size:1em}
+  .st-what li:before{content:"✓ ";color:var(--color-primary);font-weight:700}
+
+  /* Глоссарий */
+  .glossary{
+    background:var(--color-white);
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+    margin:20px 0;
+  }
+  .gloss-item{
+    padding:14px 0;
+    border-bottom:1px solid var(--color-soft);
+  }
+  .gloss-item:last-child{border-bottom:none}
+  .gloss-term{
+    font-weight:700;
+    color:var(--color-primary);
+    font-size:1.05em;
+  }
+  .gloss-def{
+    color:var(--color-text);
+    margin-top:4px;
+    padding-left:20px;
+  }
+
+  /* Footer */
+  footer{
+    background:var(--color-dark);
+    color:var(--color-soft);
+    padding:40px 30px;
+    text-align:center;
+  }
+  footer .signature{
+    font-family:'Caveat',cursive;
+    font-size:1.6em;
+    color:var(--color-accent);
+    margin-top:14px;
+  }
+
+  @media (max-width:768px){
+    .hero h1{font-size:2em}
+    .hero{padding:40px 20px}
+    .section-title{font-size:1.7em}
+    .st-item{grid-template-columns:1fr}
+    .before-after{grid-template-columns:1fr}
+    .ba-arrow{transform:rotate(90deg)}
+    body{font-size:16px}
+    .idea-big,.intro-box,.how-it-works{padding:20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Как сайту приносить деньги</h1>
+  <div class="subtitle">Простое руководство для питомника «Ланко»</div>
+  <p>Здесь собраны все способы, которыми сайт может зарабатывать. Без сложных слов. С объяснениями «на пальцах». Чтобы было понятно: что делаем, кто платит, как деньги приходят.</p>
+</section>
+
+<div class="container">
+
+<!-- ВСТУПЛЕНИЕ -->
+<section class="section">
+  <div class="intro-box">
+    <h2>Главная идея, которую нужно понять сразу</h2>
+    <p>Сейчас сайт — это как красивая витрина. Люди смотрят, любуются, но деньги приходят только когда кто-то покупает щенка.</p>
+    <p><b>Мы хотим сделать так</b>, чтобы сайт сам по себе приносил деньги — каждый день, даже когда щенков нет в продаже.</p>
+    <div class="highlight">
+      💡 Представьте: у вас есть сад. Раньше вы продавали только яблоки раз в год. А теперь вы ещё продаёте варенье, семена, проводите экскурсии, сдаёте беседку для праздников. Сад тот же — а дохода больше.
+    </div>
+    <p>С сайтом так же. У вас уже есть <b>огромные богатства</b>:</p>
+    <div class="big-numbers">
+      <div class="big-num-box">
+        <div class="big-num">40 лет</div>
+        <div class="big-num-label">опыта в собаководстве</div>
+      </div>
+      <div class="big-num-box">
+        <div class="big-num">7 книг</div>
+        <div class="big-num-label">написанных вами</div>
+      </div>
+      <div class="big-num-box">
+        <div class="big-num">6 пород</div>
+        <div class="big-num-label">в питомнике</div>
+      </div>
+      <div class="big-num-box">
+        <div class="big-num">1000+</div>
+        <div class="big-num-label">фотографий в архиве</div>
+      </div>
+    </div>
+    <p>Всё это можно превратить в деньги. Ниже — 50 способов как. Начнём с самых простых.</p>
+  </div>
+</section>
+
+<!-- ГЛОССАРИЙ -->
+<section class="section">
+  <h2 class="section-title">Сначала разберёмся со словами</h2>
+  <p class="section-lead">Чтобы дальше было понятно, вот простой словарь. Запоминать не нужно — можно подглядывать.</p>
+
+  <div class="glossary">
+    <div class="gloss-item">
+      <div class="gloss-term">Процент от продажи</div>
+      <div class="gloss-def">Когда кто-то покупает товар по нашей ссылке, магазин отдаёт нам кусочек от выручки. Как если бы продавец в магазине сказал: «Приведи мне покупателя — я тебе 100 рублей с каждой покупки отдам».</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Цифровой товар</div>
+      <div class="gloss-def">Это то, что существует только в компьютере: книга в PDF, картинка, документ. Не нужно печатать, отправлять почтой. Человек заплатил — получил файл на почту. Как электронная книга на ЛитРес.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Подписка</div>
+      <div class="gloss-def">Когда человек платит понемногу каждый месяц, чтобы получать что-то регулярно. Как за газету или Netflix. Например, 300 рублей в месяц — и человек смотрит видео про щенков.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Журнал заявок (вместо "CRM")</div>
+      <div class="gloss-def">Просто табличка, где записаны все, кто оставил заявку: имя, телефон, что хочет. Раньше такое вели в тетрадке — теперь на сайте.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Приём оплат картой</div>
+      <div class="gloss-def">Сервис, который позволяет людям платить прямо на сайте банковской картой. Как в интернет-магазине. Деньги приходят вам на счёт. Берут за это 2-3 рубля с каждой сотни.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Файл PDF</div>
+      <div class="gloss-def">Это как обычная книга или документ, только в компьютере. Открывается на телефоне, планшете, компьютере. Можно распечатать. Выглядит красиво, как в печати.</div>
+    </div>
+    <div class="gloss-item">
+      <div class="gloss-term">Самозанятая</div>
+      <div class="gloss-def">Простой способ платить налог. Скачиваете приложение «Мой налог», вносите туда сумму, которую получили — оно само считает 4% и отправляет в налоговую. Никаких бумаг.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ГРУППА 1: САМОЕ ПРОСТОЕ ===== -->
+<section class="section">
+  <h2 class="section-title">Группа 1. Самое простое — рекомендации</h2>
+  <p class="section-lead">Вы и так советуете людям корма, ветеринаров, страховки. Давайте делать это так, чтобы ещё и получать за это деньги. Ничего дополнительно делать не нужно.</p>
+
+  <!-- Идея 1 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">1</span>
+        Рекомендации кормов и товаров
+      </div>
+      <div class="how-desc">Вы пишете в статье: «Для хина хорошо подходит корм такой-то». Рядом — ссылка на магазин. Если человек кликнет и купит — магазин заплатит вам.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+          <!-- Шаг 1 -->
+          <rect x="20" y="40" width="180" height="100" rx="12" fill="#eae4d4"/>
+          <text x="110" y="75" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Вы пишете</text>
+          <text x="110" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">статью на сайте:</text>
+          <text x="110" y="120" text-anchor="middle" font-family="Caveat" font-size="15" fill="#c08a3e">«чем кормить хина»</text>
+
+          <!-- Стрелка 1 -->
+          <path d="M 210 90 L 260 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <!-- Шаг 2 -->
+          <rect x="270" y="40" width="180" height="100" rx="12" fill="#eae4d4"/>
+          <text x="360" y="75" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Читатель</text>
+          <text x="360" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">кликает на ссылку</text>
+          <text x="360" y="120" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">и покупает корм</text>
+
+          <!-- Стрелка 2 -->
+          <path d="M 460 90 L 510 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <!-- Шаг 3 -->
+          <rect x="520" y="40" width="260" height="100" rx="12" fill="#4a6b3a"/>
+          <text x="650" y="75" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#c08a3e">Магазин платит вам</text>
+          <text x="650" y="100" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">5-10% от покупки</text>
+          <text x="650" y="120" text-anchor="middle" font-family="Inter" font-size="13" fill="#eae4d4">автоматически на карту</text>
+
+          <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#4a6b3a"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="life-example">
+        <div class="le-title">Пример из жизни:</div>
+        Это как если бы соседка сказала подруге: «Купи варенье у Марьи, оно вкусное». А Марья ей за это банку варенья в подарок. Только тут вместо банки — деньги, и всё происходит само, через интернет.
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1.</span>
+          <span class="step-text">Регистрируемся на сайте зоомагазина (например, Petshop.ru) как «партнёр». Это бесплатно.</span>
+        </div>
+        <div class="step">
+          <span class="step-num">2.</span>
+          <span class="step-text">Получаем специальную ссылку на товар. Она уникальная — по ней магазин понимает, что покупатель от нас.</span>
+        </div>
+        <div class="step">
+          <span class="step-num">3.</span>
+          <span class="step-text">Вставляем ссылку в статью на сайте. Например: «Рекомендуем этот корм».</span>
+        </div>
+        <div class="step">
+          <span class="step-num">4.</span>
+          <span class="step-text">Магазин сам считает, кто от нас пришёл. Раз в месяц переводит деньги на карту.</span>
+        </div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">5 000 – 15 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят зоомагазины</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 1 вечер. Участие: никакого</div>
+    </div>
+  </div>
+
+  <!-- Идея 2 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">2</span>
+        Страхование собак
+      </div>
+      <div class="how-desc">На странице про щенков размещаем баннер: «Застрахуйте щенка от болезни». Страховая компания за каждый проданный полис платит нам.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="220" height="100" rx="12" fill="#eae4d4"/>
+          <text x="130" y="65" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Человек купил</text>
+          <text x="130" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#2b2a26">у вас щенка</text>
+          <text x="130" y="112" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">и видит баннер</text>
+
+          <path d="M 250 80 L 290 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="300" y="30" width="220" height="100" rx="12" fill="#eae4d4"/>
+          <text x="410" y="65" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Оформляет</text>
+          <text x="410" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#2b2a26">страховку на щенка</text>
+          <text x="410" y="112" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">по ссылке с сайта</text>
+
+          <path d="M 530 80 L 570 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="580" y="30" width="200" height="100" rx="12" fill="#4a6b3a"/>
+          <text x="680" y="65" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#c08a3e">Страховая</text>
+          <text x="680" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">платит вам 500–</text>
+          <text x="680" y="112" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">1000 ₽</text>
+        </svg>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1.</span>
+          <span class="step-text">Регистрируемся в страховой компании (Тинькофф Страхование, Ренессанс).</span>
+        </div>
+        <div class="step">
+          <span class="step-num">2.</span>
+          <span class="step-text">Получаем красивый баннер и ссылку.</span>
+        </div>
+        <div class="step">
+          <span class="step-num">3.</span>
+          <span class="step-text">Ставим баннер на страницу «Щенки».</span>
+        </div>
+        <div class="step">
+          <span class="step-num">4.</span>
+          <span class="step-text">Комиссия приходит автоматически.</span>
+        </div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">3 000 – 10 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят страховые компании</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 1 час. Участие: никакого</div>
+    </div>
+  </div>
+
+  <!-- Идея 3 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">3</span>
+        Продажа фотографий
+      </div>
+      <div class="how-desc">У вас в архиве — тысячи красивых фотографий собак. Журналы, сайты, рекламные агентства покупают такие фото. Можно продать одну и ту же фотографию 100 раз разным людям.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="200" height="100" rx="12" fill="#eae4d4"/>
+          <text x="120" y="75" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Ваши фото</text>
+          <text x="120" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">из архива</text>
+          <text x="120" y="120" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">за 40 лет</text>
+
+          <path d="M 230 90 L 270 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="280" y="40" width="220" height="100" rx="12" fill="#eae4d4"/>
+          <text x="390" y="75" text-anchor="middle" font-family="Playfair Display" font-size="16" font-weight="700" fill="#243024">Загружаем</text>
+          <text x="390" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">на сайт-фотобанк</text>
+          <text x="390" y="120" text-anchor="middle" font-family="Caveat" font-size="15" fill="#c08a3e">Shutterstock, Adobe</text>
+
+          <path d="M 510 90 L 550 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="560" y="40" width="220" height="100" rx="12" fill="#4a6b3a"/>
+          <text x="670" y="70" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="#c08a3e">Люди по всему</text>
+          <text x="670" y="92" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="#c08a3e">миру покупают</text>
+          <text x="670" y="120" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">30–200 ₽ за фото</text>
+        </svg>
+      </div>
+
+      <div class="life-example">
+        <div class="le-title">Пример из жизни:</div>
+        Как если бы вы напекли пирожков, отнесли на рынок, и там их продавали весь день, даже когда вы дома. Одну и ту же партию раскупают разные люди.
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1.</span>
+          <span class="step-text">Выбираем 100 лучших фотографий.</span>
+        </div>
+        <div class="step">
+          <span class="step-num">2.</span>
+          <span class="step-text">Регистрируемся на сайте фотобанка (Shutterstock, Adobe Stock).</span>
+        </div>
+        <div class="step">
+          <span class="step-num">3.</span>
+          <span class="step-text">Загружаем фото. Описываем: «Японский хин, белый с рыжим».</span>
+        </div>
+        <div class="step">
+          <span class="step-num">4.</span>
+          <span class="step-text">Деньги капают каждый месяц. Одну фотографию могут купить 100 раз.</span>
+        </div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">5 000 – 15 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят дизайнеры, журналы, сайты</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 1 день. Участие: загрузил и забыл</div>
+    </div>
+  </div>
+
+  <!-- Идея 4 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">4</span>
+        Кнопка «Поддержать питомник»
+      </div>
+      <div class="how-desc">На сайте — маленькая кнопка «Угостить собак лакомством». Люди, которые любят ваш сайт, могут отправить 100, 300, 500 рублей просто так. Как чаевые.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 150" xmlns="http://www.w3.org/2000/svg">
+          <rect x="40" y="35" width="250" height="80" rx="12" fill="#eae4d4"/>
+          <text x="165" y="70" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="#243024">Человек читает</text>
+          <text x="165" y="95" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">ваш сайт, умиляется</text>
+
+          <path d="M 300 75 L 340 75" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="350" y="35" width="180" height="80" rx="12" fill="#c08a3e"/>
+          <text x="440" y="70" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="white">Нажимает</text>
+          <text x="440" y="95" text-anchor="middle" font-family="Inter" font-size="13" fill="white">кнопку «Поблагодарить»</text>
+
+          <path d="M 540 75 L 580 75" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="590" y="35" width="180" height="80" rx="12" fill="#4a6b3a"/>
+          <text x="680" y="70" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="#c08a3e">Вам приходит</text>
+          <text x="680" y="95" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">100–500 ₽</text>
+        </svg>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">1 000 – 5 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят благодарные посетители</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 30 минут. Участие: никакого</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ГРУППА 2: КНИГИ ===== -->
+<section class="section">
+  <h2 class="section-title">Группа 2. Продажа ваших книг в электронном виде</h2>
+  <p class="section-lead">У вас написано 7 книг. Их можно продавать не только в бумажном виде через магазин, но и прямо с сайта — как файл. Один раз подготовили — продаётся годами.</p>
+
+  <div class="intro-box">
+    <h2>⚖️ Важный момент про права</h2>
+    <p>Когда вы издавали книги в «Аквариум-Принт», вы подписывали договор. Обычно в таких договорах написано, что издательство имеет право печатать книгу <b>3–5 лет</b>. Потом это право заканчивается, и книга снова полностью ваша.</p>
+    <p><b>Что нужно сделать:</b></p>
+    <ul style="padding-left:24px;margin-top:12px">
+      <li>Найти договор с издательством (должен быть в документах)</li>
+      <li>Посмотреть дату и срок действия</li>
+      <li>Если прошло больше 5 лет — права ваши, можно продавать</li>
+      <li>Если меньше — позвонить в издательство и спросить</li>
+    </ul>
+    <div class="highlight">
+      💡 Даже если права пока не вернулись, есть другой путь — загрузить книги на сайт ЛитРес (раздел «Самиздат»). Они берут 30%, но всё оформляют сами.
+    </div>
+  </div>
+
+  <!-- Идея 5 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">5</span>
+        Продаём ваши книги прямо с сайта
+      </div>
+      <div class="how-desc">Книга превращается в файл PDF. Человек нажимает «Купить», платит картой — и сразу получает файл на почту. Как купить электронную книгу.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="160" height="120" rx="12" fill="#c08a3e"/>
+          <text x="100" y="75" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Ваша книга</text>
+          <text x="100" y="100" text-anchor="middle" font-family="Inter" font-size="12" fill="white">(была бумажная)</text>
+          <text x="100" y="130" text-anchor="middle" font-family="Caveat" font-size="16" fill="#243024">→ делаем PDF</text>
+
+          <path d="M 190 100 L 230 100" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="240" y="40" width="180" height="120" rx="12" fill="#eae4d4"/>
+          <text x="330" y="75" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Кладём</text>
+          <text x="330" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">на сайт с кнопкой</text>
+          <text x="330" y="125" text-anchor="middle" font-family="Caveat" font-size="16" fill="#c08a3e">«Купить за 390 ₽»</text>
+
+          <path d="M 430 100 L 470 100" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="480" y="40" width="150" height="120" rx="12" fill="#eae4d4"/>
+          <text x="555" y="75" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Человек</text>
+          <text x="555" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">оплачивает</text>
+          <text x="555" y="125" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">картой</text>
+
+          <path d="M 640 100 L 680 100" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="690" y="40" width="100" height="55" rx="10" fill="#4a6b3a"/>
+          <text x="740" y="65" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#c08a3e">Деньги вам</text>
+          <text x="740" y="85" text-anchor="middle" font-family="Inter" font-size="12" fill="#f7f4ec">на карту</text>
+
+          <rect x="690" y="105" width="100" height="55" rx="10" fill="#c08a3e"/>
+          <text x="740" y="130" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="white">Книга ему</text>
+          <text x="740" y="150" text-anchor="middle" font-family="Inter" font-size="12" fill="white">на почту</text>
+        </svg>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1.</span>
+          <span class="step-text">Попросить кого-то из знакомых сделать из книги PDF (или отсканировать, если нет файла).</span>
+        </div>
+        <div class="step">
+          <span class="step-num">2.</span>
+          <span class="step-text">Подключить к сайту приём оплат (это сделает программист за 1 день).</span>
+        </div>
+        <div class="step">
+          <span class="step-num">3.</span>
+          <span class="step-text">Сделать на сайте страницу «Книги» с красивыми обложками и кнопкой «Купить».</span>
+        </div>
+        <div class="step">
+          <span class="step-num">4.</span>
+          <span class="step-text">Всё. Дальше сайт сам принимает оплату и отправляет книгу покупателю.</span>
+        </div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">10 000 – 25 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят любители пород со всей России</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 2 недели. Участие: потом никакого</div>
+    </div>
+  </div>
+
+  <!-- Идея 6 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">6</span>
+        Чек-лист «Что нужно новому хозяину щенка»
+      </div>
+      <div class="how-desc">Вы и так рассказываете покупателям: что купить, когда прививки, как кормить. Запишем это в красивый документ — и будем продавать тем, кто купил щенка НЕ у вас.</div>
+
+      <div class="life-example">
+        <div class="le-title">Что внутри (10–15 страниц):</div>
+        • Список покупок: миски, лежанка, корм, игрушки — с ценами<br>
+        • Календарь прививок по месяцам<br>
+        • Что делать в первый день дома<br>
+        • Телефоны ветеринаров (можно по городам)<br>
+        • Как приучить к туалету
+      </div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="240" height="80" rx="12" fill="#eae4d4"/>
+          <text x="140" y="65" text-anchor="middle" font-family="Playfair Display" font-size="15" font-weight="700" fill="#243024">Кто-то в России</text>
+          <text x="140" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">купил щенка хина</text>
+
+          <path d="M 270 70 L 310 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="320" y="30" width="200" height="80" rx="12" fill="#c08a3e"/>
+          <text x="420" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Ищет в интернете:</text>
+          <text x="420" y="90" text-anchor="middle" font-family="Caveat" font-size="15" fill="white">«как ухаживать»</text>
+
+          <path d="M 530 70 L 570 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="580" y="30" width="200" height="80" rx="12" fill="#4a6b3a"/>
+          <text x="680" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#c08a3e">Покупает ваш</text>
+          <text x="680" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">чек-лист за 490 ₽</text>
+        </svg>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">5 000 – 10 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят новые владельцы щенков</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 1 неделя. Участие: потом никакого</div>
+    </div>
+  </div>
+
+  <!-- Идея 7 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">7</span>
+        Шаблоны договоров для других заводчиков
+      </div>
+      <div class="how-desc">У вас за 40 лет накопились идеальные договоры: на продажу щенка, на вязку, на совладение. Начинающие заводчики мечтают о таких. Можно продать им готовые шаблоны.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="230" height="80" rx="12" fill="#eae4d4"/>
+          <text x="135" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Начинающий</text>
+          <text x="135" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">заводчик ищет образцы</text>
+
+          <path d="M 260 70 L 300 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="310" y="30" width="220" height="80" rx="12" fill="#c08a3e"/>
+          <text x="420" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Находит на вашем</text>
+          <text x="420" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="white">сайте за 490 ₽</text>
+
+          <path d="M 540 70 L 580 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="590" y="30" width="190" height="80" rx="12" fill="#4a6b3a"/>
+          <text x="685" y="60" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#c08a3e">Скачивает</text>
+          <text x="685" y="85" text-anchor="middle" font-family="Inter" font-size="13" fill="#f7f4ec">готовые Word-</text>
+          <text x="685" y="105" text-anchor="middle" font-family="Inter" font-size="13" fill="#f7f4ec">документы</text>
+        </svg>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">10 000 – 20 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят начинающие заводчики</div>
+      </div>
+
+      <div class="difficulty diff-easy">⏱ Запуск: 1 неделя. Участие: потом никакого</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ГРУППА 3: УМНЫЕ ШТУКИ ===== -->
+<section class="section">
+  <h2 class="section-title">Группа 3. «Умные штучки» на сайте</h2>
+  <p class="section-lead">Это такие кнопки на сайте, которые сами работают. Человек нажимает — получает результат. Вы в это время можете пить чай.</p>
+
+  <!-- Идея 8 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">8</span>
+        Портрет собаки «как картина»
+      </div>
+      <div class="how-desc">Человек загружает фото своей собаки. Специальная программа превращает его в портрет «под старину» — как на картине в музее. Получает файл, ставит на заставку телефона или печатает на холсте.</div>
+
+      <div class="before-after">
+        <div class="ba-box ba-before">
+          <div style="font-size:3em">📷</div>
+          <div>Обычное фото собаки с телефона</div>
+        </div>
+        <div class="ba-arrow">→</div>
+        <div class="ba-box ba-after">
+          <div style="font-size:3em">🖼️</div>
+          <div>Портрет «как у короля»</div>
+        </div>
+      </div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="180" height="80" rx="12" fill="#eae4d4"/>
+          <text x="110" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Хозяйка</text>
+          <text x="110" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">загружает фото</text>
+
+          <path d="M 210 70 L 250 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="260" y="30" width="180" height="80" rx="12" fill="#c08a3e"/>
+          <text x="350" y="60" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Программа</text>
+          <text x="350" y="85" text-anchor="middle" font-family="Inter" font-size="13" fill="white">сама превращает</text>
+          <text x="350" y="105" text-anchor="middle" font-family="Inter" font-size="13" fill="white">в портрет</text>
+
+          <path d="M 450 70 L 490 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="500" y="30" width="140" height="80" rx="12" fill="#eae4d4"/>
+          <text x="570" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Платит</text>
+          <text x="570" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#c08a3e">490 ₽</text>
+
+          <path d="M 650 70 L 690 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="700" y="30" width="90" height="80" rx="12" fill="#4a6b3a"/>
+          <text x="745" y="65" text-anchor="middle" font-family="Inter" font-size="12" font-weight="700" fill="#c08a3e">Вам</text>
+          <text x="745" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">400 ₽</text>
+        </svg>
+      </div>
+
+      <div class="life-example">
+        <div class="le-title">Почему это работает:</div>
+        Люди обожают своих собак. И любят красивые вещи. Заплатить 500 рублей, чтобы увидеть своего Тузика в образе короля — это весело. Многие потом выкладывают в соцсети, и к вам приходят новые люди.
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">15 000 – 30 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят владельцы собак по всей России</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 1 неделя (программист). Участие: никакого</div>
+    </div>
+  </div>
+
+  <!-- Идея 9 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">9</span>
+        Камера в вольере (щенки 24 часа в сутки)
+      </div>
+      <div class="how-desc">Ставим маленькую камеру в вольере, где растут щенки. Она сама снимает и передаёт картинку на сайт. Люди могут смотреть, как щенки играют, едят, спят. Кто хочет смотреть без перерыва — платит подписку.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 180" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="40" width="160" height="100" rx="12" fill="#eae4d4"/>
+          <text x="100" y="75" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Камера</text>
+          <text x="100" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">в вольере</text>
+          <text x="100" y="120" text-anchor="middle" font-family="Caveat" font-size="15" fill="#c08a3e">(один раз купили)</text>
+
+          <path d="M 190 90 L 230 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="240" y="40" width="180" height="100" rx="12" fill="#eae4d4"/>
+          <text x="330" y="75" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Сама снимает</text>
+          <text x="330" y="100" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">круглосуточно</text>
+          <text x="330" y="120" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">и передаёт на сайт</text>
+
+          <path d="M 430 90 L 470 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="480" y="40" width="150" height="100" rx="12" fill="#c08a3e"/>
+          <text x="555" y="70" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Люди смотрят</text>
+          <text x="555" y="95" text-anchor="middle" font-family="Inter" font-size="13" fill="white">с телефона</text>
+          <text x="555" y="120" text-anchor="middle" font-family="Caveat" font-size="15" fill="white">как сериал</text>
+
+          <path d="M 640 90 L 680 90" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="690" y="40" width="100" height="100" rx="12" fill="#4a6b3a"/>
+          <text x="740" y="75" text-anchor="middle" font-family="Playfair Display" font-size="13" font-weight="700" fill="#c08a3e">Платят</text>
+          <text x="740" y="100" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">99 ₽</text>
+          <text x="740" y="120" text-anchor="middle" font-family="Inter" font-size="12" fill="#eae4d4">в месяц</text>
+        </svg>
+      </div>
+
+      <div class="faq">
+        <div class="faq-q">Это сложно технически?</div>
+        <div class="faq-a">Нет. Камера стоит 5-7 тысяч рублей, покупается один раз. Настроить — час работы. Главное, чтобы на даче был интернет.</div>
+      </div>
+
+      <div class="faq">
+        <div class="faq-q">Зачем людям это смотреть?</div>
+        <div class="faq-a">Тот, кто забронировал щенка и ждёт 2 месяца — хочет видеть, как он растёт. Это как «окно к своему щенку». А бабушки и дедушки, у которых нет собаки, смотрят как сериал — это называется «щенячья терапия».</div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">8 000 – 20 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят подписчики + те, кто забронировал щенка</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 1 неделя. Участие: раз в месяц протереть камеру</div>
+    </div>
+  </div>
+
+  <!-- Идея 10 -->
+  <div class="idea-big green">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">10</span>
+        Помощник-собеседник на сайте
+      </div>
+      <div class="how-desc">На сайте появляется окошко, куда можно написать вопрос: «Сколько раз в день кормить хина?». И сразу получить ответ. Отвечает не вы, а специальная программа, которую обучили на ваших книгах.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="200" height="100" rx="12" fill="#eae4d4"/>
+          <text x="120" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Человек пишет:</text>
+          <text x="120" y="90" text-anchor="middle" font-family="Caveat" font-size="15" fill="#c08a3e">«Чем кормить</text>
+          <text x="120" y="115" text-anchor="middle" font-family="Caveat" font-size="15" fill="#c08a3e">щенка хина?»</text>
+
+          <path d="M 230 80 L 270 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="280" y="30" width="230" height="100" rx="12" fill="#c08a3e"/>
+          <text x="395" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Программа ищет</text>
+          <text x="395" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="white">ответ в ваших книгах</text>
+          <text x="395" y="115" text-anchor="middle" font-family="Inter" font-size="13" fill="white">(которые мы загрузили)</text>
+
+          <path d="M 520 80 L 560 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="570" y="30" width="210" height="100" rx="12" fill="#4a6b3a"/>
+          <text x="675" y="60" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#c08a3e">Отвечает через</text>
+          <text x="675" y="85" text-anchor="middle" font-family="Inter" font-size="13" fill="#f7f4ec">5 секунд — вашим</text>
+          <text x="675" y="105" text-anchor="middle" font-family="Inter" font-size="13" fill="#f7f4ec">языком, из книги</text>
+          <text x="675" y="125" text-anchor="middle" font-family="Inter" font-size="11" fill="#eae4d4">без вашего участия</text>
+        </svg>
+      </div>
+
+      <div class="life-example">
+        <div class="le-title">Это как если бы:</div>
+        Вы записали все свои ответы на вопросы на бумажки и разложили по ящичкам. А помощница сидит и по запросу достаёт нужную бумажку. Только тут помощница — программа, которая не устаёт и работает 24 часа в сутки.
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Зачем это нужно:</div>
+          <div class="amount">Больше людей → больше продаж</div>
+        </div>
+        <div class="who-pays">Не платят напрямую, но покупают потом щенков и книги</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 2 недели (программист). Участие: никакого</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ГРУППА 4: УСЛУГИ С ПОМОЩНИКАМИ ===== -->
+<section class="section">
+  <h2 class="section-title">Группа 4. Услуги на даче (делают помощники)</h2>
+  <p class="section-lead">У вас есть красивая дача, собаки, территория. Это можно сдавать для разных мероприятий. Главное — нанять человека, который будет всем заниматься. Вы только разрешаете.</p>
+
+  <!-- Идея 11 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">11</span>
+        Фотосессии с собаками
+      </div>
+      <div class="how-desc">Семьи с детьми, молодые пары, бабушки — все хотят сфотографироваться с красивой собакой. Вы предоставляете место и собак. Фотограф приезжает, снимает, забирает себе часть денег. Вам — остальное.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="160" height="100" rx="12" fill="#eae4d4"/>
+          <text x="100" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Семья</text>
+          <text x="100" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">записывается</text>
+          <text x="100" y="110" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">через сайт</text>
+
+          <path d="M 190 80 L 230 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="240" y="30" width="170" height="100" rx="12" fill="#c08a3e"/>
+          <text x="325" y="60" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Платит 3500 ₽</text>
+          <text x="325" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="white">за часовую</text>
+          <text x="325" y="110" text-anchor="middle" font-family="Inter" font-size="13" fill="white">фотосессию</text>
+
+          <path d="M 420 80 L 460 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="470" y="30" width="150" height="45" rx="10" fill="#4a6b3a"/>
+          <text x="545" y="60" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#c08a3e">Вам: 2000 ₽</text>
+
+          <rect x="470" y="85" width="150" height="45" rx="10" fill="#eae4d4"/>
+          <text x="545" y="115" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#243024">Фотографу: 1500 ₽</text>
+
+          <path d="M 630 80 L 670 80" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="680" y="30" width="110" height="100" rx="12" fill="#c08a3e"/>
+          <text x="735" y="70" text-anchor="middle" font-family="Playfair Display" font-size="13" font-weight="700" fill="white">Помощник</text>
+          <text x="735" y="95" text-anchor="middle" font-family="Inter" font-size="12" fill="white">встречает</text>
+          <text x="735" y="115" text-anchor="middle" font-family="Inter" font-size="12" fill="white">гостей</text>
+        </svg>
+      </div>
+
+      <div class="faq">
+        <div class="faq-q">А я должна там быть?</div>
+        <div class="faq-a">Нет. Вы находите помощника (например, соседку или студентку), которая встречает гостей, приводит собак. Вы только согласовываете расписание раз в неделю.</div>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">20 000 – 40 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят семьи, пары, владельцы других собак</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 2 недели. Участие: 1 час в неделю на согласование</div>
+    </div>
+  </div>
+
+  <!-- Идея 12 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">12</span>
+        Передержка собак (только VIP)
+      </div>
+      <div class="how-desc">Когда хозяева уезжают в отпуск — им некуда деть собаку. Обычные передержки берут по 10 собак в клетках. У вас — по 2-3 собаки, в доме, как свои. За это можно брать дороже.</div>
+
+      <div class="scheme">
+        <svg viewBox="0 0 800 140" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="30" width="180" height="80" rx="12" fill="#eae4d4"/>
+          <text x="110" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">Хозяин уезжает</text>
+          <text x="110" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">на 2 недели</text>
+
+          <path d="M 210 70 L 250 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="260" y="30" width="180" height="80" rx="12" fill="#c08a3e"/>
+          <text x="350" y="60" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="white">Оставляет</text>
+          <text x="350" y="85" text-anchor="middle" font-family="Inter" font-size="13" fill="white">собаку у вас</text>
+          <text x="350" y="105" text-anchor="middle" font-family="Inter" font-size="13" fill="white">за 2000 ₽/сутки</text>
+
+          <path d="M 450 70 L 490 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="500" y="30" width="150" height="80" rx="12" fill="#eae4d4"/>
+          <text x="575" y="65" text-anchor="middle" font-family="Playfair Display" font-size="14" font-weight="700" fill="#243024">За собакой</text>
+          <text x="575" y="90" text-anchor="middle" font-family="Inter" font-size="13" fill="#2b2a26">смотрит помощник</text>
+
+          <path d="M 660 70 L 700 70" stroke="#4a6b3a" stroke-width="3" marker-end="url(#arrow)"/>
+
+          <rect x="710" y="30" width="80" height="80" rx="12" fill="#4a6b3a"/>
+          <text x="750" y="65" text-anchor="middle" font-family="Inter" font-size="13" font-weight="700" fill="#c08a3e">Вам</text>
+          <text x="750" y="90" text-anchor="middle" font-family="Inter" font-size="14" fill="#f7f4ec">1500 ₽</text>
+        </svg>
+      </div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">30 000 – 60 000 ₽ в месяц (летом)</div>
+        </div>
+        <div class="who-pays">Платят владельцы собак, уезжающие в отпуск</div>
+      </div>
+
+      <div class="difficulty diff-hard">⏱ Запуск: 1 месяц. Нужно найти помощника, который живёт рядом</div>
+    </div>
+  </div>
+
+  <!-- Идея 13 -->
+  <div class="idea-big">
+    <div class="how-it-works">
+      <div class="how-title">
+        <span class="how-num">13</span>
+        Детские экскурсии «Знакомство с собаками»
+      </div>
+      <div class="how-desc">Родители хотят показать детям настоящих собак (в городе у многих их нет). Школы ищут, куда свозить класс. Вы принимаете группу на 2 часа, проводите экскурсию. Можно договориться с учительницей или студенткой-педагогом.</div>
+
+      <div class="income-block">
+        <div>
+          <div class="label">Сколько можно получать:</div>
+          <div class="amount">15 000 – 30 000 ₽ в месяц</div>
+        </div>
+        <div class="who-pays">Платят родители и школы</div>
+      </div>
+
+      <div class="difficulty diff-medium">⏱ Запуск: 1 месяц. Участие: минимальное, проводит помощник</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ИТОГОВАЯ ТАБЛИЦА ===== -->
+<section class="section">
+  <h2 class="section-title">Итого: что самое простое и выгодное</h2>
+  <p class="section-lead">Вот топ-10 идей — с чего лучше всего начать. Отсортировано по принципу «легко запустить + хороший доход».</p>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Что делать</th>
+        <th>Кто платит</th>
+        <th>Доход в месяц</th>
+        <th>Моё участие</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Рекомендовать корма и товары</td>
+        <td>Зоомагазины</td>
+        <td style="color:var(--color-primary);font-weight:700">5–15 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Продавать ваши книги в PDF</td>
+        <td>Любители пород</td>
+        <td style="color:var(--color-primary);font-weight:700">10–25 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Портреты собак «как картина»</td>
+        <td>Владельцы собак</td>
+        <td style="color:var(--color-primary);font-weight:700">15–30 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Чек-лист нового владельца</td>
+        <td>Новые хозяева щенков</td>
+        <td style="color:var(--color-primary);font-weight:700">5–10 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Шаблоны договоров</td>
+        <td>Начинающие заводчики</td>
+        <td style="color:var(--color-primary);font-weight:700">10–20 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Камера в вольере</td>
+        <td>Подписчики</td>
+        <td style="color:var(--color-primary);font-weight:700">8–20 тыс. ₽</td>
+        <td>🟢 почти никакого</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Продажа фотографий</td>
+        <td>Журналы, сайты</td>
+        <td style="color:var(--color-primary);font-weight:700">5–15 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Фотосессии на даче</td>
+        <td>Семьи, пары</td>
+        <td style="color:var(--color-primary);font-weight:700">20–40 тыс. ₽</td>
+        <td>🟡 1 час в неделю</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Страховки для собак</td>
+        <td>Страховые компании</td>
+        <td style="color:var(--color-primary);font-weight:700">3–10 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Подарочные сертификаты</td>
+        <td>Те, кто ищет подарок</td>
+        <td style="color:var(--color-primary);font-weight:700">10–40 тыс. ₽</td>
+        <td>🟢 никакого</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="intro-box" style="margin-top:30px">
+    <h2>💰 Если запустить всё из топ-10</h2>
+    <p style="font-size:1.1em">Сайт будет приносить дополнительно:</p>
+    <div class="big-numbers">
+      <div class="big-num-box">
+        <div class="big-num">100–200</div>
+        <div class="big-num-label">тысяч рублей в месяц</div>
+      </div>
+      <div class="big-num-box">
+        <div class="big-num">5</div>
+        <div class="big-num-label">часов вашего времени в неделю</div>
+      </div>
+      <div class="big-num-box">
+        <div class="big-num">0</div>
+        <div class="big-num-label">дополнительных забот с собаками</div>
+      </div>
+    </div>
+    <p style="margin-top:16px">И главное — <b>это не мешает</b> основной работе питомника. Собаки, помёты, выставки — всё как прежде. А сайт в это время зарабатывает сам.</p>
+  </div>
+</section>
+
+<!-- ТАЙМЛАЙН -->
+<section class="section">
+  <h2 class="section-title">В каком порядке запускать</h2>
+  <p class="section-lead">Не нужно всё сразу. Вот простой план — от самого простого к более серьёзному.</p>
+
+  <div class="simple-timeline">
+    <div class="st-item">
+      <div class="st-when">Этот вечер</div>
+      <div class="st-what">
+        <h4>Самое-самое простое</h4>
+        <ul>
+          <li>Найти договор с «Аквариум-Принт» — проверить, ваши ли права на книги</li>
+          <li>Зарегистрироваться как партнёр в Petshop.ru (бесплатно, 10 минут)</li>
+          <li>Зарегистрироваться на Shutterstock (для фотографий)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="st-item">
+      <div class="st-when">Первая неделя</div>
+      <div class="st-what">
+        <h4>Первые деньги</h4>
+        <ul>
+          <li>Поставить партнёрские ссылки на корма в статьи блога</li>
+          <li>Загрузить 50 лучших фото на Shutterstock</li>
+          <li>Добавить на сайт кнопку «Поддержать питомник»</li>
+          <li>Сделать подарочные сертификаты (просто красивый PDF)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="st-item">
+      <div class="st-when">Второй месяц</div>
+      <div class="st-what">
+        <h4>Главные продукты</h4>
+        <ul>
+          <li>Превратить ваши книги в PDF и выставить на сайте</li>
+          <li>Сделать чек-лист «Что нужно новому хозяину щенка»</li>
+          <li>Сделать шаблоны договоров для заводчиков</li>
+          <li>Поставить «портреты собак как картина» (попросить программиста)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="st-item">
+      <div class="st-when">Третий месяц</div>
+      <div class="st-what">
+        <h4>Расширение</h4>
+        <ul>
+          <li>Установить камеру в вольере</li>
+          <li>Запустить «помощника-собеседника» на сайте</li>
+          <li>Найти помощника для фотосессий на даче</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="st-item">
+      <div class="st-when">Через полгода</div>
+      <div class="st-what">
+        <h4>Всё работает само</h4>
+        <ul>
+          <li>Деньги капают с нескольких источников каждый день</li>
+          <li>Помощники сами ведут фотосессии и экскурсии</li>
+          <li>Вы занимаетесь только собаками — как всегда</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ВОПРОСЫ -->
+<section class="section">
+  <h2 class="section-title">Частые вопросы</h2>
+
+  <div class="faq">
+    <div class="faq-q">А налоги платить надо?</div>
+    <div class="faq-a">Да, с любого дохода. Проще всего — стать самозанятой. Скачиваете приложение «Мой налог» от налоговой. Каждый раз, когда пришли деньги — вносите сумму. Приложение само считает 4% и отправляет в налоговую. Раз в месяц платите одной кнопкой. Никаких бумажек, никаких походов в налоговую.</div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-q">А если я ничего не понимаю в компьютерах?</div>
+    <div class="faq-a">Для большинства идей нужен программист — он делает один раз, потом всё работает само. Стоит это 10-30 тысяч рублей за настройку. Дальше — никаких затрат. Это как один раз вызвать мастера, чтобы он починил стиральную машину — потом она стирает сама годами.</div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-q">А если никто не будет покупать?</div>
+    <div class="faq-a">Ваши книги, ваши знания, ваши собаки — это уникально. В России всего несколько экспертов вашего уровня с 40-летним стажем. Люди, которые покупают щенка за 100 тысяч рублей, готовы заплатить 500 за хороший чек-лист или портрет. Главное — просто выставить это на сайте, чтобы они видели.</div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-q">Сколько нужно денег, чтобы всё начать?</div>
+    <div class="faq-a">Около 30-50 тысяч рублей один раз. На программиста (чтобы он всё настроил) и на камеру (если решите ставить). Это разовая трата. Через 2-3 месяца она полностью окупится.</div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-q">Это точно законно?</div>
+    <div class="faq-a">Абсолютно. Самозанятые — официальный статус, его ввели в 2019 году. Партнёрские программы — стандартный способ заработка в интернете, так работают все блогеры. Продажа электронных книг — как продажа в ЛитРес. Никаких «серых» схем.</div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-q">Что если мне что-то не нравится из списка?</div>
+    <div class="faq-a">Просто не делайте это. Из 50 идей вам подойдут 10-15. Этого уже хватит, чтобы сайт приносил хорошие деньги. Выбирайте то, что ближе душе.</div>
+  </div>
+</section>
+
+<!-- ГЛАВНАЯ МЫСЛЬ -->
+<section class="section">
+  <div class="intro-box" style="background:var(--color-dark);color:var(--color-bg);border-left-color:var(--color-accent)">
+    <h2 style="color:var(--color-accent)">Главная мысль</h2>
+    <p style="color:var(--color-soft);font-size:1.15em;line-height:1.8">
+      Вы занимаетесь собаками — это ваше дело и ваша страсть. Сайт при этом может <b>тихо, спокойно, сам по себе</b> приносить деньги. Каждый месяц. Без звонков, без встреч, без беготни.
+    </p>
+    <p style="color:var(--color-soft);font-size:1.15em;margin-top:16px;line-height:1.8">
+      Всё, что нужно от вас — <b>один раз разрешить</b>, чтобы это настроили. Дальше сайт работает, а вы занимаетесь питомником, как привыкли.
+    </p>
+    <p style="font-family:'Caveat',cursive;font-size:1.8em;color:var(--color-accent);margin-top:24px;text-align:center">
+      Сайт работает — вы занимаетесь любимым делом 🐾
+    </p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div>Руководство подготовлено для питомника «Ланко»</div>
+  <div style="margin-top:10px;font-size:0.95em;opacity:0.8">Простым языком — о 50 способах заработка с сайта</div>
+  <div class="signature">— для Надежды Викторовны, с уважением</div>
+</footer>
+
+</body>
+</html>
