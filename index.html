@@ -1,397 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Редизайн сайта питомника «Ланко» — кейс</title>
-<meta name="description" content="Редизайн и перевод на WordPress сайта многопородного питомника собак: дизайн, перенос контента, родословные, приём заявок, мини-CRM, Telegram-бот, личный кабинет-приложение (PWA/APK), SEO и оптимизация скорости.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lanko.rf — кейс цифровой экосистемы питомника</title>
+<meta name="description" content="Портфолио проекта Lanko.rf: консолидация трёх сайтов, WordPress, миграция данных, CRM, PWA-кабинет, Telegram, SEO и оптимизация.">
 <style>
-:root{
-  --teal:#0ea5a8; --teal-dk:#0a7e80; --sky:#2bb3e0; --green:#34c759;
-  --sun:#ffc83d; --coral:#ff6f61; --ink:#143642; --ink2:#3a5a66;
-  --muted:#6f8a93; --line:#d6e7ec; --bg:#f2fbfc; --surface:#fff;
-  --grad:linear-gradient(135deg,#0ea5a8 0%,#2bb3e0 55%,#34c759 100%);
-  --radius:18px; --shadow:0 10px 30px rgba(14,165,168,.14); --shadow-lg:0 20px 50px rgba(14,90,110,.20);
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;
-  background-image:
-    radial-gradient(circle at 12% 16%,rgba(43,179,224,.10) 0 22px,transparent 23px),
-    radial-gradient(circle at 82% 10%,rgba(52,199,89,.09) 0 30px,transparent 31px),
-    radial-gradient(circle at 88% 60%,rgba(14,165,168,.08) 0 26px,transparent 27px),
-    radial-gradient(circle at 28% 80%,rgba(255,200,61,.10) 0 18px,transparent 19px);
-  background-attachment:fixed;}
-h1,h2,h3{font-family:'Comfortaa',sans-serif;line-height:1.2;font-weight:700}
-a{color:var(--teal-dk);text-decoration:none}
-.wrap{width:min(100% - 2rem,1080px);margin-inline:auto}
-.section{padding:clamp(2.5rem,6vw,4.5rem) 0}
-
-/* hero */
-.hero{background:var(--grad);color:#fff;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
-  background-image:
-    radial-gradient(circle at 15% 30%,rgba(255,255,255,.16) 0 26px,transparent 27px),
-    radial-gradient(circle at 80% 22%,rgba(255,255,255,.12) 0 34px,transparent 35px),
-    radial-gradient(circle at 70% 80%,rgba(255,255,255,.10) 0 22px,transparent 23px);}
-.hero .wrap{position:relative;z-index:2;padding:clamp(3rem,7vw,5.5rem) 0}
-.hero .tag{font-family:'Comfortaa';font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
-.hero h1{font-size:clamp(2rem,5.2vw,3.4rem);margin:.4rem 0 .8rem}
-.hero p{font-size:1.15rem;max-width:62ch;opacity:.96}
-.meta{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem}
-.chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:.4rem .9rem;border-radius:999px;font-size:.9rem;font-weight:700}
-.cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.8rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Comfortaa';font-weight:600;padding:.85em 1.6em;border-radius:999px;transition:transform .18s,box-shadow .18s}
-.btn--light{background:#fff;color:var(--teal-dk);box-shadow:var(--shadow)}
-.btn--ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.6)}
-.btn:hover{transform:translateY(-2px)}
-.wave{display:block;width:100%;height:auto;margin-bottom:-6px}
-
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-top:-2rem;position:relative;z-index:3}
-.stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem 1rem;text-align:center;box-shadow:var(--shadow)}
-.stat b{font-family:'Comfortaa';font-size:1.9rem;display:block;color:var(--teal-dk)}
-.stat span{font-size:.85rem;color:var(--muted)}
-
-.lead{text-align:center;max-width:760px;margin:0 auto 2.5rem}
-.lead .eyebrow{font-family:'Comfortaa';color:var(--teal);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:.85rem}
-.lead h2{font-size:clamp(1.5rem,3.2vw,2.3rem);margin:.3rem 0 .6rem}
-.lead p{color:var(--ink2)}
-
-/* compare links */
-.links{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;box-shadow:var(--shadow);}
-.card--new{border:2px solid var(--green)}
-.card .label{font-family:'Comfortaa';font-weight:700;display:inline-block;padding:.25rem .7rem;border-radius:999px;font-size:.78rem;margin-bottom:.6rem}
-.label--old{background:#ffe2de;color:#c2402f}
-.label--new{background:var(--green);color:#fff}
-.card h3{font-size:1.2rem;margin-bottom:.3rem}
-.card ul{list-style:none;margin:.7rem 0 1rem}
-.card li{padding:.2rem 0;color:var(--ink2);font-size:.95rem}
-.card li::before{content:"•";color:var(--teal);margin-right:.5rem;font-weight:700}
-.card a.go{font-weight:700}
-
-/* table */
-.tbl-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow);background:#fff;border:1px solid var(--line)}
-table{width:100%;border-collapse:collapse;min-width:640px}
-th,td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-thead th{background:var(--grad);color:#fff;font-family:'Comfortaa';font-size:.95rem;position:sticky;top:0}
-tbody tr:nth-child(even){background:#f6fcfd}
-td.feature{font-weight:700;color:var(--ink)}
-td.old{color:var(--muted)}
-td.new{color:var(--green-dk,#1f9d44)}
-.yes{color:#1f9d44;font-weight:800}
-.no{color:#c2402f;font-weight:800}
-
-/* feature grid */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
-.feat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:1.4rem;box-shadow:var(--shadow)}
-.feat .ico{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;background:linear-gradient(135deg,#d9f0fb,#def8e6);margin-bottom:.8rem}
-.feat h3{font-size:1.1rem;margin-bottom:.4rem}
-.feat p{font-size:.93rem;color:var(--ink2)}
-
-/* stack */
-.stack{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center}
-.stack span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;font-size:.9rem;box-shadow:var(--shadow)}
-
-.soft{background:linear-gradient(135deg,#d9f0fb,#def8e6)}
-footer{background:var(--ink);color:#cfe6ec;text-align:center;padding:2.5rem 1rem;font-size:.9rem}
-footer a{color:#fff;border-bottom:1px dashed rgba(255,255,255,.4)}
-
-@media(max-width:980px){ .stats{grid-template-columns:repeat(3,1fr)} }
-@media(max-width:780px){
-  .stats{grid-template-columns:1fr 1fr}
-  .links{grid-template-columns:1fr}
-  .grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:520px){ .grid{grid-template-columns:1fr} }
+:root{--bg:#f6f8f7;--surface:#fff;--ink:#14231f;--muted:#61706b;--line:#dfe7e4;--brand:#147d7e;--brand2:#2f9d70;--soft:#e7f3f0;--soft2:#eef7f4;--shadow:0 16px 50px rgba(28,67,58,.10);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}a{color:inherit}button{font:inherit}.wrap{width:min(1180px,calc(100% - 32px));margin:auto}.nav{position:sticky;top:0;z-index:20;background:rgba(246,248,247,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(223,231,228,.9)}.nav-in{height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:850;letter-spacing:-.03em;text-decoration:none}.brand span{color:var(--brand)}.navlinks{display:flex;gap:20px;align-items:center}.navlinks a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:700}.navlinks a:hover{color:var(--ink)}.hero{padding:84px 0 54px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:54px;align-items:center}.kicker{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--brand);font-weight:800;font-size:13px}.hero h1{font-size:clamp(42px,6vw,74px);line-height:1.02;letter-spacing:-.055em;margin:18px 0 18px;max-width:880px}.hero p{font-size:20px;color:var(--muted);max-width:760px;margin:0}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.btn{border:0;border-radius:14px;padding:13px 18px;text-decoration:none;font-weight:800;display:inline-flex;align-items:center;gap:8px;cursor:pointer}.btn.primary{background:var(--ink);color:#fff}.btn.secondary{background:var(--surface);border:1px solid var(--line)}.hero-card{background:linear-gradient(145deg,#163c35,#147d7e);color:white;border-radius:32px;padding:28px;box-shadow:var(--shadow);min-height:430px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}.hero-card:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.08);right:-100px;top:-100px}.mini{opacity:.75;font-size:13px;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.flow{display:grid;gap:10px;position:relative;z-index:1}.flow div{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:12px 14px;border-radius:14px;font-weight:750}.flow .arrow{text-align:center;background:none;border:0;padding:0;opacity:.55}.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:10px 0 64px}.stat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}.stat b{display:block;font-size:26px;letter-spacing:-.04em}.stat span{font-size:13px;color:var(--muted)}section{padding:72px 0}.section-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:30px}.section-head h2{font-size:clamp(30px,4vw,48px);line-height:1.08;letter-spacing:-.04em;margin:0}.section-head p{color:var(--muted);max-width:590px;margin:0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:0 8px 26px rgba(28,67,58,.04)}.ico{width:46px;height:46px;border-radius:14px;background:var(--soft);display:grid;place-items:center;font-size:22px;margin-bottom:20px}.card h3{font-size:20px;letter-spacing:-.02em;margin:0 0 9px}.card p{color:var(--muted);margin:0}.before{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch}.before .box{border-radius:26px;padding:28px;border:1px solid var(--line);background:var(--surface)}.before .old{background:#fbf4f1}.before .new{background:var(--soft2)}.before ul{margin:18px 0 0;padding-left:20px;color:var(--muted)}.before .mid{display:grid;place-items:center;font-size:28px;color:var(--brand)}.arch{background:#132821;color:#e9f5f1;border-radius:32px;padding:28px;overflow:auto}.arch-grid{display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:12px;min-width:850px;align-items:center}.node{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);border-radius:18px;padding:18px;text-align:center;font-weight:760}.node strong{display:block;margin-bottom:6px}.node span{font-size:12px;opacity:.68;font-weight:500}.arr{text-align:center;font-size:24px;opacity:.5}.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.step{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;position:relative}.step .ver{font-size:12px;font-weight:900;color:var(--brand);letter-spacing:.1em;text-transform:uppercase}.step h3{margin:8px 0 10px}.step p{color:var(--muted);margin:0}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.tab{border:1px solid var(--line);background:var(--surface);padding:9px 13px;border-radius:999px;cursor:pointer;font-weight:750;color:var(--muted)}.tab.active{background:var(--ink);color:#fff;border-color:var(--ink)}.feature[data-group]{display:none}.feature.show{display:block}.stack{display:flex;flex-wrap:wrap;gap:9px}.pill{background:var(--surface);border:1px solid var(--line);padding:8px 12px;border-radius:999px;font-weight:750;font-size:13px}.links{display:grid;grid-template-columns:2fr 1fr 1fr;gap:16px}.linkbox{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px}.linkbox:hover{transform:translateY(-2px);transition:.2s}.linkbox b{display:block;font-size:18px;margin-bottom:7px}.linkbox span{color:var(--muted);font-size:14px}.note{margin-top:28px;padding:18px 20px;border-radius:18px;background:#fff8e8;border:1px solid #eadcb8;color:#695d3b}.footer{padding:42px 0 70px;color:var(--muted);font-size:14px}.footer-in{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:24px}.badge{display:inline-flex;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.mobile-menu{display:none}@media(max-width:920px){.hero-grid{grid-template-columns:1fr}.hero-card{min-height:auto}.stats{grid-template-columns:repeat(3,1fr)}.cards{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}.links{grid-template-columns:1fr}.navlinks{display:none}.before{grid-template-columns:1fr}.before .mid{transform:rotate(90deg)}.section-head{display:block}.section-head p{margin-top:12px}}@media(max-width:620px){.hero{padding-top:48px}.stats{grid-template-columns:1fr 1fr}.cards,.timeline{grid-template-columns:1fr}.hero h1{font-size:42px}.hero p{font-size:17px}.footer-in{display:block}.footer-in div+div{margin-top:12px}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <span class="tag">🐾 Кейс · Веб-разработка</span>
-    <h1>Редизайн и перевод на WordPress сайта питомника «Ланко»</h1>
-    <p>Объединил три устаревших сайта многопородного питомника собак в один современный адаптивный сайт на WordPress: новый дизайн, корректный перенос контента, родословное древо питомцев, приём заявок с мини-CRM и Telegram-бот — всё редактируется владельцем в админке.</p>
-    <div class="meta">
-      <span class="chip">WordPress + ACF</span>
-      <span class="chip">PHP</span>
-      <span class="chip">Перенос данных</span>
-      <span class="chip">Адаптивный дизайн</span>
-      <span class="chip">Мини-CRM</span>
-      <span class="chip">Telegram-бот</span>
-      <span class="chip">PWA / APK</span>
-      <span class="chip">SEO + Schema.org</span>
-    </div>
-    <div class="cta">
-      <a class="btn btn--light" href="https://ланко.рф" target="_blank" rel="noopener">Новый сайт →</a>
-      <a class="btn btn--ghost" href="#compare">Что сделано ↓</a>
-    </div>
-  </div>
-  <svg class="wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path fill="#f2fbfc" d="M0,35 C240,80 480,0 720,28 C960,55 1200,80 1440,35 L1440,70 L0,70 Z"></path></svg>
-</header>
-
-<section class="section" style="padding-top:0">
-  <div class="wrap">
-    <div class="stats">
-      <div class="stat"><b>3 → 1</b><span>сайта объединены</span></div>
-      <div class="stat"><b>7</b><span>пород</span></div>
-      <div class="stat"><b>1000+</b><span>фото перенесено</span></div>
-      <div class="stat"><b>20</b><span>карточек собак</span></div>
-      <div class="stat"><b>21</b><span>статья блога</span></div>
-      <div class="stat"><b>15</b><span>альбомов галереи</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- О ПРОЕКТЕ -->
-<section class="section">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">О проекте</span>
-      <h2>Задача</h2>
-      <p>У питомника было три отдельных устаревших сайта (lanko.ru, king.lanko.ru, karavan-iti.ru) с громоздкой навигацией, частью нерабочих страниц и перепутанными фотографиями — например, фото алабая стояло под записью о японском хине. Нужно было собрать единый современный сайт, навести порядок в контенте и дать владельцу возможность самостоятельно его редактировать.</p>
-    </div>
-  </div>
-</section>
-
-<!-- СРАВНЕНИЕ ССЫЛОК -->
-<section class="section soft" id="compare">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">До и после</span>
-      <h2>Старые сайты и новый</h2>
-    </div>
-    <div class="links">
-      <div class="card">
-        <span class="label label--old">Было</span>
-        <h3>Три отдельных сайта</h3>
-        <ul>
-          <li>Громоздкая, дублирующая навигация</li>
-          <li>Часть страниц не открывалась</li>
-          <li>Перепутанные фотографии пород</li>
-          <li>Нет адаптива и единого стиля</li>
-        </ul>
-        <p>
-          <a class="go" href="https://lanko.ru" target="_blank" rel="noopener">lanko.ru ↗</a><br>
-          <a class="go" href="https://king.lanko.ru" target="_blank" rel="noopener">king.lanko.ru ↗</a><br>
-          <a class="go" href="https://karavan-iti.ru" target="_blank" rel="noopener">karavan-iti.ru ↗</a>
-        </p>
-      </div>
-      <div class="card card--new">
-        <span class="label label--new">Стало</span>
-        <h3>Единый сайт на WordPress</h3>
-        <ul>
-          <li>5 понятных разделов вместо десятка</li>
-          <li>Родословное древо питомцев</li>
-          <li>Корректная привязка фото к собакам</li>
-          <li>Приём заявок, мини-CRM и Telegram-бот</li>
-          <li>Адаптив, яркая фирменная гамма</li>
-          <li>Редактирование контента в админке</li>
-        </ul>
-        <p><a class="go" href="https://ланко.рф" target="_blank" rel="noopener"><b>ланко.рф ↗</b></a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ТАБЛИЦА -->
-<section class="section">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">Сравнение</span>
-      <h2>Что изменилось</h2>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr><th>Параметр</th><th>Старые сайты</th><th>Новый сайт</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="feature">Платформа</td><td class="old">Статичные HTML, 3 разных сайта</td><td class="new">WordPress + ACF, одна тема</td></tr>
-          <tr><td class="feature">Структура</td><td class="old">Десятки разрозненных страниц</td><td class="new">5 разделов: Главная · Питомцы · Блог · Галерея · Контакты</td></tr>
-          <tr><td class="feature">Дизайн</td><td class="old">Устаревший, без единого стиля</td><td class="new">Современный, голубо-зелёная гамма, фон-«пятнышки»</td></tr>
-          <tr><td class="feature">Мобильная версия</td><td class="no">✗ нет</td><td class="yes">✓ полный адаптив</td></tr>
-          <tr><td class="feature">Привязка фото к собакам</td><td class="old">Перепутаны (алабай под хином)</td><td class="new">Восстановлена по исходным данным</td></tr>
-          <tr><td class="feature">Родословные</td><td class="no">✗ нет</td><td class="yes">✓ древо на 3 поколения со ссылками на предков</td></tr>
-          <tr><td class="feature">Породы / щенки / производители</td><td class="old">Разные страницы</td><td class="new">Единый раздел «Питомцы» с фильтром по породам</td></tr>
-          <tr><td class="feature">Блог</td><td class="old">Статьи разбросаны по сайтам</td><td class="new">Лента с фильтром по рубрикам + карта сайта</td></tr>
-          <tr><td class="feature">Галерея</td><td class="old">Простой список фото</td><td class="new">Альбомы-карточки с лайтбоксом</td></tr>
-          <tr><td class="feature">Услуги</td><td class="no">✗ нет</td><td class="yes">✓ щенки, передержка, ветуход, груминг, дрессировка</td></tr>
-          <tr><td class="feature">Форма записи</td><td class="no">✗ нет</td><td class="yes">✓ динамическая: поля подстраиваются под услугу</td></tr>
-          <tr><td class="feature">Приём заявок</td><td class="no">✗ нет</td><td class="yes">✓ сохранение в БД + письмо; готовность к Amelia</td></tr>
-          <tr><td class="feature">CRM</td><td class="no">✗ нет</td><td class="yes">✓ канбан-доска + календарь с периодами передержки</td></tr>
-          <tr><td class="feature">Telegram-бот</td><td class="no">✗ нет</td><td class="yes">✓ запись, уведомления, напоминания, новости в блог</td></tr>
-          <tr><td class="feature">Редактирование владельцем</td><td class="no">✗ только через разработчика</td><td class="yes">✓ полностью в админке WordPress</td></tr>
-          <tr><td class="feature">Битые ссылки и фото</td><td class="old">Присутствовали</td><td class="new">Проверены и исправлены (0 битых)</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ФИЧИ -->
-<section class="section soft">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">Реализовано</span>
-      <h2>Ключевые возможности</h2>
-    </div>
-    <div class="grid">
-      <div class="feat"><div class="ico">🌳</div><h3>Родословное древо</h3><p>Карточка собаки раскрывает отца, мать, дедов и бабок. Если предок есть на сайте — ведёт на его карточку.</p></div>
-      <div class="feat"><div class="ico">🖼️</div><h3>Корректные фото</h3><p>Более 1000 фотографий перенесены и заново привязаны к нужным собакам и статьям по данным исходных сайтов.</p></div>
-      <div class="feat"><div class="ico">🗂️</div><h3>Контент в БД</h3><p>Питомцы, помёты, статьи и альбомы — кастомные типы записей WordPress + ACF. Редактируются в админке.</p></div>
-      <div class="feat"><div class="ico">📸</div><h3>Галерея-альбомы</h3><p>Альбомы-обложки с фильтром по тегам; клик открывает лайтбокс с перелистыванием.</p></div>
-      <div class="feat"><div class="ico">📨</div><h3>Динамическая форма записи</h3><p>Поля подстраиваются под услугу: для передержки — даты и кличка, для груминга — одна дата, чекбоксы доп. услуг.</p></div>
-      <div class="feat"><div class="ico">📥</div><h3>Приём заявок</h3><p>Заявки сохраняются в базе как отдельный тип записей и приходят на e-mail. Готовность к онлайн-записи через Amelia.</p></div>
-      <div class="feat"><div class="ico">🗂️</div><h3>Мини-CRM</h3><p>Канбан-доска заявок (Новые / В процессе / Завершённые) и календарь FullCalendar с полосами периодов передержки.</p></div>
-      <div class="feat"><div class="ico">💬</div><h3>Telegram-бот</h3><p>Приветствие и запись клиентов, уведомления и напоминания. Для владельца — публикация новостей в блог и сводки заявок.</p></div>
-      <div class="feat"><div class="ico">👥</div><h3>Несколько админов</h3><p>Привязка администраторов по @нику Telegram с авто-подстановкой chat_id; уведомления приходят всем.</p></div>
-      <div class="feat"><div class="ico">☁️</div><h3>Релей через Cloudflare</h3><p>Если хостинг блокирует входящие от Telegram, webhook проксируется через бесплатный Cloudflare Worker.</p></div>
-      <div class="feat"><div class="ico">📝</div><h3>Помощник в админке</h3><p>Формы «Добавить питомца / статью»: владелец заполняет поля, выбирает фото — создаётся черновик в нужном разделе.</p></div>
-      <div class="feat"><div class="ico">🚚</div><h3>Импортёр данных</h3><p>Пошаговый импорт всего контента и фотографий из подготовленного датасета одной кнопкой в админке.</p></div>
-      <div class="feat"><div class="ico">📱</div><h3>Адаптив</h3><p>Корректная работа на телефонах и планшетах: меню, древо родословных, галерея, формы.</p></div>
-      <div class="feat"><div class="ico">⚙️</div><h3>Редактируемые тексты</h3><p>Заголовки разделов, блок «О питомнике», контакты и услуги меняются через настройки темы без кода.</p></div>
-      <div class="feat"><div class="ico">🤖</div><h3>Задел под ИИ-ассистента</h3><p>REST-эндпоинты и функции, чтобы подключить ИИ-помощника (DeepSeek/Qwen) для создания карточек по команде.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ПРОЦЕСС -->
-<section class="section">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">Как делалось</span>
-      <h2>Процесс</h2>
-    </div>
-    <div class="grid">
-      <div class="feat"><div class="ico">1️⃣</div><h3>Анализ и аудит</h3><p>Разобрал выгрузку трёх сайтов, нашёл проблемы: битые страницы, перепутанные и «битые» (HTML вместо изображений) фото.</p></div>
-      <div class="feat"><div class="ico">2️⃣</div><h3>Сборка датасета</h3><p>Скриптами на Python распарсил исходные данные, восстановил привязку фото к собакам и статьям, очистил тексты.</p></div>
-      <div class="feat"><div class="ico">3️⃣</div><h3>Дизайн и вёрстка</h3><p>Кастомная дизайн-система, адаптивные шаблоны, родословное древо, галерея, формы.</p></div>
-      <div class="feat"><div class="ico">4️⃣</div><h3>WordPress-тема</h3><p>CPT + ACF, импортёр, формы-помощники, настройки контента — всё под редактирование владельцем.</p></div>
-      <div class="feat"><div class="ico">5️⃣</div><h3>Сервисы</h3><p>Приём заявок в БД, мини-CRM с календарём и Telegram-бот для записи, уведомлений и публикации новостей.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ОБНОВЛЕНИЕ V2 -->
-<section class="section" id="v2">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">Вторая итерация</span>
-      <h2>Обновление v2 — редизайн и личный кабинет</h2>
-      <p>После запуска сайт прошёл вторую итерацию: обновлён дизайн главной, переработана логика разделов под реальные задачи питомника, а владельцу добавлен отдельный кабинет-приложение для ведения сайта с телефона — без админки WordPress и без Telegram.</p>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr><th>Раздел</th><th>Было (v1)</th><th>Стало (v2)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="feature">Логотип в шапке</td><td class="old">Текст «Питомник Ланко»</td><td class="new">Анимированный 3D-логотип «San Lang Hin» с вращающимися буквами</td></tr>
-          <tr><td class="feature">Раздел питомцев</td><td class="old">«Питомцы»</td><td class="new">Переименован в «Щенки на продажу» во всём меню и кнопках</td></tr>
-          <tr><td class="feature">Породы</td><td class="old">Карточки-ссылки с подписями</td><td class="new">Зацикленная лента-марка (фото + название), ведёт на «Щенки на продажу»</td></tr>
-          <tr><td class="feature">Щенки на главной</td><td class="old">Блок «Помёты и малыши»</td><td class="new">Автослайдер карточек, подгружается автоматически</td></tr>
-          <tr><td class="feature">Галерея</td><td class="old">Отдельный раздел</td><td class="new">Объединена с блогом; фото листаются в пределах одной записи</td></tr>
-          <tr><td class="feature">Блог</td><td class="old">Лента статей</td><td class="new">Раскрывающиеся карточки с фото-слайдером, тегом и описанием</td></tr>
-          <tr><td class="feature">Контакты</td><td class="old">Текст и телефон</td><td class="new">Добавлена карта (г. Москва, Аминьевское шоссе, д. 4Дк1)</td></tr>
-          <tr><td class="feature">Старые сайты</td><td class="no">✗ нет</td><td class="yes">✓ кнопка с выпадающим списком (lanko.ru · king.lanko.ru · karavan-iti.ru)</td></tr>
-          <tr><td class="feature">Баннеры главной</td><td class="no">✗ только код</td><td class="yes">✓ редактор из админки и из кабинета</td></tr>
-          <tr><td class="feature">Кабинет владельца</td><td class="no">✗ только админка WordPress</td><td class="yes">✓ приложение /app/ + APK для телефона</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="lead" style="margin-top:3rem">
-      <span class="eyebrow">Без Telegram и VPN</span>
-      <h2>Личный кабинет-приложение</h2>
-      <p>Telegram в РФ без VPN недоступен, поэтому для владельца сделан кабинет прямо на сайте по адресу <b>/app/</b>: вход по обычному логину WordPress, простой мобильный интерфейс, устанавливается как приложение (PWA) или собирается в нативный APK.</p>
-    </div>
-    <div class="grid">
-      <div class="feat"><div class="ico">🐶</div><h3>Щенки на продажу</h3><p>Создание карточки (кличка, пол, дата рождения, фото, описание), снятие с публикации, возврат и удаление — в пару касаний.</p></div>
-      <div class="feat"><div class="ico">📝</div><h3>Блог и фотоальбомы</h3><p>Статьи и альбомы: тег, заголовок, фото, описание. Без описания — публикуется просто фотоальбом.</p></div>
-      <div class="feat"><div class="ico">📋</div><h3>CRM и календарь</h3><p>Список заявок со сменой статуса (Новая / В работе / Завершена) и календарь визитов с напоминаниями.</p></div>
-      <div class="feat"><div class="ico">🖼️</div><h3>Баннеры главной</h3><p>Загрузка, удаление и перестановка фотографий на главной странице прямо из кабинета.</p></div>
-      <div class="feat"><div class="ico">📲</div><h3>Установка как приложение</h3><p>PWA: «Установить приложение» из браузера — иконка на телефоне. Service worker с офлайн-кэшем.</p></div>
-      <div class="feat"><div class="ico">🤖</div><h3>Нативный APK</h3><p>Android-обёртка (WebView) с автоматической сборкой через GitHub Actions — установочный файл без среды разработки.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ОБНОВЛЕНИЕ V3 -->
-<section class="section" id="v3">
-  <div class="wrap">
-    <div class="lead">
-      <span class="eyebrow">Третья итерация</span>
-      <h2>Обновление v3 — продвижение, скорость и редактирование на ходу</h2>
-      <p>Сайт довели до боевого состояния под реальные задачи: настроили поисковую видимость (в том числе для ИИ-поисковиков), ускорили загрузку по метрикам Google PageSpeed и расширили кабинет владельца — теперь прямо с телефона можно не только создавать, но и редактировать опубликованные карточки и новости.</p>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr><th>Раздел</th><th>Было (v2)</th><th>Стало (v3)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="feature">Названия разделов</td><td class="old">«Блог», «Старые сайты»</td><td class="new">«Новости» и «Архив» — понятнее владельцу и посетителям</td></tr>
-          <tr><td class="feature">Контакты</td><td class="old">Телефон и e-mail</td><td class="new">Прямой переход в Telegram по телефону + ссылка на Telegram-канал</td></tr>
-          <tr><td class="feature">SEO</td><td class="no">✗ только базовые мета-теги</td><td class="yes">✓ title/description для каждой страницы, Open Graph, Twitter Card</td></tr>
-          <tr><td class="feature">Карта сайта</td><td class="no">✗ нет</td><td class="yes">✓ собственный /sitemap.xml + robots.txt темы</td></tr>
-          <tr><td class="feature">Индексация ИИ-поиском</td><td class="no">✗ нет</td><td class="yes">✓ разрешены боты GPTBot, PerplexityBot, ClaudeBot, Google-Extended и др.</td></tr>
-          <tr><td class="feature">Структурированные данные</td><td class="no">✗ нет</td><td class="yes">✓ Schema.org JSON-LD (организация, статьи, карточки щенков)</td></tr>
-          <tr><td class="feature">Аналитика</td><td class="no">✗ нет</td><td class="yes">✓ Яндекс.Метрика и Google Analytics — подключаются из админки</td></tr>
-          <tr><td class="feature">Скорость загрузки</td><td class="old">Без оптимизации</td><td class="new">fetchpriority/LCP, lazy-load, defer, асинхронные шрифты, CLS = 0</td></tr>
-          <tr><td class="feature">Кабинет владельца</td><td class="old">Только создание карточек</td><td class="new">Редактирование опубликованных щенков и новостей с телефона</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="lead" style="margin-top:3rem">
-      <span class="eyebrow">Поиск и продвижение</span>
-      <h2>Видимость в поиске — включая ИИ</h2>
-      <p>Всё SEO встроено в тему: отдельный плагин не нужен. Тексты, коды подтверждения поисковиков и счётчики аналитики настраиваются в админке без правки кода.</p>
-    </div>
-    <div class="grid">
-      <div class="feat"><div class="ico">🔎</div><h3>Мета-теги на каждой странице</h3><p>Заголовок, описание, Open Graph и Twitter Card формируются автоматически для главной, щенков, новостей и карточек.</p></div>
-      <div class="feat"><div class="ico">🗺️</div><h3>Карта сайта и robots</h3><p>Собственный /sitemap.xml (встроенный WordPress на хостинге не отдавался) и robots.txt с запретом на админку и кабинет.</p></div>
-      <div class="feat"><div class="ico">🧠</div><h3>Доступ для ИИ-поиска</h3><p>Явно разрешены краулеры ChatGPT, Perplexity, Claude, Gemini, Common Crawl — чтобы сайт попадал в ответы ИИ-поисковиков.</p></div>
-      <div class="feat"><div class="ico">🏷️</div><h3>Schema.org JSON-LD</h3><p>Структурированные данные об организации-питомнике, статьях и щенках — поисковики и ИИ точно понимают содержимое.</p></div>
-      <div class="feat"><div class="ico">📊</div><h3>Аналитика из админки</h3><p>Яндекс.Метрика и Google Analytics подключаются вставкой ID в настройках темы, без кода.</p></div>
-      <div class="feat"><div class="ico">⚡</div><h3>Оптимизация скорости</h3><p>Приоритет первой картинки (LCP), ленивая загрузка, defer-скрипты, асинхронные шрифты, фиксированные размеры (CLS = 0), WebP через LiteSpeed.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- СТЕК -->
-<section class="section soft">
-  <div class="wrap">
-    <div class="lead"><span class="eyebrow">Технологии</span><h2>Стек</h2></div>
-    <div class="stack">
-      <span>WordPress</span><span>PHP</span><span>ACF</span>
-      <span>HTML5</span><span>CSS3</span><span>JavaScript (vanilla)</span>
-      <span>Python (ETL)</span><span>REST API</span><span>FullCalendar</span>
-      <span>Telegram Bot API</span><span>Cloudflare Workers</span><span>Amelia</span>
-      <span>PWA</span><span>Service Worker</span><span>Web App Manifest</span>
-      <span>Android WebView</span><span>GitHub Actions</span>
-      <span>Schema.org JSON-LD</span><span>SEO</span><span>Яндекс.Метрика</span>
-      <span>Google Analytics</span><span>LiteSpeed Cache</span>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>Кейс по редизайну сайта питомника собак «Ланко».</p>
-  <p style="margin-top:.5rem">
-    Новый сайт: <a href="https://ланко.рф" target="_blank" rel="noopener">ланко.рф</a> ·
-    Старые: <a href="https://lanko.ru" target="_blank" rel="noopener">lanko.ru</a>,
-    <a href="https://king.lanko.ru" target="_blank" rel="noopener">king.lanko.ru</a>,
-    <a href="https://karavan-iti.ru" target="_blank" rel="noopener">karavan-iti.ru</a>
-  </p>
-</footer>
-
+<nav class="nav"><div class="wrap nav-in"><a class="brand" href="#top">Lanko<span>.rf</span> / case</a><div class="navlinks"><a href="#result">Результат</a><a href="#features">Система</a><a href="#architecture">Архитектура</a><a href="#history">Эволюция</a><a href="docs/architecture.md">Docs</a></div></div></nav>
+<header class="hero" id="top"><div class="wrap hero-grid"><div><span class="kicker">🐾 Portfolio case · production</span><h1>Из трёх старых сайтов — в цифровую экосистему питомника</h1><p>Редизайн Lanko.rf вырос в полноценный продукт: миграция и очистка контента, кастомный WordPress, заявки и CRM, мобильный кабинет владельца, Telegram-интеграция, SEO и production-оптимизация.</p><div class="actions"><a class="btn primary" href="https://ланко.рф" target="_blank" rel="noopener">Открыть production ↗</a><a class="btn secondary" href="README.md">README</a><a class="btn secondary" href="#architecture">Смотреть архитектуру ↓</a></div></div><aside class="hero-card"><div><div class="mini">главный сценарий продукта</div><h2 style="font-size:32px;line-height:1.1;margin:12px 0 0">Контент → заявка → обработка → повторное управление</h2></div><div class="flow"><div>Публичный сайт</div><div class="arrow">↓</div><div>Заявки + мини-CRM + календарь</div><div class="arrow">↓</div><div>Кабинет владельца / PWA / Telegram</div></div><div><span class="badge">WordPress</span> <span class="badge">REST API</span> <span class="badge">PWA</span></div></aside></div></header>
+<main>
+<div class="wrap stats"><div class="stat"><b>3 → 1</b><span>сайта объединено</span></div><div class="stat"><b>1000+</b><span>фото в миграции</span></div><div class="stat"><b>20</b><span>карточек собак</span></div><div class="stat"><b>7</b><span>пород</span></div><div class="stat"><b>21</b><span>статья</span></div><div class="stat"><b>15</b><span>фотоальбомов</span></div></div>
+<section id="result"><div class="wrap"><div class="section-head"><h2>Не просто редизайн</h2><p>Исходная задача была визуальной, но основная инженерная работа оказалась в данных, управлении и эксплуатации. Поэтому результат — не набор страниц, а связанная система.</p></div><div class="before"><div class="box old"><strong>Было</strong><h3>Три раздельных сайта</h3><ul><li>дублирование и сложная навигация</li><li>битые страницы и медиа</li><li>ошибочные привязки фотографий</li><li>слабый мобильный опыт</li><li>зависимость от разработчика</li></ul></div><div class="mid">→</div><div class="box new"><strong>Стало</strong><h3>Одна цифровая система</h3><ul><li>единый production-сайт</li><li>нормализованный контент</li><li>щенки, новости и услуги</li><li>заявки, CRM и календарь</li><li>мобильный кабинет владельца</li></ul></div></div></div></section>
+<section id="features"><div class="wrap"><div class="section-head"><h2>Что входит в систему</h2><p>Переключай категории: портфолио показывает не только внешний сайт, но и внутренние сервисы вокруг него.</p></div><div class="tabs"><button class="tab active" data-tab="all">Всё</button><button class="tab" data-tab="public">Публичный сайт</button><button class="tab" data-tab="ops">Управление</button><button class="tab" data-tab="integration">Интеграции</button><button class="tab" data-tab="tech">Техника</button></div><div class="cards" id="featureGrid">
+<div class="card feature show" data-group="public"><div class="ico">🐶</div><h3>Щенки на продажу</h3><p>Карточки, фотослайдеры, дата рождения, пол, описание и управление статусом публикации.</p></div>
+<div class="card feature show" data-group="public"><div class="ico">📰</div><h3>Новости и фотоальбомы</h3><p>Одна модель публикации работает и как статья с текстом, и как визуальный альбом.</p></div>
+<div class="card feature show" data-group="public"><div class="ico">🧾</div><h3>Динамические заявки</h3><p>Набор полей меняется по выбранной услуге: даты, кличка, дополнительные опции.</p></div>
+<div class="card feature show" data-group="ops"><div class="ico">📱</div><h3>Кабинет `/app/`</h3><p>Упрощённый мобильный интерфейс поверх REST API без необходимости заходить в wp-admin.</p></div>
+<div class="card feature show" data-group="ops"><div class="ico">📋</div><h3>Mini-CRM</h3><p>Заявки, статусы, календарь визитов и периодов передержки — в одном операционном контуре.</p></div>
+<div class="card feature show" data-group="ops"><div class="ico">🖼️</div><h3>Баннеры без кода</h3><p>Владелец может менять состав и порядок изображений на главной самостоятельно.</p></div>
+<div class="card feature show" data-group="integration"><div class="ico">💬</div><h3>Telegram bot</h3><p>Уведомления, запись, публикация контента, несколько администраторов и сервисные команды.</p></div>
+<div class="card feature show" data-group="integration"><div class="ico">☁️</div><h3>Cloudflare relay</h3><p>Промежуточный webhook-слой на случай сетевых ограничений на стороне хостинга.</p></div>
+<div class="card feature show" data-group="integration"><div class="ico">📊</div><h3>Аналитика</h3><p>Подключение Яндекс.Метрики и Google Analytics через настройки проекта.</p></div>
+<div class="card feature show" data-group="tech"><div class="ico">🧹</div><h3>Python / ETL</h3><p>Разбор исторического контента, очистка, восстановление связей и подготовка единого датасета.</p></div>
+<div class="card feature show" data-group="tech"><div class="ico">🔎</div><h3>SEO + Schema</h3><p>Мета-теги, canonical, Open Graph, JSON-LD, sitemap и robots как часть темы.</p></div>
+<div class="card feature show" data-group="tech"><div class="ico">⚡</div><h3>Performance</h3><p>Работа с LCP/CLS, lazy-loading, defer, WebP и кэшированием production-сайта.</p></div>
+</div></div></section>
+<section id="architecture"><div class="wrap"><div class="section-head"><h2>Архитектура</h2><p>Главная идея — WordPress остаётся источником данных и CMS, а вокруг него добавлены узкие интерфейсы и интеграции под реальные рабочие сценарии.</p></div><div class="arch"><div class="arch-grid"><div class="node"><strong>Посетитель</strong><span>публичный frontend</span></div><div class="arr">→</div><div class="node"><strong>WordPress + ACF</strong><span>контент и предметные сущности</span></div><div class="arr">→</div><div class="node"><strong>Щенки / Новости</strong><span>публикация</span></div><div class="node"><strong>Владелец</strong><span>PWA / admin / bot</span></div><div class="arr">→</div><div class="node"><strong>REST API</strong><span>lanko/v1</span></div><div class="arr">→</div><div class="node"><strong>CRM / Calendar</strong><span>операционная работа</span></div><div class="node"><strong>Интеграции</strong><span>Telegram / e-mail</span></div><div class="arr">←</div><div class="node"><strong>Уведомления</strong><span>новые заявки и события</span></div><div class="arr">←</div><div class="node"><strong>Форма заявки</strong><span>публичный сайт</span></div></div></div><div class="note">Подробная техническая карта без секретов и production-конфигурации: <a href="docs/architecture.md"><b>docs/architecture.md</b></a>.</div></div></section>
+<section id="history"><div class="wrap"><div class="section-head"><h2>Как проект развивался</h2><p>Вместо длинного changelog — четыре смысловых этапа, каждый из которых решал новый класс задач.</p></div><div class="timeline"><div class="step"><span class="ver">v1</span><h3>Консолидация</h3><p>3 сайта → 1, ETL, новая тема, карточки, заявки, CRM и Telegram.</p></div><div class="step"><span class="ver">v2</span><h3>Эксплуатация</h3><p>Новая логика главной, щенки, фотоальбомы, баннеры, кабинет `/app/`, PWA/APK.</p></div><div class="step"><span class="ver">v3</span><h3>Production</h3><p>SEO, Schema.org, аналитика, sitemap/robots, performance и редактирование с телефона.</p></div><div class="step"><span class="ver">2026</span><h3>Portfolio refresh</h3><p>Репозиторий перестроен из набора файлов в связный публичный кейс проекта.</p></div></div></div></section>
+<section><div class="wrap"><div class="section-head"><h2>Стек</h2><p>Стек подбирался не ради количества технологий, а под задачи миграции, CMS, управления и интеграций.</p></div><div class="stack"><span class="pill">WordPress</span><span class="pill">PHP</span><span class="pill">ACF</span><span class="pill">HTML / CSS / JS</span><span class="pill">Python ETL</span><span class="pill">REST API</span><span class="pill">FullCalendar</span><span class="pill">Telegram Bot API</span><span class="pill">Cloudflare Workers</span><span class="pill">PWA</span><span class="pill">Service Worker</span><span class="pill">Android WebView</span><span class="pill">GitHub Actions</span><span class="pill">Schema.org</span><span class="pill">Яндекс.Метрика</span><span class="pill">Google Analytics</span><span class="pill">LiteSpeed Cache</span></div></div></section>
+<section><div class="wrap"><div class="section-head"><h2>Материалы репозитория</h2><p>Основная страница теперь — витрина. Технические и эксплуатационные документы вынесены отдельно.</p></div><div class="links"><a class="linkbox" href="docs/architecture.md"><b>Архитектура проекта →</b><span>Слои, сущности, API, интеграции, миграция и безопасность публичного репозитория.</span></a><a class="linkbox" href="docs/project-history.md"><b>История →</b><span>Почему проект эволюционировал от редизайна к системе.</span></a><a class="linkbox" href="docs/owner-guide.html"><b>Инструкция →</b><span>Короткая памятка владельцу сайта.</span></a></div></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-in"><div><b>Lanko.rf · portfolio case</b><br>Публичное описание выполненной разработки.</div><div>Production: <a href="https://ланко.рф" target="_blank" rel="noopener">ланко.рф ↗</a></div></div></footer>
+<script>
+const tabs=[...document.querySelectorAll('.tab')], features=[...document.querySelectorAll('.feature')];
+tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('active'));t.classList.add('active');const g=t.dataset.tab;features.forEach(f=>f.classList.toggle('show',g==='all'||f.dataset.group===g));}));
+</script>
 </body>
 </html>
