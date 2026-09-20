@@ -1,28 +1,48 @@
-# Lanko.rf — portfolio repository
+# 🐾 ЛАНКО — портфолио проекта ланко.рф
 
-Публичное резюме проекта по переработке цифровой инфраструктуры питомника «Ланко / San Lang Hin».
+Публичный репозиторий-кейс о том, как три старых сайта питомника были объединены в современный сайт **[ланко.рф](https://ланко.рф)**.
 
-**GitHub Pages:** https://altersam.github.io/Lanko/  
-**Production:** https://ланко.рф
+Здесь собрана не production-кодовая база WordPress, а **история и архитектура выполненной работы**: миграция контента, восстановление фотографий и связей, новый интерфейс, заявки, CRM, кабинет владельца, PWA, Telegram, SEO, отзывы и практический гид.
 
-## Страницы репозитория
+## 🌐 GitHub Pages
 
-- [Главный кейс](https://altersam.github.io/Lanko/) — обзор проекта и реализованных подсистем.
-- [Архитектура](https://altersam.github.io/Lanko/architecture.html) — CMS, REST API, CRM, PWA и потоки данных.
-- [История разработки](https://altersam.github.io/Lanko/history.html) — эволюция проекта по итерациям.
-- [Инструкция владельцу](https://altersam.github.io/Lanko/Ins.html) — ежедневное управление сайтом.
-- [Развитие и сервисы](https://altersam.github.io/Lanko/microservices.html) — направления дальнейшего развития.
+**Главная страница кейса:**  
+https://altersam.github.io/Lanko/
 
-## Что сделано
+### Страницы
 
-Проект начался с объединения трёх устаревших сайтов и вырос в связанную цифровую систему: миграция и очистка исторического контента, кастомный WordPress, карточки собак и щенков, новости и фотоальбомы, услуги и заявки, mini-CRM и календарь, мобильный кабинет `/app/`, PWA, Telegram-интеграции, SEO/Schema.org, аналитика и performance-оптимизация.
+- [Главный кейс](https://altersam.github.io/Lanko/)
+- [Архитектура](https://altersam.github.io/Lanko/architecture.html)
+- [История разработки](https://altersam.github.io/Lanko/history.html)
+- [Инструкция владельцу](https://altersam.github.io/Lanko/Ins.html)
+- [Идеи развития](https://altersam.github.io/Lanko/microservices.html)
 
-В актуальной версии production-сайта также работают отдельный раздел отзывов и практический гид владельца на 8 глав.
+## Что было сделано
+
+**3 старых сайта → 1 современный сайт**
+
+- аудит и перенос исторического контента;
+- Python/ETL для очистки и восстановления привязок;
+- WordPress + ACF и кастомная тема;
+- карточки собак, щенки, родословные и архив;
+- новости и фотоальбомы;
+- услуги и динамические формы;
+- заявки, mini-CRM и календарь;
+- Telegram-интеграции;
+- мобильный кабинет `/app/`, PWA и Android-сценарий;
+- отзывы клиентов;
+- практический гид владельца на 8 глав;
+- SEO, Schema.org, sitemap, robots и аналитика;
+- оптимизация загрузки и мобильной версии.
+
+## Визуальный стиль репозитория
+
+GitHub Pages оформлен в той же лёгкой стилистике, что и основной проект: светлый фон, бирюзово-голубая палитра, зелёные акценты, округлые белые карточки и типографика **Comfortaa + Nunito**.
 
 ## Стек
 
-`WordPress` · `PHP` · `ACF` · `HTML/CSS/JS` · `Python/ETL` · `REST API` · `FullCalendar` · `Telegram Bot API` · `Cloudflare Workers` · `PWA` · `Service Worker` · `Android WebView` · `GitHub Actions` · `Schema.org` · `Яндекс.Метрика` · `Google Analytics` · `LiteSpeed Cache`
+`WordPress` · `PHP` · `ACF` · `JavaScript` · `Python / ETL` · `REST API` · `FullCalendar` · `Telegram Bot API` · `Cloudflare Workers` · `PWA` · `Service Worker` · `Android WebView` · `GitHub Actions` · `Schema.org` · `Яндекс.Метрика` · `Google Analytics` · `LiteSpeed Cache`
 
-## Важно
+---
 
-Это **публичный portfolio-repository**, а не зеркало production-кода. Секреты, токены, пароли, персональные данные заявителей и конфигурация сервера здесь не публикуются.
+Продакшен: **https://ланко.рф**
