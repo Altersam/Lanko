@@ -414,3 +414,32 @@ h1,h2,h3{letter-spacing:-.025em}
   .foot{display:block}
   .foot div+div{margin-top:10px}
 }
+
+
+/* ===== Monetization / economics ===== */
+.money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.money-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.money-card:before{content:"";position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,var(--teal),var(--sky))}
+.money-card.easy:before{background:linear-gradient(90deg,var(--green),#8be3a1)}
+.money-card.test:before{background:linear-gradient(90deg,var(--sun),#ffe596)}
+.money-card h3{font-size:20px;margin:12px 0 7px}.money-card p{color:var(--ink2);margin:0}
+.money-card .money{font:700 25px/1.1 "Comfortaa";color:var(--teal-dk);margin:15px 0 6px}
+.money-card .formula{background:var(--soft-sky);border:1px solid #cceaf0;border-radius:14px;padding:10px 12px;margin-top:12px;color:var(--ink2);font-size:13px}
+.badges{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 0}.badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 9px;background:#f5fbfc;border:1px solid var(--line);color:var(--ink2);font-size:11px;font-weight:900}
+.badge.green{background:var(--soft-green);border-color:#d6efdc;color:#247a3c}.badge.sun{background:var(--soft-sun);border-color:#f3e3a5;color:#8b6a00}.badge.coral{background:var(--soft-coral);border-color:#f5d5cf;color:#a94d42}
+.priority{display:grid;grid-template-columns:52px 1fr auto;gap:15px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 18px;margin:10px 0;box-shadow:0 6px 20px rgba(20,54,66,.04)}
+.priority .rank{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#dff6f8,#ebf9fd);color:var(--teal-dk);font:900 15px/1 "Comfortaa"}
+.priority h3{font-size:17px;margin:0 0 3px}.priority p{font-size:13px;color:var(--muted);margin:0}.priority .value{font:700 16px/1.2 "Comfortaa";color:var(--teal-dk);text-align:right}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.plan{border:1px solid var(--line);border-radius:24px;background:#fff;padding:23px;box-shadow:var(--shadow)}.plan.featured{background:linear-gradient(145deg,#fff,#edfafa);border-color:#bfe4e8}.plan h3{font-size:22px;margin:5px 0 9px}.plan .sum{font:700 30px/1 "Comfortaa";color:var(--teal-dk);margin:12px 0}.plan ul{padding-left:19px;color:var(--ink2)}.plan li{margin:.28rem 0}
+.mini-table{width:100%;border-collapse:collapse}.mini-table th,.mini-table td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.mini-table th{background:var(--soft-sky);color:var(--teal-dk);font-size:12px}.mini-table td{color:var(--ink2)}.mini-table tr:last-child td{border-bottom:0}
+.calc-shell{display:grid;grid-template-columns:1.12fr .88fr;gap:18px;align-items:start;margin-top:22px}.calc-panel{background:#fff;border:1px solid var(--line);border-radius:26px;padding:23px;box-shadow:var(--shadow)}.calc-panel h2,.calc-panel h3{margin-top:0}
+.control{display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #edf4f5}.control:last-child{border-bottom:0}.control label{font-weight:900;color:var(--ink)}.control small{display:block;color:var(--muted);font-weight:600;margin-top:2px}.control .num-input{width:100%;border:1px solid var(--line);border-radius:12px;padding:9px 10px;color:var(--ink);background:#fbfeff;font-weight:800}.control input[type=range]{width:100%;accent-color:var(--teal)}.range-wrap{grid-column:1/-1;margin-top:-4px}
+.result-card{background:linear-gradient(135deg,#e2f7f9,#eaf9fd 55%,#eefbf2);border:1px solid #bfe4e8;border-radius:25px;padding:23px;margin-bottom:13px}.result-card .label{color:var(--muted);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.result-card .big{font:700 clamp(36px,5vw,56px)/1 "Comfortaa";color:var(--teal-dk);margin:8px 0 6px}.result-card .sub{color:var(--ink2);font-size:13px}
+.breakdown{display:grid;gap:8px;margin-top:15px}.break{display:grid;grid-template-columns:1fr auto;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}.break span{color:var(--ink2);font-size:13px}.break b{color:var(--teal-dk)}
+.preset-row{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 18px}.preset{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;color:var(--teal-dk);font-weight:900;cursor:pointer}.preset:hover{background:var(--soft-sky)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 5px 18px rgba(20,54,66,.04)}.kpi b{display:block;font:700 24px/1.1 "Comfortaa";color:var(--teal-dk)}.kpi span{font-size:12px;color:var(--muted)}
+.source-list{display:grid;gap:9px}.source-link{display:block;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 15px;color:var(--ink2)}.source-link:hover{border-color:#b7dfe5;background:#fbfeff}.source-link b{color:var(--teal-dk)}
+.checks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.check{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--ink2)}.check b{display:block;color:var(--ink);margin-bottom:4px}
+.simple-flow{display:flex;align-items:stretch;gap:9px;flex-wrap:wrap;margin:20px 0}.flow-box{flex:1 1 150px;min-width:140px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;text-align:center;color:var(--ink2);box-shadow:0 5px 18px rgba(20,54,66,.04)}.flow-box b{display:block;color:var(--ink);margin-bottom:3px}.flow-arrow{display:grid;place-items:center;color:var(--teal);font-weight:900;font-size:22px}
+@media(max-width:1000px){.money-grid,.plan-grid{grid-template-columns:1fr 1fr}.calc-shell{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.money-grid,.plan-grid,.checks,.kpi-grid{grid-template-columns:1fr}.priority{grid-template-columns:42px 1fr}.priority .value{grid-column:2;text-align:left}.control{grid-template-columns:1fr 95px}.flow-arrow{transform:rotate(90deg);flex:0 0 100%}}
